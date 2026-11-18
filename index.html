@@ -4,23 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Our Streets Wiki</title>
+<link rel="stylesheet" href="phosphor.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-<a id="back" href="#council" hidden></a>
+<button id="menuBtn" class="btn icon" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><i class="ph ph-list"></i></button>
+<a id="back" class="btn" href="#council" hidden></a>
 <b id="brand">Our Streets Wiki</b>
-<select id="lang" aria-label="Language">
-<option value="en">English</option>
-<option value="es">Español</option>
-<option value="hi">हिन्दी</option>
-<option value="tl">Tagalog</option>
-<option value="ko">한국어</option>
-<option value="zh">中文</option>
-</select>
+<a id="searchBtn" class="btn icon" href="#search-all" aria-label="Search"><i class="ph ph-magnifying-glass"></i></a>
+<div id="langWrap">
+<button id="langBtn" class="btn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Language">
+<span id="flag"></span><i class="ph ph-caret-down sm"></i>
+</button>
+<ul id="langMenu" hidden></ul>
+</div>
 </header>
+<div id="scrim"></div>
+<aside id="drawer" aria-label="Menu"></aside>
 <main id="app"></main>
-<nav id="pill"></nav>
+<nav id="tabs"></nav>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
