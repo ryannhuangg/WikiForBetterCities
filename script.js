@@ -267,7 +267,7 @@ const seg=(k,lab,o)=>`<h2 class="ax" id="${pre}${k}">${lab}</h2><div class="seg"
 const chk=(k,l)=>`<label class="check"><input type="checkbox" data-k="${k}"${p[k]?' checked':''}>${l}</label>`;
 const parts={
 theme:()=>seg('theme',t.aTheme,[['auto',t.aAuto],['light',t.aLight],['dark',t.aDark]]),
-size:()=>`<h2 class="ax" id="${pre}size">${t.aSize}</h2><div class="sl"><span class="sm" aria-hidden="true">A</span><input type="range" min="0.875" max="1.5" step="0.125" value="${p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size}" aria-labelledby="${pre}size" aria-valuetext="${Math.round((p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size)*100)}%"><span class="lg" aria-hidden="true">A</span></div><label class="check"><input type="checkbox" data-k="sizeAuto"${p.size==='auto'?' checked':''}>${t.aDevSize}</label>`,
+size:()=>`<h2 class="ax" id="${pre}size">${t.aSize}</h2><div class="sl"><span class="sm" aria-hidden="true">A</span><div class="rg"><input type="range" min="0.875" max="1.5" step="0.125" value="${p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size}" aria-labelledby="${pre}size" aria-valuetext="${Math.round((p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size)*100)}%"><div class="tk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="lg" aria-hidden="true">A</span></div><label class="check"><input type="checkbox" data-k="sizeAuto"${p.size==='auto'?' checked':''}>${t.aDevSize}</label>`,
 contrast:()=>chk('contrast',t.aContrast),
 motion:()=>chk('motion',t.aMotion),
 marks:()=>chk('marks',t.aMarks)
@@ -371,7 +371,7 @@ const com=PUB.map(p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:[...(p.ca
 const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),b:TX(w.short),s:w.img.src,tags:[nameOf(w.cat)],h:'#wiki/'+w.id}));
 const all=[...com,...wk].sort(byT);
 const tile=(i,n)=>`<button class="shot" type="button" data-i="${n}">${pic(i.s,500,i.t,' loading="lazy"')}<span class="cap">${esc(i.t)}</span></button>`;
-app.innerHTML=`<h1>${t.bank}</h1><div class="actions"><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`);
+app.innerHTML=`<div class="th"><h1>${t.bank}</h1><a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`);
 const g=$('gal');
 if(g)g.addEventListener('click',e=>{const b=e.target.closest('.shot');if(b)showPhoto(all[+b.dataset.i])});
 },
