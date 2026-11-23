@@ -396,7 +396,7 @@ const img=w.img;
 const rel=WIKI.filter(x=>x.cat===w.cat&&x.id!==w.id);
 await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short])]);
 if(tok!==tokn)return;
-app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<div class="cat" data-c="${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span></div><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'media')).join(''):'')+`</article>`;
+app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<div class="cat" data-c="${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span></div><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res')).join(''):'')+`</article>`;
 $('shr').addEventListener('click',async()=>{
 const u=location.href;
 if(navigator.share){try{await navigator.share({title:TX(w.title),url:u})}catch(e){}return}
@@ -724,7 +724,7 @@ const items=[
 const draw=()=>{
 const s=q.value.trim().toLowerCase();
 const out=items.filter(i=>(cat==='all'||i.cat===cat)&&(!s||(i.t+' '+i.b+' '+(i.tags||[]).join(' ')).toLowerCase().includes(s)));
-res.innerHTML=out.length?out.map(i=>card(iconOf(i.cat),i.t,i.k,i.b,false,i.h,i.s,i.h?'media':'',i.user?` role="button" tabindex="0" data-k="${items.indexOf(i)}"`:'')).join(''):`<div class="none"><p>${t.none}</p><p>${t.noneHint}</p></div>`;
+res.innerHTML=out.length?out.map(i=>card(iconOf(i.cat),i.t,i.k,i.b,false,i.h,i.s,'res',i.user?` role="button" tabindex="0" data-k="${items.indexOf(i)}"`:'')).join(''):`<div class="none"><p>${t.none}</p><p>${t.noneHint}</p></div>`;
 };
 q.addEventListener('input',draw);
 const open=e=>{const c=e.target.closest('[data-k]');if(c)showPhoto(items[+c.dataset.k])};
