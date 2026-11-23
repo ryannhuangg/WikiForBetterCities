@@ -21,6 +21,13 @@ Object.assign(A.tl,{maxC:"Hanggang {n} character",badLogin:"Mali ang email o pas
 Object.assign(A.ko,{maxC:"최대 {n}자",badLogin:"이메일 또는 비밀번호가 올바르지 않습니다.",needConfirm:"먼저 이메일을 인증하세요. 받은편지함에서 링크를 확인하세요.",exists:"이 이메일로 이미 계정이 있습니다. 로그인하세요.",weakPw:"비밀번호는 6자 이상이어야 합니다.",rate:"시도가 너무 많습니다. 잠시 후 다시 시도하세요.",badEmail:"올바른 이메일 주소를 입력하세요.",pwHint:"6자 이상"});
 Object.assign(A.zh,{maxC:"最多 {n} 个字符",badLogin:"邮箱或密码不正确。",needConfirm:"请先确认邮箱。查看收件箱中的链接。",exists:"该邮箱已有账户，请直接登录。",weakPw:"密码至少需要 6 个字符。",rate:"尝试次数过多，请稍等一分钟再试。",badEmail:"请输入有效的邮箱地址。",pwHint:"至少 6 个字符"});
 
+Object.assign(A.en,{tagsF:"Tags (up to 5)",tagPh:"e.g. bike lane",tagHint:"Press Enter or comma to add. Up to {n} tags.",tagMax:"You can add up to 5 tags.",userSub:"User submitted",readArt:"Read article",rmTag:"Remove tag {x}"});
+Object.assign(A.es,{tagsF:"Etiquetas (hasta 5)",tagPh:"p. ej. ciclovía",tagHint:"Pulsa Intro o coma para añadir. Hasta {n} etiquetas.",tagMax:"Puedes añadir hasta 5 etiquetas.",userSub:"Enviado por un usuario",readArt:"Leer artículo",rmTag:"Quitar etiqueta {x}"});
+Object.assign(A.hi,{tagsF:"टैग (अधिकतम 5)",tagPh:"जैसे बाइक लेन",tagHint:"जोड़ने के लिए Enter या कॉमा दबाएँ। अधिकतम {n} टैग।",tagMax:"आप अधिकतम 5 टैग जोड़ सकते हैं।",userSub:"उपयोगकर्ता द्वारा भेजा गया",readArt:"लेख पढ़ें",rmTag:"टैग {x} हटाएँ"});
+Object.assign(A.tl,{tagsF:"Mga tag (hanggang 5)",tagPh:"hal. bike lane",tagHint:"Pindutin ang Enter o kuwit para magdagdag. Hanggang {n} tag.",tagMax:"Hanggang 5 tag lang ang maaari.",userSub:"Isinumite ng user",readArt:"Basahin ang artikulo",rmTag:"Alisin ang tag na {x}"});
+Object.assign(A.ko,{tagsF:"태그 (최대 5개)",tagPh:"예: 자전거 도로",tagHint:"Enter 또는 쉼표를 눌러 추가하세요. 최대 {n}개.",tagMax:"태그는 최대 5개까지 추가할 수 있습니다.",userSub:"사용자 제출",readArt:"글 읽기",rmTag:"태그 {x} 삭제"});
+Object.assign(A.zh,{tagsF:"标签（最多 5 个）",tagPh:"例如：自行车道",tagHint:"按回车或逗号添加。最多 {n} 个标签。",tagMax:"最多只能添加 5 个标签。",userSub:"用户投稿",readArt:"阅读文章",rmTag:"删除标签 {x}"});
+
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -168,12 +175,12 @@ const m=String(u).match(/^https:\/\/(?:thumb|upload)\.wikimedia\.org\/wikipedia\
 return m?`https://upload.wikimedia.org/wikipedia/commons/thumb/${m[1]}/${w}px-${m[1].split('/')[2]}`:u;
 };
 const pic=(u,w,alt,extra)=>`<img src="${esc(thumbUrl(u,w))}" data-o="${esc(u)}" onload="this.classList.add('in')" onerror="this.onerror=null;this.src=this.dataset.o" alt="${esc(alt)}"${extra||''}>`;
-const card=(i,t,s,b,full,href,src,cls)=>{
+const card=(i,t,s,b,full,href,src,cls,attr)=>{
 const inner=`<div class="thumb">${src?pic(src,500,'',' loading="lazy"'):ic(i)}</div><div class="txt"><h3>${esc(t)}</h3>${s?`<small>${esc(s)}</small>`:''}${b?`<p${full?' class="full"':''}>${esc(b)}</p>`:''}</div>`;
 const c='card'+(cls?' '+cls:'');
 const cc=CATS.find(x=>x.i===i);
 const dc=cc?` data-c="${cc.id}"`:'';
-return href?`<a class="${c}"${dc} href="${href}">${inner}</a>`:`<article class="${c}"${dc}>${inner}</article>`;
+return href?`<a class="${c}"${dc} href="${href}">${inner}</a>`:`<article class="${c}"${dc}${attr||''}>${inner}</article>`;
 };
 const TL={es:'es',hi:'hi',tl:'tl',ko:'ko',zh:'zh-CN'};
 let TC={};
@@ -232,11 +239,12 @@ async function loadWiki(){
 if(!sb)return;
 const{data,error}=await sb.from('wiki_articles').select('*').order('title');
 if(!error&&data)WIKI=data.map(r=>({id:r.id,cat:r.cat,title:r.title,short:r.short,body:r.body,img:r.img_src?{src:r.img_src,credit:r.img_credit||'',alt:r.img_alt||''}:null}));
-const ph=await sb.from('submissions').select('title,caption,cat,photo_path').eq('status','approved').order('created_at',{ascending:false});
+let ph=await sb.from('submissions').select('title,caption,cat,photo_path,tags').eq('status','approved').order('created_at',{ascending:false});
+if(ph.error)ph=await sb.from('submissions').select('title,caption,cat,photo_path').eq('status','approved').order('created_at',{ascending:false});
 const rows=ph.data||[];
 const su=rows.length?await sb.storage.from('submissions').createSignedUrls(rows.map(r=>r.photo_path),3600):{data:[]};
 const urls=new Map((su.data||[]).map(u=>[u.path,u.signedUrl]));
-PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({cat:r.cat||'all',t:r.title,b:r.caption||'',s:urls.get(r.photo_path)}));
+PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({cat:r.cat||'all',t:r.title,b:r.caption||'',tags:r.tags||[],s:urls.get(r.photo_path)}));
 }
 
 async function loadUser(s){
@@ -325,6 +333,22 @@ axHint.setAttribute('aria-label',t.access);
 $('axHintGo').addEventListener('click',e=>{e.stopPropagation();hideHint();setAx(true)});
 $('axHintNo').addEventListener('click',hideHint);
 
+const byT=(a,b)=>a.t.localeCompare(b.t,lang,{sensitivity:'base',numeric:true});
+function showPhoto(o){
+let d=$('lb');
+if(!d){
+d=document.createElement('dialog');
+d.id='lb';
+document.body.appendChild(d);
+d.addEventListener('click',e=>{if(e.target===d)d.close()});
+}
+const t=T();
+d.setAttribute('aria-label',o.t);
+d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${o.tags&&o.tags.length?`<div class="tags">${o.tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
+d.querySelector('.lbx').addEventListener('click',()=>d.close());
+d.showModal();
+}
+
 const views={
 async council(){
 const t=T(),tok=tokn;
@@ -341,16 +365,15 @@ return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.
 },
 async photos(){
 const t=T(),tok=tokn;
-await prep([...PUB.map(p=>p.t),...WIKI.filter(w=>w.img).map(w=>w.title)]);
+await prep([...PUB.flatMap(p=>[p.t,p.b]),...WIKI.filter(w=>w.img).flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
-const tile=i=>{
-const f=`${pic(i.s,500,i.t,' loading="lazy"')}<figcaption>${esc(i.t)}</figcaption>`;
-return i.h?`<a class="shot" href="${i.h}">${f}</a>`:`<figure class="shot">${f}</figure>`;
-};
-const com=PUB.map(p=>({t:TX(p.t),s:p.s,h:null}));
-const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),s:w.img.src,h:'#wiki/'+w.id}));
-const all=[...com,...wk];
-app.innerHTML=`<h1>${t.bank}</h1><div class="actions"><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`);
+const com=PUB.map(p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:[...(p.cat==='all'?[]:[nameOf(p.cat)]),...p.tags]}));
+const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),b:TX(w.short),s:w.img.src,tags:[nameOf(w.cat)],h:'#wiki/'+w.id}));
+const all=[...com,...wk].sort(byT);
+const tile=(i,n)=>`<button class="shot" type="button" data-i="${n}">${pic(i.s,500,i.t,' loading="lazy"')}<span class="cap">${esc(i.t)}</span></button>`;
+app.innerHTML=`<h1>${t.bank}</h1><div class="actions"><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`);
+const g=$('gal');
+if(g)g.addEventListener('click',e=>{const b=e.target.closest('.shot');if(b)showPhoto(all[+b.dataset.i])});
 },
 async wiki(){
 const t=T(),tok=tokn;
@@ -398,10 +421,26 @@ app.innerHTML=`<div class="page"><h1>${t.faq}</h1>`+[1,2,3].map(n=>`<details><su
 },
 contribute(){
 const t=T();
-app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><small class="hint" id="ptg"></small></div><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
 const counter=(i,o,n)=>{const u=()=>{const l=i.value.length;o.textContent=t.maxC.replace('{n}',n)+' · '+l+'/'+n;o.classList.toggle('warn',l>=n)};i.addEventListener('input',u);u()};
 counter($('ptitle'),$('ptc'),120);
 counter($('pcap'),$('pcc'),300);
+let tags=[];
+const tl=()=>{
+$('ptl').innerHTML=tags.map((x,n)=>`<button type="button" class="tag rm" data-n="${n}" aria-label="${esc(t.rmTag.replace('{x}',x))}">${esc(x)}${ic('x')}</button>`).join('');
+$('ptg').textContent=t.tagHint.replace('{n}',5)+' · '+tags.length+'/5';
+};
+const addTag=raw=>{
+const v=raw.trim().toLowerCase().replace(/\s+/g,' ').slice(0,24);
+if(!v||tags.includes(v))return;
+if(tags.length>=5){$('ptg').textContent=t.tagMax;$('ptg').classList.add('warn');return}
+tags.push(v);$('ptg').classList.remove('warn');tl();
+};
+tl();
+$('ptag').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();addTag($('ptag').value);$('ptag').value=''}});
+$('ptag').addEventListener('input',e=>{const v=e.target.value;if(v.includes(',')){v.split(',').forEach(addTag);e.target.value=''}});
+$('ptag').addEventListener('blur',e=>{addTag(e.target.value);e.target.value=''});
+$('ptl').addEventListener('click',e=>{const b=e.target.closest('[data-n]');if(b){tags.splice(+b.dataset.n,1);$('ptg').classList.remove('warn');tl()}});
 const bad=file=>!file||!file.type.startsWith('image/')||file.size>5242880;
 const sub=$('f').querySelector('button[type=submit]');
 let busy=false;
@@ -420,14 +459,15 @@ if($('hp').value){f.reset();ok.textContent=t.thanks;return}
 if(bad(file)){ok.textContent=t.big;return}
 busy=true;sub.disabled=true;ok.textContent=t.loading;
 try{
+addTag($('ptag').value);$('ptag').value='';
 const title=$('ptitle').value.trim(),caption=$('pcap').value.trim();
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
 const up=await sb.storage.from('submissions').upload(path,file);
 if(up.error){ok.textContent=/size|exceed|mime|type/i.test(up.error.message||'')?t.big:t.err;return}
-const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path});
+const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path,...(tags.length?{tags}:{})});
 if(r.error){await sb.storage.from('submissions').remove([path]);ok.textContent=r.error.code==='42501'?t.limit:t.err;return}
 ok.textContent=t.thanks;
-f.reset();
+f.reset();tags=[];tl();
 }catch(x){ok.textContent=t.err}
 finally{busy=false;sub.disabled=false}
 });
@@ -516,6 +556,7 @@ app.innerHTML=`<div class="page"><h1>Admin</h1>
 <label class="field">Topic<select id="sc">${topics}</select></label>
 <label class="field">Title<input type="text" id="st" required></label>
 <label class="field">Caption<input type="text" id="sp"></label>
+<label class="field">Tags (comma-separated, max 5)<input type="text" id="stg"></label>
 <button class="btn solid" type="submit">Save submission</button>
 <button id="sx" class="btn ghost" type="button">Cancel edit</button></form>
 <label class="check"><input type="checkbox" id="srev">Show reviewed</label><input type="search" class="flt" data-for="sl" placeholder="Filter" aria-label="Filter"><div id="sl"></div></section></div>`;
@@ -629,23 +670,23 @@ document.querySelectorAll('[data-pane]').forEach(x=>x.hidden=x.dataset.pane!==b.
 });
 $('sf').addEventListener('submit',async e=>{
 e.preventDefault();
-if(fail(await sb.from('submissions').update({cat:$('sc').value,title:$('st').value.trim(),caption:$('sp').value.trim()||null}).eq('id',$('sid').value)))return;
+if(fail(await sb.from('submissions').update({cat:$('sc').value,title:$('st').value.trim(),caption:$('sp').value.trim()||null,tags:[...new Set($('stg').value.split(',').map(x=>x.trim().toLowerCase().slice(0,24)).filter(Boolean))].slice(0,5)}).eq('id',$('sid').value)))return;
 $('sf').hidden=true;
 await draw();
 });
 $('sx').addEventListener('click',()=>{$('sf').hidden=true});
 $('srev').addEventListener('change',drawS);
 $('sl').addEventListener('click',async e=>{
-const b=e.target.closest('button');
-if(!b)return;
+let b=e.target.closest('button');
+if(!b){const r=e.target.closest('.arow');b=r&&r.querySelector('[data-sv]');if(!b)return}
 const id=b.dataset.sv||b.dataset.se||b.dataset.sa||b.dataset.sr||b.dataset.sd;
 const s=S.find(x=>x.id===id);
 if(!s)return;
 if(b.dataset.sv){
 const{data}=await sb.storage.from('submissions').createSignedUrl(s.photo_path,300);
-if(data)window.open(data.signedUrl,'_blank');
+showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',tags:s.tags||[],meta:['Status: '+s.status,'Topic: '+(s.cat&&CATS.some(c=>c.id===s.cat)?L.en.cats[CATS.findIndex(c=>c.id===s.cat)]:'All'),'Submitted: '+new Date(s.created_at).toLocaleString()]});
 }else if(b.dataset.se){
-$('sid').value=s.id;$('sc').value=s.cat||CATS[0].id;$('st').value=s.title;$('sp').value=s.caption||'';
+$('sid').value=s.id;$('sc').value=s.cat||CATS[0].id;$('st').value=s.title;$('sp').value=s.caption||'';$('stg').value=(s.tags||[]).join(', ');
 $('sf').hidden=false;window.scrollTo(0,0);
 }else if(b.dataset.sa||b.dataset.sr){
 if(fail(await sb.from('submissions').update({status:b.dataset.sa?'approved':'rejected'}).eq('id',s.id)))return;
@@ -676,16 +717,19 @@ app.innerHTML=`<h1>${nameOf(cat)}</h1><input id="q" type="search" aria-label="${
 const q=$('q');
 const res=$('res');
 const items=[
-...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:TX(p.b),h:null,s:p.s})),
+...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:p.b?TX(p.b):'',h:null,s:p.s,user:true,tags:[...(p.cat==='all'?[]:[nameOf(p.cat)]),...p.tags]})),
 ...PHOTOS.map(p=>({cat:p[0],t:TX(p[1]),k:t.photo,b:'',h:null})),
 ...WIKI.map(w=>({cat:w.cat,t:TX(w.title),k:t.article,b:TX(w.short),h:'#wiki/'+w.id,s:w.img?.src}))
-];
+].sort(byT);
 const draw=()=>{
 const s=q.value.trim().toLowerCase();
-const out=items.filter(i=>(cat==='all'||i.cat===cat)&&(!s||(i.t+' '+i.b).toLowerCase().includes(s)));
-res.innerHTML=out.length?out.map(i=>card(iconOf(i.cat),i.t,i.k,i.b,false,i.h,i.s,i.h?'media':'')).join(''):`<div class="none"><p>${t.none}</p><p>${t.noneHint}</p></div>`;
+const out=items.filter(i=>(cat==='all'||i.cat===cat)&&(!s||(i.t+' '+i.b+' '+(i.tags||[]).join(' ')).toLowerCase().includes(s)));
+res.innerHTML=out.length?out.map(i=>card(iconOf(i.cat),i.t,i.k,i.b,false,i.h,i.s,i.h?'media':'',i.user?` role="button" tabindex="0" data-k="${items.indexOf(i)}"`:'')).join(''):`<div class="none"><p>${t.none}</p><p>${t.noneHint}</p></div>`;
 };
 q.addEventListener('input',draw);
+const open=e=>{const c=e.target.closest('[data-k]');if(c)showPhoto(items[+c.dataset.k])};
+res.addEventListener('click',open);
+res.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const c=e.target.closest('[data-k]');if(c){e.preventDefault();open(e)}}});
 draw();
 }
 
@@ -728,6 +772,7 @@ langMenu.innerHTML=LANGS.map(l=>`<li><button data-l="${l[0]}"${l[0]===lang?' ari
 
 async function route(){
 const n=++tokn;
+const lbd=$('lb');if(lbd&&lbd.open)lbd.close();
 if(!app.innerHTML)app.innerHTML=`<div class="none">${T().loading}</div>`;
 const slow=await Promise.race([wikiReady.then(()=>0),new Promise(r=>setTimeout(()=>r(1),4000))]);
 if(slow)wikiReady.then(()=>route());

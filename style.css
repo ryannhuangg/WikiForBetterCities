@@ -118,7 +118,7 @@ button.chip{cursor:pointer;font:600 1rem var(--sans)}
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
 .shot{position:relative;display:block;margin:0;border-radius:12px;overflow:hidden;aspect-ratio:1;background:var(--tile)}
 .shot img{display:block;width:100%;height:100%;object-fit:cover}
-.shot figcaption{position:absolute;inset:auto 0 0;padding:24px 10px 8px;color:#fff;font:600 var(--fs-xs)/1.2 var(--sans);background:linear-gradient(transparent,rgba(0,0,0,.65))}
+.shot figcaption,.shot .cap{position:absolute;inset:auto 0 0;padding:24px 10px 8px;color:#fff;font:600 var(--fs-xs)/1.2 var(--sans);background:linear-gradient(transparent,rgba(0,0,0,.65))}
 #res .card{margin:0 0 var(--s3)}
 @media (min-width:600px){
 :root{--wide:840px}
@@ -247,3 +247,22 @@ html[data-contrast=high] #tabs{background:var(--bg)}
 
 .field .hint{display:block;margin-top:4px;font-weight:400;color:var(--mut);font-size:.875rem}
 .field .hint.warn{color:var(--fg);font-weight:600}
+
+button.shot{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.shot .cap{display:block}
+#sl .arow>div{cursor:pointer}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.tag{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--tile);color:var(--fg);font:600 .875rem var(--sans)}
+button.tag{min-height:40px;cursor:pointer}
+button.tag i.ph{font-size:16px}
+#lb{width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--fg);overflow:auto}
+#lb::backdrop{background:rgba(0,0,0,.65)}
+#lb .lbx{position:absolute;top:8px;right:8px;z-index:2}
+#lb .lbimg{background:var(--tile);min-height:120px}
+#lb .lbimg img{display:block;width:100%;max-height:60dvh;object-fit:contain}
+#lb .lbtx{padding:16px}
+#lb h2{margin:0 0 8px}
+#lb p{margin:0 0 10px;color:var(--mut)}
+#lb p.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--tile);color:var(--accent);font-weight:600}
+#lb .meta{margin:10px 0;padding-left:18px;color:var(--mut)}
+#lb .btn{margin-top:8px;color:var(--accent);text-decoration:none}
