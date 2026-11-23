@@ -351,9 +351,8 @@ d.showModal();
 
 // Decorative skyline banner (parallax) and light scroll reveals for the main page.
 const PLX='<div class="plx" aria-hidden="true"><svg class="far" viewBox="0 0 400 172" preserveAspectRatio="xMidYMax slice"><path d="M0 172V104h28V84h26v32h22V92h30v24h24V70h28v46h26V96h30v20h24V80h28v36h28V100h26v72z"/></svg><svg class="near" viewBox="0 0 400 172" preserveAspectRatio="xMidYMax slice"><path d="M0 172V126h34V108h30v22h26V116h36v18h30V104h32v30h28V120h34v14h30V110h28v62z"/></svg></div>';
+const calm=()=>matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.motion==='reduce';
 function fx(){
-const root=document.documentElement;
-const calm=()=>matchMedia('(prefers-reduced-motion:reduce)').matches||root.dataset.motion==='reduce';
 const p=app.querySelector('.plx');
 if(p){
 let raf=0;
@@ -362,16 +361,20 @@ const sc=()=>{if(!raf)raf=requestAnimationFrame(upd)};
 addEventListener('scroll',sc,{passive:true});
 upd();
 }
+reveal(app.querySelectorAll('section .card,section .rel'));
+}
+// Fade-and-rise items in as they scroll into view. Items already on screen are left alone.
+function reveal(list){
 if(calm()||!('IntersectionObserver' in window))return;
-const io=new IntersectionObserver(es=>es.forEach(e=>{
-if(!e.isIntersecting)return;
-const c=e.target;io.unobserve(c);c.classList.add('in');
+const io=new IntersectionObserver(es=>es.filter(e=>e.isIntersecting).forEach((e,j)=>{
+const c=e.target;io.unobserve(c);
+c.style.setProperty('--d',Math.min(j,5)*60+'ms');c.classList.add('in');
 c.addEventListener('transitionend',()=>{c.classList.remove('rv','in');c.style.removeProperty('--d')},{once:true});
 }),{rootMargin:'0px 0px -8% 0px'});
-app.querySelectorAll('section').forEach(sec=>sec.querySelectorAll('.card,.rel').forEach((c,i)=>{
+list.forEach(c=>{
 if(c.getBoundingClientRect().top<innerHeight)return;
-c.classList.add('rv');c.style.setProperty('--d',Math.min(i,3)*60+'ms');io.observe(c);
-}));
+c.classList.add('rv');io.observe(c);
+});
 }
 
 const views={
@@ -400,6 +403,7 @@ const tile=(i,n)=>`<button class="shot" type="button" data-i="${n}">${pic(i.s,50
 app.innerHTML=`<div class="th"><h1>${t.bank}</h1><a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`);
 const g=$('gal');
 if(g)g.addEventListener('click',e=>{const b=e.target.closest('.shot');if(b)showPhoto(all[+b.dataset.i])});
+if(g)reveal(g.querySelectorAll('.shot'));
 },
 async wiki(){
 const t=T(),tok=tokn;
@@ -422,7 +426,7 @@ const img=w.img;
 const rel=WIKI.filter(x=>x.cat===w.cat&&x.id!==w.id);
 await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short])]);
 if(tok!==tokn)return;
-app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<div class="cat" data-c="${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span></div><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res')).join(''):'')+`</article>`;
+app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<a class="cat" data-c="${w.cat}" href="#search-${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span>${ic('caret-right')}</a><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res')).join(''):'')+`</article>`;
 $('shr').addEventListener('click',async()=>{
 const u=location.href;
 if(navigator.share){try{await navigator.share({title:TX(w.title),url:u})}catch(e){}return}

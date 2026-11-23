@@ -189,7 +189,7 @@ a.card:active,.shot:active{transform:scale(.985)}
 section[data-c] h2::before{content:"";display:inline-block;width:10px;height:10px;margin-right:10px;border-radius:50%;background:var(--dot)}
 .wiki-article .cat{display:inline-flex;padding:4px 14px 4px 10px;border-radius:999px;background:var(--tint,var(--tile))}
 .date::after{height:2px;background:repeating-linear-gradient(90deg,var(--lane) 0 10px,transparent 10px 18px)}
-#app>h1::after,.page h1::after,.th h1::after{content:"";display:block;width:56px;height:4px;margin-top:10px;background:repeating-linear-gradient(90deg,var(--accent) 0 12px,transparent 12px 18px)}
+#app>h1::after,.page h1::after,.th h1::after{content:"";display:block;width:84px;height:4px;margin-top:10px;background:repeating-linear-gradient(90deg,var(--accent) 0 12px,transparent 12px 18px)}
 #app>h1,.page h1{margin-bottom:var(--s4)}
 #drawer hr{border-top:2px dashed var(--lane)}
 #app>h2.sec{margin:var(--s5) 0 var(--s3)}
@@ -305,13 +305,41 @@ input[type=file]::file-selector-button{min-height:40px;margin:7px 12px 7px 7px;p
 .plx .near{opacity:.26;transform:translate3d(0,calc(var(--py,0)*.28px),0)}
 .plx::after{content:"";position:absolute;left:16px;right:16px;bottom:12px;height:2px;background:repeating-linear-gradient(90deg,var(--lane) 0 10px,transparent 10px 18px)}
 @keyframes dash{from{transform:scaleX(0)}}
-#app>h1::after{transform-origin:left;animation:dash .5s .2s cubic-bezier(.2,.8,.2,1) both}
-.card.rv{opacity:0;transform:translateY(14px);transition:opacity .45s ease var(--d,0ms),transform .45s cubic-bezier(.2,.8,.2,1) var(--d,0ms)}
+#app>h1::after,.page h1::after,.th h1::after{transform-origin:left;animation:dash .5s .2s cubic-bezier(.2,.8,.2,1) both}
+.card.rv,.shot.rv{opacity:0;transform:translateY(14px);transition:opacity .45s ease var(--d,0ms),transform .45s cubic-bezier(.2,.8,.2,1) var(--d,0ms)}
 h3.rel.rv{opacity:0;transform:translateY(14px);transition:opacity .45s ease var(--d,0ms),transform .45s cubic-bezier(.2,.8,.2,1) var(--d,0ms)}
-.card.rv.in,h3.rel.rv.in{opacity:1;transform:none}
+.card.rv.in,.shot.rv.in,h3.rel.rv.in{opacity:1;transform:none}
 @media (hover:hover){a.card,.shot{transition:transform .15s,border-color .15s}a.card:hover,.shot:hover{transform:translateY(-2px)}a.card:hover{border-color:var(--accent)}a.card:hover:active,.shot:hover:active{transform:scale(.985)}}
-@media (prefers-reduced-motion:reduce){.plx svg{transform:none!important}#app>h1::after{animation:none}.card.rv,h3.rel.rv{opacity:1;transform:none;transition:none}a.card:hover,.shot:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){.plx svg{transform:none!important}#app>h1::after,.page h1::after,.th h1::after{animation:none}.card.rv,.shot.rv,h3.rel.rv{opacity:1;transform:none;transition:none}a.card:hover,.shot:hover{transform:none}}
 html[data-motion=reduce] .plx svg{transform:none!important}
-html[data-motion=reduce] .card.rv,html[data-motion=reduce] h3.rel.rv{opacity:1;transform:none}
+html[data-motion=reduce] .card.rv,html[data-motion=reduce] .shot.rv,html[data-motion=reduce] h3.rel.rv{opacity:1;transform:none}
 html[data-motion=reduce] a.card:hover,html[data-motion=reduce] .shot:hover{transform:none}
 html[data-contrast=high] .plx{display:none}
+
+/* Tappable category tag on articles */
+.wiki-article a.cat{text-decoration:none;transition:filter .15s,transform .1s}
+.wiki-article a.cat .ph-caret-right{font-size:1rem;transition:transform .15s}
+.wiki-article a.cat:active{transform:scale(.97)}
+.wiki-article a.cat:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (hover:hover){.wiki-article a.cat:hover{filter:brightness(.96)}.wiki-article a.cat:hover .ph-caret-right{transform:translateX(3px)}}
+/* Language and accessibility menus */
+@keyframes menupop{from{opacity:0;transform:translateY(-6px) scale(.97)}}
+@keyframes slidein{from{opacity:0;transform:translateX(-6px)}}
+@keyframes tick{from{opacity:0;transform:scale(.3)}60%{transform:scale(1.2)}}
+#langMenu,#axMenu{transform-origin:top right}
+#langMenu:not([hidden]),#axMenu:not([hidden]){animation:menupop .18s cubic-bezier(.2,.8,.2,1)}
+#langMenu:not([hidden]) li{animation:slidein .22s cubic-bezier(.2,.8,.2,1) both}
+#langMenu:not([hidden]) li:nth-child(2){animation-delay:30ms}
+#langMenu:not([hidden]) li:nth-child(3){animation-delay:60ms}
+#langMenu:not([hidden]) li:nth-child(4){animation-delay:90ms}
+#langMenu:not([hidden]) li:nth-child(5){animation-delay:120ms}
+#langMenu:not([hidden]) li:nth-child(6){animation-delay:150ms}
+#langMenu:not([hidden]) .ck{animation:tick .3s .15s both}
+#langBtn .ph-caret-down{transition:transform .2s}
+#langBtn[aria-expanded=true] .ph-caret-down{transform:rotate(180deg)}
+.seg button{transition:background-color .15s,border-color .15s,color .15s,transform .1s}
+.seg button:active{transform:scale(.96)}
+.check input{transition:background-color .15s,border-color .15s}
+.check input::after{transform:rotate(45deg) translate(-1px,-1px) scale(.4);transition:opacity .15s,transform .15s cubic-bezier(.2,.8,.2,1)}
+.check input:checked::after{transform:rotate(45deg) translate(-1px,-1px) scale(1)}
+@media (prefers-reduced-motion:reduce){#langMenu,#axMenu,#langMenu li,#langMenu .ck{animation:none!important}#langBtn .ph-caret-down,.seg button,.check input,.check input::after,.wiki-article a.cat,.wiki-article a.cat .ph-caret-right{transition:none}.seg button:active,.wiki-article a.cat:active{transform:none}.wiki-article a.cat:hover .ph-caret-right{transform:none}}
