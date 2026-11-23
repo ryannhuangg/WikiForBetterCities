@@ -1,23 +1,24 @@
 const A={
-en:{signup:'Create account',noAcct:"Don't have an account? Sign up",haveAcct:'Already have an account? Sign in',signout:'Sign out',confirm:'Check your email to confirm your account, then sign in.',err:'Something went wrong. Check your details and try again.',notReady:'Accounts are not set up yet.',signedAs:'Signed in as',empty:'No meetings yet.',loading:'Loading…',related:'Related articles',seeImg:'See images'},
-es:{signup:'Crear cuenta',noAcct:'¿No tienes cuenta? Regístrate',haveAcct:'¿Ya tienes cuenta? Inicia sesión',signout:'Cerrar sesión',confirm:'Revisa tu correo para confirmar tu cuenta y luego inicia sesión.',err:'Algo salió mal. Revisa tus datos e inténtalo de nuevo.',notReady:'Las cuentas aún no están configuradas.',signedAs:'Sesión iniciada como',empty:'Aún no hay reuniones.',loading:'Cargando…',related:'Artículos relacionados',seeImg:'Ver imágenes'},
-hi:{signup:'खाता बनाएँ',noAcct:'खाता नहीं है? साइन अप करें',haveAcct:'पहले से खाता है? साइन इन करें',signout:'साइन आउट',confirm:'अपना खाता पक्का करने के लिए ईमेल देखें, फिर साइन इन करें।',err:'कुछ गड़बड़ हो गई। अपनी जानकारी जाँचकर फिर कोशिश करें।',notReady:'खाते अभी सेट नहीं हैं।',signedAs:'साइन इन किया हुआ:',empty:'अभी कोई बैठक नहीं।',loading:'लोड हो रहा है…',related:'संबंधित लेख',seeImg:'चित्र देखें'},
-tl:{signup:'Gumawa ng account',noAcct:'Wala pang account? Mag-sign up',haveAcct:'May account na? Mag-sign in',signout:'Mag-sign out',confirm:'Tingnan ang iyong email para kumpirmahin ang account, saka mag-sign in.',err:'Nagkaproblema. Suriin ang iyong detalye at subukan muli.',notReady:'Hindi pa naka-set up ang mga account.',signedAs:'Naka-sign in bilang',empty:'Wala pang pulong.',loading:'Naglo-load…',related:'Mga kaugnay na artikulo',seeImg:'Tingnan ang mga larawan'},
-ko:{signup:'계정 만들기',noAcct:'계정이 없나요? 가입하기',haveAcct:'이미 계정이 있나요? 로그인',signout:'로그아웃',confirm:'이메일을 확인해 계정을 인증한 후 로그인하세요.',err:'문제가 발생했습니다. 정보를 확인하고 다시 시도하세요.',notReady:'계정 기능이 아직 설정되지 않았습니다.',signedAs:'로그인 계정:',empty:'아직 회의가 없습니다.',loading:'불러오는 중…',related:'관련 글',seeImg:'사진 보기'},
-zh:{signup:'创建账户',noAcct:'没有账户？注册',haveAcct:'已有账户？登录',signout:'退出登录',confirm:'请查收邮件确认账户，然后登录。',err:'出错了。请检查信息后重试。',notReady:'账户功能尚未设置。',signedAs:'当前登录：',empty:'暂无会议。',loading:'加载中…',related:'相关文章',seeImg:'查看图片'}
+en:{signup:'Create account',noAcct:"Don't have an account? Sign up",haveAcct:'Already have an account? Sign in',signout:'Sign out',confirm:'Check your email to confirm your account, then sign in.',err:'Something went wrong. Check your details and try again.',notReady:'Accounts are not set up yet.',signedAs:'Signed in as',empty:'No meetings yet.',loading:'Loading…',related:'Related articles',seeImg:'See images',remember:'Remember me'},
+es:{signup:'Crear cuenta',noAcct:'¿No tienes cuenta? Regístrate',haveAcct:'¿Ya tienes cuenta? Inicia sesión',signout:'Cerrar sesión',confirm:'Revisa tu correo para confirmar tu cuenta y luego inicia sesión.',err:'Algo salió mal. Revisa tus datos e inténtalo de nuevo.',notReady:'Las cuentas aún no están configuradas.',signedAs:'Sesión iniciada como',empty:'Aún no hay reuniones.',loading:'Cargando…',related:'Artículos relacionados',seeImg:'Ver imágenes',remember:'Recordarme'},
+hi:{signup:'खाता बनाएँ',noAcct:'खाता नहीं है? साइन अप करें',haveAcct:'पहले से खाता है? साइन इन करें',signout:'साइन आउट',confirm:'अपना खाता पक्का करने के लिए ईमेल देखें, फिर साइन इन करें।',err:'कुछ गड़बड़ हो गई। अपनी जानकारी जाँचकर फिर कोशिश करें।',notReady:'खाते अभी सेट नहीं हैं।',signedAs:'साइन इन किया हुआ:',empty:'अभी कोई बैठक नहीं।',loading:'लोड हो रहा है…',related:'संबंधित लेख',seeImg:'चित्र देखें',remember:'मुझे याद रखें'},
+tl:{signup:'Gumawa ng account',noAcct:'Wala pang account? Mag-sign up',haveAcct:'May account na? Mag-sign in',signout:'Mag-sign out',confirm:'Tingnan ang iyong email para kumpirmahin ang account, saka mag-sign in.',err:'Nagkaproblema. Suriin ang iyong detalye at subukan muli.',notReady:'Hindi pa naka-set up ang mga account.',signedAs:'Naka-sign in bilang',empty:'Wala pang pulong.',loading:'Naglo-load…',related:'Mga kaugnay na artikulo',seeImg:'Tingnan ang mga larawan',remember:'Tandaan ako'},
+ko:{signup:'계정 만들기',noAcct:'계정이 없나요? 가입하기',haveAcct:'이미 계정이 있나요? 로그인',signout:'로그아웃',confirm:'이메일을 확인해 계정을 인증한 후 로그인하세요.',err:'문제가 발생했습니다. 정보를 확인하고 다시 시도하세요.',notReady:'계정 기능이 아직 설정되지 않았습니다.',signedAs:'로그인 계정:',empty:'아직 회의가 없습니다.',loading:'불러오는 중…',related:'관련 글',seeImg:'사진 보기',remember:'로그인 상태 유지'},
+zh:{signup:'创建账户',noAcct:'没有账户？注册',haveAcct:'已有账户？登录',signout:'退出登录',confirm:'请查收邮件确认账户，然后登录。',err:'出错了。请检查信息后重试。',notReady:'账户功能尚未设置。',signedAs:'当前登录：',empty:'暂无会议。',loading:'加载中…',related:'相关文章',seeImg:'查看图片',remember:'记住我'}
 };
 
-Object.assign(A,{en:Object.assign(A.en,{access:"Accessibility",aTheme:"Theme",aAuto:"System",aLight:"Light",aDark:"Dark",aSize:"Text size",aN:"Normal",aL:"Large",aXL:"Larger",aContrast:"High contrast",aMotion:"Reduce motion",aMarks:"Mark selected items with underlines and checks, not color alone",aReset:"Reset to defaults"}),es:Object.assign(A.es,{access:"Accesibilidad",aTheme:"Tema",aAuto:"Sistema",aLight:"Claro",aDark:"Oscuro",aSize:"Tamaño del texto",aN:"Normal",aL:"Grande",aXL:"Más grande",aContrast:"Alto contraste",aMotion:"Reducir movimiento",aMarks:"Marcar lo seleccionado con subrayados y marcas, no solo con color",aReset:"Restablecer"}),hi:Object.assign(A.hi,{access:"सुलभता",aTheme:"थीम",aAuto:"सिस्टम",aLight:"हल्का",aDark:"गहरा",aSize:"टेक्स्ट का आकार",aN:"सामान्य",aL:"बड़ा",aXL:"और बड़ा",aContrast:"उच्च कंट्रास्ट",aMotion:"एनिमेशन कम करें",aMarks:"चुने हुए आइटम को केवल रंग से नहीं, रेखांकन और निशान से दिखाएँ",aReset:"डिफ़ॉल्ट पर लौटें"}),tl:Object.assign(A.tl,{access:"Accessibility",aTheme:"Tema",aAuto:"Sistema",aLight:"Maliwanag",aDark:"Madilim",aSize:"Laki ng teksto",aN:"Normal",aL:"Malaki",aXL:"Mas malaki",aContrast:"Mataas na contrast",aMotion:"Bawasan ang galaw",aMarks:"Markahan ang napili ng underline at tsek, hindi kulay lang",aReset:"I-reset"}),ko:Object.assign(A.ko,{access:"접근성",aTheme:"테마",aAuto:"시스템",aLight:"라이트",aDark:"다크",aSize:"글자 크기",aN:"보통",aL:"크게",aXL:"더 크게",aContrast:"고대비",aMotion:"움직임 줄이기",aMarks:"선택 항목을 색상만이 아니라 밑줄과 체크로 표시",aReset:"기본값으로 되돌리기"}),zh:Object.assign(A.zh,{access:"无障碍",aTheme:"主题",aAuto:"跟随系统",aLight:"浅色",aDark:"深色",aSize:"文字大小",aN:"标准",aL:"大",aXL:"更大",aContrast:"高对比度",aMotion:"减少动画",aMarks:"用下划线和对勾标记所选项，而不只靠颜色",aReset:"恢复默认"})});
-
-Object.assign(A,{en:Object.assign(A.en,{aMore:"More settings",aSkip:"Skip to content"}),es:Object.assign(A.es,{aMore:"Más ajustes",aSkip:"Saltar al contenido"}),hi:Object.assign(A.hi,{aMore:"और सेटिंग्स",aSkip:"सामग्री पर जाएँ"}),tl:Object.assign(A.tl,{aMore:"Higit pang setting",aSkip:"Lumaktaw sa nilalaman"}),ko:Object.assign(A.ko,{aMore:"설정 더 보기",aSkip:"본문으로 건너뛰기"}),zh:Object.assign(A.zh,{aMore:"更多设置",aSkip:"跳到内容"})});
-
-Object.assign(A,{en:Object.assign(A.en,{aDevSize:"Match device text size"}),es:Object.assign(A.es,{aDevSize:"Usar el tamaño de texto del dispositivo"}),hi:Object.assign(A.hi,{aDevSize:"डिवाइस के टेक्स्ट आकार का उपयोग करें"}),tl:Object.assign(A.tl,{aDevSize:"Gamitin ang laki ng teksto ng device"}),ko:Object.assign(A.ko,{aDevSize:"기기 글자 크기 따르기"}),zh:Object.assign(A.zh,{aDevSize:"跟随设备文字大小"})});
+Object.assign(A.en,{access:"Accessibility",aTheme:"Theme",aAuto:"System",aLight:"Light",aDark:"Dark",aSize:"Text size",aContrast:"High contrast",aMotion:"Reduce motion",aMarks:"Mark selected items with underlines and checks, not color alone",aReset:"Reset to defaults",aMore:"More settings",aDevSize:"Match device text size",aHint:"Need larger text or higher contrast?",aAdjust:"Adjust",aNo:"No thanks"});
+Object.assign(A.es,{access:"Accesibilidad",aTheme:"Tema",aAuto:"Sistema",aLight:"Claro",aDark:"Oscuro",aSize:"Tamaño del texto",aContrast:"Alto contraste",aMotion:"Reducir movimiento",aMarks:"Marcar lo seleccionado con subrayados y marcas, no solo con color",aReset:"Restablecer",aMore:"Más ajustes",aDevSize:"Usar el tamaño de texto del dispositivo",aHint:"¿Necesitas texto más grande o más contraste?",aAdjust:"Ajustar",aNo:"No, gracias"});
+Object.assign(A.hi,{access:"सुलभता",aTheme:"थीम",aAuto:"सिस्टम",aLight:"हल्का",aDark:"गहरा",aSize:"टेक्स्ट का आकार",aContrast:"उच्च कंट्रास्ट",aMotion:"एनिमेशन कम करें",aMarks:"चुने हुए आइटम को केवल रंग से नहीं, रेखांकन और निशान से दिखाएँ",aReset:"डिफ़ॉल्ट पर लौटें",aMore:"और सेटिंग्स",aDevSize:"डिवाइस के टेक्स्ट आकार का उपयोग करें",aHint:"बड़ा टेक्स्ट या ज़्यादा कंट्रास्ट चाहिए?",aAdjust:"बदलें",aNo:"नहीं, धन्यवाद"});
+Object.assign(A.tl,{access:"Accessibility",aTheme:"Tema",aAuto:"Sistema",aLight:"Maliwanag",aDark:"Madilim",aSize:"Laki ng teksto",aContrast:"Mataas na contrast",aMotion:"Bawasan ang galaw",aMarks:"Markahan ang napili ng underline at tsek, hindi kulay lang",aReset:"I-reset",aMore:"Higit pang setting",aDevSize:"Gamitin ang laki ng teksto ng device",aHint:"Kailangan ng mas malaking teksto o mas mataas na contrast?",aAdjust:"I-adjust",aNo:"Hindi, salamat"});
+Object.assign(A.ko,{access:"접근성",aTheme:"테마",aAuto:"시스템",aLight:"라이트",aDark:"다크",aSize:"글자 크기",aContrast:"고대비",aMotion:"움직임 줄이기",aMarks:"선택 항목을 색상만이 아니라 밑줄과 체크로 표시",aReset:"기본값으로 되돌리기",aMore:"설정 더 보기",aDevSize:"기기 글자 크기 따르기",aHint:"더 큰 글자나 높은 대비가 필요하신가요?",aAdjust:"조정",aNo:"괜찮아요"});
+Object.assign(A.zh,{access:"无障碍",aTheme:"主题",aAuto:"跟随系统",aLight:"浅色",aDark:"深色",aSize:"文字大小",aContrast:"高对比度",aMotion:"减少动画",aMarks:"用下划线和对勾标记所选项，而不只靠颜色",aReset:"恢复默认",aMore:"更多设置",aDevSize:"跟随设备文字大小",aHint:"需要更大的文字或更高的对比度吗？",aAdjust:"调整",aNo:"不用了"});
 
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
 
-const WIKI=[
+const SEED_WIKI=[
 {id:'complete-streets',cat:'roads',title:'Complete streets',short:'Streets designed to be safe for walking, biking, transit, and driving.',body:[
 'A complete street is designed for everyone who uses it, not only people in cars. Depending on the location and traffic, the design can include sidewalks, bike lanes, crosswalks, bus stops, and curb ramps.',
 'Many cities adopt complete streets policies so that road projects consider these users from the start. When a repaving or redesign is proposed, this framework is often behind changes such as protected bike lanes or narrower crossings.']},
@@ -56,25 +57,7 @@ const WIKI=[
 'Each district has its own rules for uses, height, lot size, and parking. Changes to zoning are usually decided by the city council after a public hearing.']},
 {id:'variance',cat:'zoning',title:'Variance',short:'Special permission to break a zoning rule for one property.',body:[
 'A variance is permission to break a specific zoning rule for one property. Owners ask for one when a rule would create a real hardship for their lot, such as an unusual shape or a building that needs to sit closer to the street.',
-'Variances are usually decided case by case, and neighbors often get a chance to comment.']},
-{id:'roundabout',cat:'roads',title:'Roundabout',short:'A circular intersection where traffic flows one way and yields on entry.',body:[
-'A roundabout is a circular intersection where drivers travel counterclockwise around a central island and yield to traffic already in the circle. There are no stop signs or traffic lights inside it.',
-'Because cars must slow down to enter and all turns are gentle, roundabouts tend to have fewer serious crashes than signalized intersections. They can need more space, so planners weigh the available land and the number of people walking and biking.']},
-{id:'speed-table',cat:'roads',title:'Speed table',short:'A long, flat-topped bump that slows cars without a hard jolt.',body:[
-'A speed table is a raised section of road with a flat top, wide enough for a car\'s wheels to rest on it at once. It is longer and gentler than a speed bump, so drivers slow down without a sharp jolt.',
-'Speed tables are often placed at crosswalks or on residential streets. They are usually marked with paint and can be built to allow buses and emergency vehicles to pass comfortably.']},
-{id:'bascule-bridge',cat:'bridges',title:'Bascule bridge',short:'A drawbridge with a deck that lifts upward to let boats pass.',body:[
-'A bascule bridge is a movable bridge, often called a drawbridge, with a deck that pivots upward on a hinge. When the deck is raised, boats can pass through the channel below.',
-'Many use a counterweight to balance the deck so it takes less power to lift. Bridge openings follow set schedules or signals, which is why road projects near them often include timing and traffic plans.']},
-{id:'parking-garage',cat:'structures',title:'Parking garage',short:'A multi-level building used to store cars in less space.',body:[
-'A parking garage stacks parking spaces on several levels so that more cars fit on a small piece of land. Some are stand-alone buildings, and others sit under or beside homes and shops.',
-'Cities often set parking requirements in their zoning rules. Garages can also be designed with shops on the ground floor, so the street stays lively instead of lined with blank walls.']},
-{id:'light-rail',cat:'transit',title:'Light rail',short:'Electric trains that run on city streets or dedicated tracks, stopping at platforms.',body:[
-'Light rail uses electric trains that run on tracks, either in their own lanes on city streets or on separate paths. Riders board from platforms at stations, and trains usually run more often than regional rail.',
-'Light rail carries more people than a bus and costs less to build than a subway. Planners look at how close stations are to homes, jobs, and bus connections.']},
-{id:'community-garden',cat:'parks',title:'Community garden',short:'A shared plot of land where neighbors grow plants and food.',body:[
-'A community garden is a piece of land that neighbors manage together. Members may each have their own bed or share the work and the harvest.',
-'Gardens can turn an empty lot into a gathering place and give people fresh produce. Cities often lease land for them, and zoning rules decide where they are allowed.']}
+'Variances are usually decided case by case, and neighbors often get a chance to comment.']}
 ];
 
 const IMG={
@@ -91,21 +74,47 @@ const IMG={
 'zoning':{src:'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Guilford_County_W-S_protection_study_-_zoning_map_LOC_2007629478.jpg/1280px-Guilford_County_W-S_protection_study_-_zoning_map_LOC_2007629478.jpg',credit:'U.S. Soil Conservation Service / Library of Congress, public domain'}
 };
 
+let WIKI=SEED_WIKI.map(w=>({...w,img:IMG[w.id]||null}));
+
+Object.assign(A.en,{skip:'Skip to content',offline:'You appear to be offline. Try again when connected.',limit:'Too many submissions are waiting for review. Please try again later.'});
+Object.assign(A.es,{skip:'Saltar al contenido',offline:'Parece que no tienes conexión. Inténtalo de nuevo cuando te conectes.',limit:'Hay demasiados envíos en espera de revisión. Inténtalo más tarde.'});
+Object.assign(A.hi,{skip:'सामग्री पर जाएँ',offline:'आप ऑफ़लाइन लगते हैं। कनेक्ट होने पर फिर कोशिश करें।',limit:'समीक्षा के लिए बहुत सारे योगदान लंबित हैं। कृपया बाद में कोशिश करें।'});
+Object.assign(A.tl,{skip:'Lumaktaw sa nilalaman',offline:'Mukhang offline ka. Subukan muli kapag nakakonekta.',limit:'Masyadong maraming nakabinbing ambag. Subukan muli mamaya.'});
+Object.assign(A.ko,{skip:'본문으로 건너뛰기',offline:'오프라인 상태인 것 같습니다. 연결된 후 다시 시도하세요.',limit:'검토 대기 중인 제출이 너무 많습니다. 나중에 다시 시도하세요.'});
+Object.assign(A.zh,{skip:'跳到内容',offline:'你似乎已离线。联网后请重试。',limit:'待审核的投稿过多，请稍后再试。'});
+Object.assign(A.en,{community:'Community photos',fromWiki:'From the wiki'});
+Object.assign(A.es,{community:'Fotos de la comunidad',fromWiki:'De la wiki'});
+Object.assign(A.hi,{community:'समुदाय की तस्वीरें',fromWiki:'विकी से'});
+Object.assign(A.tl,{community:'Mga larawan ng komunidad',fromWiki:'Mula sa wiki'});
+Object.assign(A.ko,{community:'커뮤니티 사진',fromWiki:'위키에서'});
+Object.assign(A.zh,{community:'社区图片',fromWiki:'来自百科'});
+Object.assign(A.en,{photoHint:'Image up to 5 MB. Photos are reviewed before they appear.',titleEx:'Example: Main Street bike lane',capEx:'Where was it taken? What stands out?',emptyHint:'Meeting summaries show up here once they are posted. In the meantime, learn the terms in the Wiki.',noneHint:'Try a different word or switch to All.',firstPhoto:'No photos yet. Be the first to share one.'});
+Object.assign(A.es,{photoHint:'Imagen de hasta 5 MB. Las fotos se revisan antes de publicarse.',titleEx:'Ejemplo: Ciclovía de Main Street',capEx:'¿Dónde se tomó? ¿Qué destaca?',emptyHint:'Los resúmenes de las reuniones aparecerán aquí cuando se publiquen. Mientras tanto, aprende los términos en la Wiki.',noneHint:'Prueba con otra palabra o elige Todo.',firstPhoto:'Aún no hay fotos. Sé el primero en compartir una.'});
+Object.assign(A.hi,{photoHint:'अधिकतम 5 MB की तस्वीर। प्रकाशित होने से पहले तस्वीरों की समीक्षा की जाती है।',titleEx:'उदाहरण: मेन स्ट्रीट की बाइक लेन',capEx:'कहाँ ली गई? क्या खास है?',emptyHint:'बैठकों के सारांश पोस्ट होने पर यहाँ दिखेंगे। तब तक विकी में शब्द सीखें।',noneHint:'दूसरा शब्द आज़माएँ या "सभी" चुनें।',firstPhoto:'अभी कोई तस्वीर नहीं। पहली तस्वीर आप साझा करें।'});
+Object.assign(A.tl,{photoHint:'Larawang hanggang 5 MB. Sinusuri ang mga larawan bago lumabas.',titleEx:'Halimbawa: Bike lane sa Main Street',capEx:'Saan kinunan? Ano ang kapansin-pansin?',emptyHint:'Lalabas dito ang mga buod ng pulong kapag nai-post na. Samantala, alamin ang mga termino sa Wiki.',noneHint:'Subukan ang ibang salita o piliin ang Lahat.',firstPhoto:'Wala pang larawan. Ikaw ang unang magbahagi.'});
+Object.assign(A.ko,{photoHint:'5MB 이하의 이미지. 사진은 검토 후 게시됩니다.',titleEx:'예: 메인 스트리트 자전거 도로',capEx:'어디에서 찍었나요? 눈에 띄는 점은?',emptyHint:'회의 요약은 게시되면 여기에 표시됩니다. 그동안 위키에서 용어를 알아보세요.',noneHint:'다른 단어를 입력하거나 전체를 선택해 보세요.',firstPhoto:'아직 사진이 없습니다. 첫 사진을 공유해 주세요.'});
+Object.assign(A.zh,{photoHint:'图片不超过 5 MB。照片审核后才会显示。',titleEx:'例如：主街自行车道',capEx:'在哪里拍的？有什么特别之处？',emptyHint:'会议摘要发布后会显示在这里。在此期间，可以在百科中了解相关术语。',noneHint:'换个词试试，或选择“全部”。',firstPhoto:'还没有图片。来分享第一张吧。'});
+Object.assign(A.en,{share:'Share',copied:'Link copied',topicF:'Topic',big:'Photo must be an image under 5 MB.'});
+Object.assign(A.es,{share:'Compartir',copied:'Enlace copiado',topicF:'Tema',big:'La foto debe ser una imagen de menos de 5 MB.'});
+Object.assign(A.hi,{share:'साझा करें',copied:'लिंक कॉपी हो गया',topicF:'विषय',big:'फ़ोटो 5 MB से छोटी इमेज होनी चाहिए।'});
+Object.assign(A.tl,{share:'Ibahagi',copied:'Nakopya ang link',topicF:'Paksa',big:'Dapat larawan na wala pang 5 MB.'});
+Object.assign(A.ko,{share:'공유',copied:'링크 복사됨',topicF:'주제',big:'5MB 미만의 이미지여야 합니다.'});
+Object.assign(A.zh,{share:'分享',copied:'链接已复制',topicF:'主题',big:'照片必须是小于 5 MB 的图片。'});
 const PHOTOS=[
-['roads','Protected bike lane','complete-streets'],['roads','Roundabout','roundabout'],['roads','Speed table','speed-table'],
-['bridges','Pedestrian footbridge','footbridge'],['bridges','Bascule bridge','bascule-bridge'],
-['structures','Mixed-use building','mixed-use'],['structures','Parking garage','parking-garage'],
-['transit','Bus rapid transit stop','bus-rapid-transit'],['transit','Light rail platform','light-rail'],
-['parks','Pocket park','pocket-park'],['parks','Community garden','community-garden'],
-['zoning','Duplex row','zoning'],['zoning','Setback diagram','setback']
+['roads','Protected bike lane'],['roads','Roundabout'],['roads','Speed table'],
+['bridges','Pedestrian footbridge'],['bridges','Bascule bridge'],
+['structures','Mixed-use building'],['structures','Parking garage'],
+['transit','Bus rapid transit stop'],['transit','Light rail platform'],
+['parks','Pocket park'],['parks','Community garden'],
+['zoning','Duplex row'],['zoning','Setback diagram']
 ];
 
 const SAMPLE={
 meetings:[
-{id:'m1',meeting_date:'2026-11-12',title:'Protected bike lanes approved for Main Street',body:'The council voted 5 to 2 to add protected bike lanes along Main Street. Construction is expected to start next spring, pending a final budget review.'},
-{id:'m2',meeting_date:'2026-11-05',title:'Canal Street bridge repairs scheduled',body:'Public works shared a repair timeline for the Canal Street bridge, including detour maps and closure windows for nearby residents.'},
-{id:'m3',meeting_date:'2026-10-29',title:'Eastside bus shelters funded',body:'Twelve new bus shelters with seating and lighting were funded. Residents can suggest stop locations at the next open session.'},
-{id:'m4',meeting_date:'2026-10-22',title:'Oak Avenue zoning hearing',body:'A hearing was held on allowing small apartment buildings near Oak Avenue. Public comment stays open for two more weeks.'}
+{id:'m1',meeting_date:'2026-11-12',outcome:'Approved 5–2',title:'Protected bike lanes approved for Main Street',body:'The council voted 5 to 2 to add protected bike lanes along Main Street. Construction is expected to start next spring, pending a final budget review.'},
+{id:'m2',meeting_date:'2026-11-05',outcome:'Scheduled',title:'Canal Street bridge repairs scheduled',body:'Public works shared a repair timeline for the Canal Street bridge, including detour maps and closure windows for nearby residents.'},
+{id:'m3',meeting_date:'2026-10-29',outcome:'Funded',title:'Eastside bus shelters funded',body:'Twelve new bus shelters with seating and lighting were funded. Residents can suggest stop locations at the next open session.'},
+{id:'m4',meeting_date:'2026-10-22',outcome:'Open for comment',title:'Oak Avenue zoning hearing',body:'A hearing was held on allowing small apartment buildings near Oak Avenue. Public comment stays open for two more weeks.'}
 ],
 articles:[
 {id:'a1',cat:'roads',title:'Protected bike lanes on Main Street',body:'Protected bike lanes use posts, planters, or curbs to separate cyclists from traffic.'},
@@ -124,7 +133,9 @@ const PAGES=['account','contribute','admin','access','about','faq'];
 const $=id=>document.getElementById(id);
 const app=$('app'),tabs=$('tabs'),back=$('back'),brand=$('brand'),drawer=$('drawer'),scrim=$('scrim'),menuBtn=$('menuBtn'),langBtn=$('langBtn'),langMenu=$('langMenu'),flag=$('flag');
 
-const sb=window.supabase&&window.SB&&SB.url&&SB.key?supabase.createClient(SB.url,SB.key):null;
+const pick=()=>{try{return localStorage.getItem('remember')==='0'?sessionStorage:localStorage}catch(e){return sessionStorage}};
+const sbStore={getItem:k=>pick().getItem(k),setItem:(k,v)=>pick().setItem(k,v),removeItem:k=>{try{localStorage.removeItem(k);sessionStorage.removeItem(k)}catch(e){}}};
+const sb=window.supabase&&window.SB&&SB.url&&SB.key?supabase.createClient(SB.url,SB.key,{auth:{storage:sbStore}}):null;
 
 let lang='en';
 let cur='council';
@@ -135,6 +146,8 @@ let ready=!sb;
 let store=null;
 let authMode='in';
 let tokn=0;
+let first=true;
+app.tabIndex=-1;
 try{lang=localStorage.getItem('lang')||'en'}catch(e){}
 if(!L[lang])lang='en';
 
@@ -143,16 +156,22 @@ const ic=n=>`<i class="ph ph-${n}"></i>`;
 const iconOf=id=>id==='all'?'images':CATS.find(c=>c.id===id).i;
 const nameOf=id=>L[lang].cats[id==='all'?6:CATS.findIndex(c=>c.id===id)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const card=(i,t,s,b,full,href,src)=>{
-const inner=`<div class="thumb">${src?`<img src="${src}" alt="" loading="lazy">`:ic(i)}</div><div class="txt"><h3>${t}</h3>${s?`<small>${s}</small>`:''}${b?`<p${full?' class="full"':''}>${b}</p>`:''}</div>`;
-return href?`<a class="card" href="${href}">${inner}</a>`:`<article class="card">${inner}</article>`;
+const thumbUrl=(u,w)=>{
+const m=String(u).match(/^https:\/\/(?:thumb|upload)\.wikimedia\.org\/wikipedia\/commons\/(?:thumb\/)?([0-9a-f]\/[0-9a-f]{2}\/[^/]+\.(?:jpe?g|png))(?:\/\d+px-[^/]+)?$/i);
+return m?`https://upload.wikimedia.org/wikipedia/commons/thumb/${m[1]}/${w}px-${m[1].split('/')[2]}`:u;
 };
-
+const pic=(u,w,alt,extra)=>`<img src="${esc(thumbUrl(u,w))}" data-o="${esc(u)}" onload="this.classList.add('in')" onerror="this.onerror=null;this.src=this.dataset.o" alt="${esc(alt)}"${extra||''}>`;
+const card=(i,t,s,b,full,href,src,cls)=>{
+const inner=`<div class="thumb">${src?pic(src,500,'',' loading="lazy"'):ic(i)}</div><div class="txt"><h3>${esc(t)}</h3>${s?`<small>${esc(s)}</small>`:''}${b?`<p${full?' class="full"':''}>${esc(b)}</p>`:''}</div>`;
+const c='card'+(cls?' '+cls:'');
+const cc=CATS.find(x=>x.i===i);
+const dc=cc?` data-c="${cc.id}"`:'';
+return href?`<a class="${c}"${dc} href="${href}">${inner}</a>`:`<article class="${c}"${dc}>${inner}</article>`;
+};
 const TL={es:'es',hi:'hi',tl:'tl',ko:'ko',zh:'zh-CN'};
 let TC={};
 try{TC=JSON.parse(localStorage.getItem('tc')||'{}')}catch(e){}
 const TX=s=>lang==='en'?s:(TC[lang+'|'+s]||s);
-const X=s=>esc(TX(s));
 async function trOne(l,s){
 const k=l+'|'+s;
 if(TC[k])return;
@@ -199,6 +218,18 @@ sb.from('meeting_articles').select('*')
 ]);
 store={meetings:m.data||[],articles:a.data||[],links:l.data||[]};
 return store;
+}
+
+let PUB=[];
+async function loadWiki(){
+if(!sb)return;
+const{data,error}=await sb.from('wiki_articles').select('*').order('title');
+if(!error&&data)WIKI=data.map(r=>({id:r.id,cat:r.cat,title:r.title,short:r.short,body:r.body,img:r.img_src?{src:r.img_src,credit:r.img_credit||'',alt:r.img_alt||''}:null}));
+const ph=await sb.from('submissions').select('title,caption,cat,photo_path').eq('status','approved').order('created_at',{ascending:false});
+const rows=ph.data||[];
+const su=rows.length?await sb.storage.from('submissions').createSignedUrls(rows.map(r=>r.photo_path),3600):{data:[]};
+const urls=new Map((su.data||[]).map(u=>[u.path,u.signedUrl]));
+PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({cat:r.cat||'all',t:r.title,b:r.caption||'',s:urls.get(r.photo_path)}));
 }
 
 async function loadUser(s){
@@ -266,8 +297,26 @@ if(open){setLang(false);axMenu.querySelector('button').focus()}
 axBind(axMenu);
 axBtn.addEventListener('click',e=>{e.stopPropagation();setAx(axMenu.hidden)});
 axMenu.addEventListener('click',e=>{if(e.target.closest('a'))setAx(false)});
-$('skip').addEventListener('click',()=>{app.tabIndex=-1;app.focus()});
 if(sb)A11Y.sync=p=>{if(user)sb.from('user_prefs').upsert({id:user.id,a11y:p}).then(()=>{},()=>{})};
+
+const axHint=$('axHint');
+let hintOn=true;
+try{hintOn=!localStorage.getItem('axSeen')&&!A11Y.stored()}catch(e){}
+function hideHint(){
+hintOn=false;
+axHint.hidden=true;
+try{localStorage.setItem('axSeen','1')}catch(e){}
+}
+function renderHint(){
+const t=T();
+axHint.hidden=!hintOn||page==='access';
+$('axHintTxt').textContent=t.aHint;
+$('axHintGo').textContent=t.aAdjust;
+$('axHintNo').textContent=t.aNo;
+axHint.setAttribute('aria-label',t.access);
+}
+$('axHintGo').addEventListener('click',e=>{e.stopPropagation();hideHint();setAx(true)});
+$('axHintNo').addEventListener('click',hideHint);
 
 const views={
 async council(){
@@ -276,36 +325,52 @@ app.innerHTML=`<h1>${t.recent}</h1><div class="none">${t.loading}</div>`;
 const d=await getData();
 if(tok!==tokn)return;
 const arts=Object.fromEntries(d.articles.map(a=>[a.id,a]));
-await prep([...d.meetings.flatMap(m=>[m.title,m.body]),...d.articles.flatMap(a=>[a.title,a.body])]);
+await prep([...d.meetings.flatMap(m=>[m.title,m.body,m.outcome]),...d.articles.flatMap(a=>[a.title,a.body])]);
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
 const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>arts[l.article_id]).filter(Boolean);
-return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',X(m.title),'',X(m.body),true)+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(a=>card(iconOf(a.cat),X(a.title),'',X(a.body),true)).join(''):'')+`</section>`;
-}).join(''):`<div class="none">${t.empty}</div>`);
+return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),true,null,null,'lead')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(a=>card(iconOf(a.cat),TX(a.title),nameOf(a.cat),TX(a.body),true,null,null,'sm')).join(''):'')+`</section>`;
+}).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
 },
-photos(){
-const t=T();
-app.innerHTML=`<h1>${t.bank}</h1><div class="grid">`+['all',...CATS.map(c=>c.id)].map(id=>
-`<a class="tile" href="#search-${id}">${ic(iconOf(id))}<span class="lab">${nameOf(id)}</span></a>`).join('')+`</div>`;
+async photos(){
+const t=T(),tok=tokn;
+await prep([...PUB.map(p=>p.t),...WIKI.filter(w=>w.img).map(w=>w.title)]);
+if(tok!==tokn)return;
+const tile=i=>{
+const f=`${pic(i.s,500,i.t,' loading="lazy"')}<figcaption>${esc(i.t)}</figcaption>`;
+return i.h?`<a class="shot" href="${i.h}">${f}</a>`:`<figure class="shot">${f}</figure>`;
+};
+const com=PUB.map(p=>({t:TX(p.t),s:p.s,h:null}));
+const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),s:w.img.src,h:'#wiki/'+w.id}));
+app.innerHTML=`<h1>${t.bank}</h1><div class="actions"><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div><h2 class="sec">${t.community}</h2>`+(com.length?`<div class="gal">${com.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`)+(wk.length?`<h2 class="sec">${t.fromWiki}</h2><div class="gal">${wk.map(tile).join('')}</div>`:'');
 },
 async wiki(){
 const t=T(),tok=tokn;
 await prep(WIKI.flatMap(w=>[w.title,w.short]));
 if(tok!==tokn)return;
-app.innerHTML=`<h1>${t.guide}</h1>`+CATS.map(c=>
-`<section><div class="sh"><h2>${nameOf(c.id)}</h2><a class="more" href="#search-${c.id}">${t.more}</a></div><div class="row">`+
-WIKI.filter(w=>w.cat===c.id).map(w=>card(c.i,X(w.title),'',X(w.short),false,'#wiki/'+w.id,IMG[w.id]?.src)).join('')+`</div></section>`).join('');
+app.innerHTML=`<h1>${t.guide}</h1><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips">`+CATS.map(c=>`<button class="chip" type="button" data-j="${c.id}">${nameOf(c.id)}</button>`).join('')+`</div>`+CATS.map(c=>
+`<section id="cat-${c.id}" data-c="${c.id}"><div class="sh"><h2>${nameOf(c.id)}</h2><a class="more" href="#search-${c.id}">${t.more}</a></div><div class="row">`+
+WIKI.filter(w=>w.cat===c.id).map(w=>card(c.i,TX(w.title),'',TX(w.short),false,'#wiki/'+w.id,w.img?.src,'media')).join('')+`</div></section>`).join('');
+app.querySelector('.chips').addEventListener('click',e=>{
+const b=e.target.closest('button');
+if(b)$('cat-'+b.dataset.j).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+});
 }
 };
 
 async function wikiArticle(id){
 const t=T(),tok=tokn,w=WIKI.find(x=>x.id===id);
 if(!w){app.innerHTML=`<div class="none">${t.none}</div>`;return}
-const img=IMG[w.id];
+const img=w.img;
 const rel=WIKI.filter(x=>x.cat===w.cat&&x.id!==w.id);
 await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short])]);
 if(tok!==tokn)return;
-app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero"><img src="${img.src}" alt="${X(w.title)}"><figcaption>${img.credit}</figcaption></figure>`:'')+`<div class="cat">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span></div><h1>${X(w.title)}</h1><p class="lede">${X(w.short)}</p><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a>`+w.body.map(p=>`<p>${X(p)}</p>`).join('')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(x=>card(iconOf(x.cat),X(x.title),'',X(x.short),false,'#wiki/'+x.id,IMG[x.id]?.src)).join(''):'')+`</article>`;
+app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<div class="cat" data-c="${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span></div><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'media')).join(''):'')+`</article>`;
+$('shr').addEventListener('click',async()=>{
+const u=location.href;
+if(navigator.share){try{await navigator.share({title:TX(w.title),url:u})}catch(e){}return}
+try{await navigator.clipboard.writeText(u);$('shr').firstChild.className='ph ph-check';$('shr').lastChild.textContent=t.copied}catch(e){}
+});
 }
 
 const pages={
@@ -325,8 +390,24 @@ app.innerHTML=`<div class="page"><h1>${t.faq}</h1>`+[1,2,3].map(n=>`<details><su
 },
 contribute(){
 const t=T();
-app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required></label><label class="field">${t.titleF}<input type="text" required></label><label class="field">${t.capF}<input type="text"></label><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
-$('f').addEventListener('submit',e=>{e.preventDefault();$('ok').textContent=t.thanks;e.target.reset()});
+app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" required placeholder="${esc(t.titleEx)}"></label><label class="field">${t.capF}<input type="text" placeholder="${esc(t.capEx)}"></label><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+$('f').addEventListener('submit',async e=>{
+e.preventDefault();
+const f=e.target,ok=$('ok');
+if(!sb){ok.textContent=t.notReady;return}
+if(!navigator.onLine){ok.textContent=t.offline;return}
+const file=f.querySelector('input[type=file]').files[0];
+if($('hp').value){f.reset();ok.textContent=t.thanks;return}
+if(!file.type.startsWith('image/')||file.size>5242880){ok.textContent=t.big;return}
+const[title,caption]=[...f.querySelectorAll('input[type=text]:not(#hp)')].map(i=>i.value.trim());
+const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
+const up=await sb.storage.from('submissions').upload(path,file);
+if(up.error){ok.textContent=/size|exceed|mime|type/i.test(up.error.message||'')?t.big:t.err;return}
+const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path});
+if(r.error){ok.textContent=r.error.code==='42501'?t.limit:t.err;return}
+ok.textContent=t.thanks;
+f.reset();
+});
 },
 account(){
 const t=T();
@@ -338,13 +419,19 @@ $('out').addEventListener('click',()=>sb.auth.signOut());
 return;
 }
 const up=authMode==='up';
-app.innerHTML=`<div class="page"><h1>${up?t.signup:t.signin}</h1><form id="f"><label class="field">${t.email}<input type="email" autocomplete="email" required></label><label class="field">${t.pass}<input type="password" autocomplete="${up?'new-password':'current-password'}" minlength="6" required></label><button class="btn solid" type="submit">${up?t.signup:t.signin}</button><div class="ok" id="ok" role="status"></div></form><button id="sw" class="btn ghost" type="button">${up?t.haveAcct:t.noAcct}</button></div>`;
+app.innerHTML=`<div class="page"><h1>${up?t.signup:t.signin}</h1><form id="f"><label class="field">${t.email}<input type="email" autocomplete="email" required></label><label class="field">${t.pass}<input type="password" autocomplete="${up?'new-password':'current-password'}" minlength="6" required></label><label class="check"><input type="checkbox" id="rm" checked>${t.remember}</label><button class="btn solid" type="submit">${up?t.signup:t.signin}</button><div class="ok" id="ok" role="status"></div></form><button id="sw" class="btn ghost" type="button">${up?t.haveAcct:t.noAcct}</button></div>`;
 $('sw').addEventListener('click',()=>{authMode=up?'in':'up';pages.account()});
 $('f').addEventListener('submit',async e=>{
 e.preventDefault();
 const[em,pw]=[...e.target.querySelectorAll('input')].map(i=>i.value);
 const ok=$('ok');
 ok.textContent='';
+const rm=$('rm').checked;
+try{
+const other=rm?sessionStorage:localStorage;
+Object.keys(other).filter(k=>k.startsWith('sb-')&&k.endsWith('-auth-token')).forEach(k=>other.removeItem(k));
+localStorage.setItem('remember',rm?'1':'0');
+}catch(x){}
 const r=up?await sb.auth.signUp({email:em,password:pw}):await sb.auth.signInWithPassword({email:em,password:pw});
 if(r.error){ok.textContent=t.err;return}
 if(up&&!r.data.session){ok.textContent=t.confirm;authMode='in'}
@@ -357,16 +444,21 @@ if(!isAdmin){app.innerHTML=`<div class="page"><h1>Admin</h1><div class="none">Ad
 const tok=tokn;
 const topics=CATS.map((c,i)=>`<option value="${c.id}">${L.en.cats[i]}</option>`).join('');
 app.innerHTML=`<div class="page"><h1>Admin</h1>
+<div class="ok" id="aerr" role="alert"></div>
+<nav class="chips" id="atabs" role="tablist"><button class="chip on" data-p="m" type="button" role="tab" aria-selected="true">Meetings</button><button class="chip" data-p="a" type="button" role="tab" aria-selected="false">Articles</button><button class="chip" data-p="w" type="button" role="tab" aria-selected="false">Wiki</button><button class="chip" data-p="s" type="button" role="tab" aria-selected="false">Submissions</button></nav>
+<section data-pane="m">
 <h2 class="sec">Council meeting</h2>
 <form id="mf"><input type="hidden" id="mid">
 <label class="field">Meeting date<input type="date" id="md" required></label>
 <label class="field">Title<input type="text" id="mt" required></label>
+<label class="field">Outcome (optional, shown on the meeting card)<input type="text" id="mo" maxlength="40"></label>
 <label class="field">Summary<textarea id="mb" rows="5" required></textarea></label>
 <fieldset class="checks"><legend>Related articles</legend><div id="mrel"></div></fieldset>
 <button class="btn solid" type="submit">Save meeting</button>
 <button id="mx" class="btn ghost" type="button" hidden>Cancel edit</button>
 <div class="ok" id="mok" role="status"></div></form>
-<div id="ml"></div>
+<input type="search" class="flt" data-for="ml" placeholder="Filter" aria-label="Filter"><div id="ml"></div></section>
+<section data-pane="a" hidden>
 <h2 class="sec">Articles</h2>
 <form id="af"><input type="hidden" id="aid">
 <label class="field">Topic<select id="ac">${topics}</select></label>
@@ -375,21 +467,54 @@ app.innerHTML=`<div class="page"><h1>Admin</h1>
 <button class="btn solid" type="submit">Save article</button>
 <button id="ax" class="btn ghost" type="button" hidden>Cancel edit</button>
 <div class="ok" id="aok" role="status"></div></form>
-<div id="al"></div></div>`;
+<input type="search" class="flt" data-for="al" placeholder="Filter" aria-label="Filter"><div id="al"></div></section>
+<section data-pane="w" hidden>
+<h2 class="sec">Wiki article</h2>
+<form id="wf"><input type="hidden" id="wkey">
+<label class="field">ID (used in the URL)<input type="text" id="wid" required></label>
+<label class="field">Topic<select id="wc">${topics}</select></label>
+<label class="field">Title<input type="text" id="wt" required></label>
+<label class="field">Short summary<input type="text" id="ws" required></label>
+<label class="field">Body (blank line between paragraphs)<textarea id="wbd" rows="8" required></textarea></label>
+<label class="field">Image URL<input type="url" id="wimg"></label>
+<label class="field">Image credit<input type="text" id="wcr"></label>
+<label class="field">Image alt text (describes the photo for screen readers)<input type="text" id="wal"></label>
+<button class="btn solid" type="submit">Save wiki article</button>
+<button id="wx" class="btn ghost" type="button" hidden>Cancel edit</button>
+<div class="ok" id="wok" role="status"></div></form>
+<input type="search" class="flt" data-for="wl" placeholder="Filter" aria-label="Filter"><div id="wl"></div></section>
+<section data-pane="s" hidden>
+<h2 class="sec">Photo submissions</h2>
+<form id="sf" hidden><input type="hidden" id="sid">
+<label class="field">Topic<select id="sc">${topics}</select></label>
+<label class="field">Title<input type="text" id="st" required></label>
+<label class="field">Caption<input type="text" id="sp"></label>
+<button class="btn solid" type="submit">Save submission</button>
+<button id="sx" class="btn ghost" type="button">Cancel edit</button></form>
+<input type="search" class="flt" data-for="sl" placeholder="Filter" aria-label="Filter"><div id="sl"></div></section></div>`;
 let D={meetings:[],articles:[],links:[]};
+let S=[];
 const resetM=()=>{$('mf').reset();$('mid').value='';$('mx').hidden=true};
 const resetA=()=>{$('af').reset();$('aid').value='';$('ax').hidden=true};
+const resetW=()=>{$('wf').reset();$('wkey').value='';$('wx').hidden=true};
+const fail=r=>{$('aerr').textContent=r&&r.error?'Failed: '+r.error.message:'';return !!(r&&r.error)};
 const draw=async()=>{
 D=await getData(true);
 if(tok!==tokn)return;
+const{data:subs}=await sb.from('submissions').select('*').order('created_at',{ascending:false});
+S=subs||[];
+$('wl').innerHTML=WIKI.map(w=>`<div class="arow"><div><b>${esc(w.title)}</b><small>${esc(w.id)}</small></div><button class="btn icon" data-we="${w.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-wd="${w.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
+$('sl').innerHTML=S.map(s=>`<div class="arow"><div><b>${esc(s.title)}</b><small>${s.status}${s.caption?' · '+esc(s.caption):''}</small></div><button class="btn icon" data-sv="${s.id}" aria-label="View photo">${ic('image')}</button><button class="btn icon" data-se="${s.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-sa="${s.id}" aria-label="Approve">${ic('check')}</button><button class="btn icon" data-sr="${s.id}" aria-label="Reject">${ic('x')}</button><button class="btn icon" data-sd="${s.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('')||'<small>No submissions.</small>';
 $('mrel').innerHTML=D.articles.map(a=>`<label class="check"><input type="checkbox" value="${a.id}"> ${esc(a.title)}</label>`).join('')||'<small>No articles yet.</small>';
-$('ml').innerHTML=D.meetings.map(m=>`<div class="arow"><div><b>${esc(m.title)}</b><small>${m.meeting_date}</small></div><button class="btn icon" data-me="${m.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-md="${m.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
+$('ml').innerHTML=D.meetings.map(m=>`<div class="arow"><div><b>${esc(m.title)}</b><small>${m.meeting_date}${m.outcome?' · '+esc(m.outcome):''}</small></div><button class="btn icon" data-me="${m.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-md="${m.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
 $('al').innerHTML=D.articles.map(a=>`<div class="arow"><div><b>${esc(a.title)}</b><small>${nameOf(a.cat)}</small></div><button class="btn icon" data-ae="${a.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-ad="${a.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
 };
 $('mf').addEventListener('submit',async e=>{
 e.preventDefault();
 const id=$('mid').value;
 const p={meeting_date:$('md').value,title:$('mt').value.trim(),body:$('mb').value.trim()};
+const o=$('mo').value.trim();
+if(o||(id&&(D.meetings.find(x=>x.id===id)||{}).outcome))p.outcome=o||null;
 const r=id?await sb.from('meetings').update(p).eq('id',id).select().single():await sb.from('meetings').insert(p).select().single();
 if(r.error){$('mok').textContent='Could not save: '+r.error.message;return}
 const picked=[...$('mrel').querySelectorAll('input:checked')].map(i=>({meeting_id:r.data.id,article_id:i.value}));
@@ -405,12 +530,12 @@ if(!b)return;
 if(b.dataset.me){
 const m=D.meetings.find(x=>x.id===b.dataset.me);
 const on=new Set(D.links.filter(l=>l.meeting_id===m.id).map(l=>l.article_id));
-$('mid').value=m.id;$('md').value=m.meeting_date;$('mt').value=m.title;$('mb').value=m.body;
+$('mid').value=m.id;$('md').value=m.meeting_date;$('mt').value=m.title;$('mo').value=m.outcome||'';$('mb').value=m.body;
 $('mrel').querySelectorAll('input').forEach(i=>i.checked=on.has(i.value));
 $('mx').hidden=false;$('mok').textContent='';
 window.scrollTo(0,0);
 }else if(b.dataset.md&&confirm('Delete this meeting?')){
-await sb.from('meetings').delete().eq('id',b.dataset.md);
+if(fail(await sb.from('meetings').delete().eq('id',b.dataset.md)))return;
 await draw();
 }
 });
@@ -433,10 +558,77 @@ $('aid').value=a.id;$('ac').value=a.cat;$('at').value=a.title;$('ab').value=a.bo
 $('ax').hidden=false;$('aok').textContent='';
 window.scrollTo(0,0);
 }else if(b.dataset.ad&&confirm('Delete this article? It will be removed from any meetings it is attached to.')){
-await sb.from('articles').delete().eq('id',b.dataset.ad);
+if(fail(await sb.from('articles').delete().eq('id',b.dataset.ad)))return;
 await draw();
 }
 });
+$('wf').addEventListener('submit',async e=>{
+e.preventDefault();
+const key=$('wkey').value;
+const p={id:$('wid').value.trim(),cat:$('wc').value,title:$('wt').value.trim(),short:$('ws').value.trim(),body:$('wbd').value.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean),img_src:$('wimg').value.trim()||null,img_credit:$('wcr').value.trim()||null,img_alt:$('wal').value.trim()||null};
+const r=key?await sb.from('wiki_articles').update(p).eq('id',key):await sb.from('wiki_articles').insert(p);
+if(r.error){$('wok').textContent='Could not save: '+r.error.message;return}
+resetW();
+$('wok').textContent='Saved.';
+wikiReady=loadWiki();
+await wikiReady;
+await draw();
+});
+$('wl').addEventListener('click',async e=>{
+const b=e.target.closest('button');
+if(!b)return;
+if(b.dataset.we){
+const w=WIKI.find(x=>x.id===b.dataset.we);
+$('wkey').value=w.id;$('wid').value=w.id;$('wc').value=w.cat;$('wt').value=w.title;$('ws').value=w.short;$('wbd').value=w.body.join('\n\n');$('wimg').value=w.img?.src||'';$('wcr').value=w.img?.credit||'';$('wal').value=w.img?.alt||'';
+$('wx').hidden=false;$('wok').textContent='';
+window.scrollTo(0,0);
+}else if(b.dataset.wd&&confirm('Delete this wiki article?')){
+if(fail(await sb.from('wiki_articles').delete().eq('id',b.dataset.wd)))return;
+wikiReady=loadWiki();
+await wikiReady;
+await draw();
+}
+});
+$('wx').addEventListener('click',()=>{resetW();$('wok').textContent=''});
+$('atabs').addEventListener('click',e=>{
+const b=e.target.closest('button');
+if(!b)return;
+document.querySelectorAll('#atabs button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});
+document.querySelectorAll('[data-pane]').forEach(x=>x.hidden=x.dataset.pane!==b.dataset.p);
+});
+$('sf').addEventListener('submit',async e=>{
+e.preventDefault();
+if(fail(await sb.from('submissions').update({cat:$('sc').value,title:$('st').value.trim(),caption:$('sp').value.trim()||null}).eq('id',$('sid').value)))return;
+$('sf').hidden=true;
+await draw();
+});
+$('sx').addEventListener('click',()=>{$('sf').hidden=true});
+$('sl').addEventListener('click',async e=>{
+const b=e.target.closest('button');
+if(!b)return;
+const id=b.dataset.sv||b.dataset.se||b.dataset.sa||b.dataset.sr||b.dataset.sd;
+const s=S.find(x=>x.id===id);
+if(!s)return;
+if(b.dataset.sv){
+const{data}=await sb.storage.from('submissions').createSignedUrl(s.photo_path,300);
+if(data)window.open(data.signedUrl,'_blank');
+}else if(b.dataset.se){
+$('sid').value=s.id;$('sc').value=s.cat||CATS[0].id;$('st').value=s.title;$('sp').value=s.caption||'';
+$('sf').hidden=false;window.scrollTo(0,0);
+}else if(b.dataset.sa||b.dataset.sr){
+if(fail(await sb.from('submissions').update({status:b.dataset.sa?'approved':'rejected'}).eq('id',s.id)))return;
+if(b.dataset.sa){wikiReady=loadWiki();await wikiReady}
+await draw();
+}else if(b.dataset.sd&&confirm('Delete this submission and its photo?')){
+await sb.storage.from('submissions').remove([s.photo_path]);
+if(fail(await sb.from('submissions').delete().eq('id',s.id)))return;
+await draw();
+}
+});
+document.querySelectorAll('.flt').forEach(i=>i.addEventListener('input',()=>{
+const q=i.value.toLowerCase();
+$(i.dataset.for).querySelectorAll('.arow').forEach(r=>r.hidden=!r.textContent.toLowerCase().includes(q));
+}));
 $('mx').addEventListener('click',()=>{resetM();$('mok').textContent=''});
 $('ax').addEventListener('click',()=>{resetA();$('aok').textContent=''});
 await draw();
@@ -445,26 +637,28 @@ await draw();
 
 async function search(cat){
 const t=T(),tok=tokn;
-await prep([...PHOTOS.map(p=>p[1]),...WIKI.flatMap(w=>[w.title,w.short])]);
+await prep([...PUB.flatMap(p=>[p.t,p.b]),...PHOTOS.map(p=>p[1]),...WIKI.flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
-app.innerHTML=`<h1>${nameOf(cat)}</h1><input id="q" type="search" placeholder="${t.ph}" autocomplete="off"><div class="chips">`+
+app.innerHTML=`<h1>${nameOf(cat)}</h1><input id="q" type="search" aria-label="${t.ph}" placeholder="${t.ph}" autocomplete="off"><div class="chips">`+
 ['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip ${id===cat?'on':''}" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div><div id="res"></div>`;
 const q=$('q');
 const res=$('res');
 const items=[
-...PHOTOS.map(p=>({cat:p[0],t:TX(p[1]),k:t.photo,b:'',h:'#wiki/'+p[2],s:IMG[p[2]]?.src})),
-...WIKI.map(w=>({cat:w.cat,t:TX(w.title),k:t.article,b:TX(w.short),h:'#wiki/'+w.id,s:IMG[w.id]?.src}))
+...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:TX(p.b),h:null,s:p.s})),
+...PHOTOS.map(p=>({cat:p[0],t:TX(p[1]),k:t.photo,b:'',h:null})),
+...WIKI.map(w=>({cat:w.cat,t:TX(w.title),k:t.article,b:TX(w.short),h:'#wiki/'+w.id,s:w.img?.src}))
 ];
 const draw=()=>{
 const s=q.value.trim().toLowerCase();
 const out=items.filter(i=>(cat==='all'||i.cat===cat)&&(!s||(i.t+' '+i.b).toLowerCase().includes(s)));
-res.innerHTML=out.length?out.map(i=>card(iconOf(i.cat),esc(i.t),i.k,esc(i.b),false,i.h,i.s)).join(''):`<div class="none">${t.none}</div>`;
+res.innerHTML=out.length?out.map(i=>card(iconOf(i.cat),i.t,i.k,i.b,false,i.h,i.s,i.h?'media':'')).join(''):`<div class="none"><p>${t.none}</p><p>${t.noneHint}</p></div>`;
 };
 q.addEventListener('input',draw);
 draw();
 }
 
 function nav(){
+tabs.setAttribute('aria-label',T().menu);
 tabs.innerHTML=SECTIONS.map(s=>
 `<a href="#${s}"${s===cur?' aria-current="page"':''}>${ic(ICON[s])}<span>${T()[s]}</span></a>`).join('');
 }
@@ -482,6 +676,7 @@ drawer.setAttribute('aria-label',t.menu);
 function setDrawer(open){
 drawer.classList.toggle('open',open);
 scrim.classList.toggle('open',open);
+app.inert=open;tabs.inert=open;
 menuBtn.setAttribute('aria-expanded',open);
 if(open){setLang(false);$('closeBtn').focus()}else if(drawer.contains(document.activeElement))menuBtn.focus();
 }
@@ -499,8 +694,12 @@ langBtn.setAttribute('aria-label',cl[2]);
 langMenu.innerHTML=LANGS.map(l=>`<li><button data-l="${l[0]}"${l[0]===lang?' aria-current="true"':''}><span class="f">${l[1]}</span>${l[2]}${l[0]===lang?`<span class="ck">${ic('check')}</span>`:''}</button></li>`).join('');
 }
 
-function route(){
-tokn++;
+async function route(){
+const n=++tokn;
+if(!app.innerHTML)app.innerHTML=`<div class="none">${T().loading}</div>`;
+const slow=await Promise.race([wikiReady.then(()=>0),new Promise(r=>setTimeout(()=>r(1),4000))]);
+if(slow)wikiReady.then(()=>route());
+if(n!==tokn)return;
 let h=location.hash.slice(1)||'council';
 page='';
 if(h.startsWith('search-')){
@@ -528,18 +727,24 @@ cur=h;
 back.hidden=true;brand.hidden=false;
 views[h]();
 }
+document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council'])+' · Our Streets Wiki';
+if(h==='wiki'||h==='photos'||h.startsWith('search-'))app.dataset.wide='1';else delete app.dataset.wide;
 nav();
 renderDrawer();
 renderLang();
 setAx(false);
-$('skip').textContent=T().aSkip;
+renderHint();
 $('footLink').textContent=T().access;
 setDrawer(false);
 setLang(false);
 document.documentElement.lang=lang;
 window.scrollTo(0,0);
+if(!first)app.focus({preventScroll:true});
+first=false;
 }
 
+$('skip').textContent=T().skip;
+$('skip').addEventListener('click',()=>app.focus());
 menuBtn.addEventListener('click',()=>setDrawer(!drawer.classList.contains('open')));
 scrim.addEventListener('click',()=>setDrawer(false));
 drawer.addEventListener('click',e=>{if(e.target.closest('a.item'))setDrawer(false)});
@@ -548,6 +753,7 @@ langMenu.addEventListener('click',e=>{
 const b=e.target.closest('button');
 if(!b)return;
 lang=b.dataset.l;
+$('skip').textContent=T().skip;
 try{localStorage.setItem('lang',lang)}catch(x){}
 route();
 langBtn.focus();
@@ -560,6 +766,7 @@ else if(!langMenu.hidden){setLang(false);langBtn.focus()}
 else if(drawer.classList.contains('open'))setDrawer(false);
 });
 addEventListener('hashchange',route);
+let wikiReady=loadWiki();
 
 if(sb)sb.auth.onAuthStateChange((_e,s)=>{
 setTimeout(async()=>{
