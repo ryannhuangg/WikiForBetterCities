@@ -391,22 +391,34 @@ app.innerHTML=`<div class="page"><h1>${t.faq}</h1>`+[1,2,3].map(n=>`<details><su
 contribute(){
 const t=T();
 app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" required placeholder="${esc(t.titleEx)}"></label><label class="field">${t.capF}<input type="text" placeholder="${esc(t.capEx)}"></label><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+const bad=file=>!file||!file.type.startsWith('image/')||file.size>5242880;
+const sub=$('f').querySelector('button[type=submit]');
+let busy=false;
+$('f').querySelector('input[type=file]').addEventListener('change',e=>{
+const file=e.target.files[0];
+if(file&&bad(file)){e.target.value='';$('ok').textContent=t.big}else $('ok').textContent='';
+});
 $('f').addEventListener('submit',async e=>{
 e.preventDefault();
 const f=e.target,ok=$('ok');
+if(busy)return;
 if(!sb){ok.textContent=t.notReady;return}
 if(!navigator.onLine){ok.textContent=t.offline;return}
 const file=f.querySelector('input[type=file]').files[0];
 if($('hp').value){f.reset();ok.textContent=t.thanks;return}
-if(!file.type.startsWith('image/')||file.size>5242880){ok.textContent=t.big;return}
+if(bad(file)){ok.textContent=t.big;return}
+busy=true;sub.disabled=true;ok.textContent=t.loading;
+try{
 const[title,caption]=[...f.querySelectorAll('input[type=text]:not(#hp)')].map(i=>i.value.trim());
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
 const up=await sb.storage.from('submissions').upload(path,file);
 if(up.error){ok.textContent=/size|exceed|mime|type/i.test(up.error.message||'')?t.big:t.err;return}
 const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path});
-if(r.error){ok.textContent=r.error.code==='42501'?t.limit:t.err;return}
+if(r.error){await sb.storage.from('submissions').remove([path]);ok.textContent=r.error.code==='42501'?t.limit:t.err;return}
 ok.textContent=t.thanks;
 f.reset();
+}catch(x){ok.textContent=t.err}
+finally{busy=false;sub.disabled=false}
 });
 },
 account(){
@@ -491,20 +503,24 @@ app.innerHTML=`<div class="page"><h1>Admin</h1>
 <label class="field">Caption<input type="text" id="sp"></label>
 <button class="btn solid" type="submit">Save submission</button>
 <button id="sx" class="btn ghost" type="button">Cancel edit</button></form>
-<input type="search" class="flt" data-for="sl" placeholder="Filter" aria-label="Filter"><div id="sl"></div></section></div>`;
+<label class="check"><input type="checkbox" id="srev">Show reviewed</label><input type="search" class="flt" data-for="sl" placeholder="Filter" aria-label="Filter"><div id="sl"></div></section></div>`;
 let D={meetings:[],articles:[],links:[]};
 let S=[];
 const resetM=()=>{$('mf').reset();$('mid').value='';$('mx').hidden=true};
 const resetA=()=>{$('af').reset();$('aid').value='';$('ax').hidden=true};
 const resetW=()=>{$('wf').reset();$('wkey').value='';$('wx').hidden=true};
 const fail=r=>{$('aerr').textContent=r&&r.error?'Failed: '+r.error.message:'';return !!(r&&r.error)};
+const drawS=()=>{
+const v=S.filter(s=>$('srev').checked||s.status==='pending');
+$('sl').innerHTML=v.map(s=>`<div class="arow"><div><b>${esc(s.title)}</b><small>${s.status}${s.caption?' · '+esc(s.caption):''}</small></div><button class="btn icon" data-sv="${s.id}" aria-label="View photo">${ic('image')}</button><button class="btn icon" data-se="${s.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-sa="${s.id}" aria-label="Approve">${ic('check')}</button><button class="btn icon" data-sr="${s.id}" aria-label="Reject">${ic('x')}</button><button class="btn icon" data-sd="${s.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('')||`<small>${$('srev').checked?'No submissions.':'No pending submissions.'}</small>`;
+};
 const draw=async()=>{
 D=await getData(true);
 if(tok!==tokn)return;
 const{data:subs}=await sb.from('submissions').select('*').order('created_at',{ascending:false});
 S=subs||[];
 $('wl').innerHTML=WIKI.map(w=>`<div class="arow"><div><b>${esc(w.title)}</b><small>${esc(w.id)}</small></div><button class="btn icon" data-we="${w.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-wd="${w.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
-$('sl').innerHTML=S.map(s=>`<div class="arow"><div><b>${esc(s.title)}</b><small>${s.status}${s.caption?' · '+esc(s.caption):''}</small></div><button class="btn icon" data-sv="${s.id}" aria-label="View photo">${ic('image')}</button><button class="btn icon" data-se="${s.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-sa="${s.id}" aria-label="Approve">${ic('check')}</button><button class="btn icon" data-sr="${s.id}" aria-label="Reject">${ic('x')}</button><button class="btn icon" data-sd="${s.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('')||'<small>No submissions.</small>';
+drawS();
 $('mrel').innerHTML=D.articles.map(a=>`<label class="check"><input type="checkbox" value="${a.id}"> ${esc(a.title)}</label>`).join('')||'<small>No articles yet.</small>';
 $('ml').innerHTML=D.meetings.map(m=>`<div class="arow"><div><b>${esc(m.title)}</b><small>${m.meeting_date}${m.outcome?' · '+esc(m.outcome):''}</small></div><button class="btn icon" data-me="${m.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-md="${m.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
 $('al').innerHTML=D.articles.map(a=>`<div class="arow"><div><b>${esc(a.title)}</b><small>${nameOf(a.cat)}</small></div><button class="btn icon" data-ae="${a.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-ad="${a.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
@@ -603,6 +619,7 @@ $('sf').hidden=true;
 await draw();
 });
 $('sx').addEventListener('click',()=>{$('sf').hidden=true});
+$('srev').addEventListener('change',drawS);
 $('sl').addEventListener('click',async e=>{
 const b=e.target.closest('button');
 if(!b)return;
@@ -727,7 +744,7 @@ cur=h;
 back.hidden=true;brand.hidden=false;
 views[h]();
 }
-document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council'])+' · Our Streets Wiki';
+document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||'Admin'))+' · Our Streets Wiki';
 if(h==='wiki'||h==='photos'||h.startsWith('search-'))app.dataset.wide='1';else delete app.dataset.wide;
 nav();
 renderDrawer();
