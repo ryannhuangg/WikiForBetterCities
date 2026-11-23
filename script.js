@@ -14,6 +14,13 @@ Object.assign(A.tl,{access:"Accessibility",aTheme:"Tema",aAuto:"Sistema",aLight:
 Object.assign(A.ko,{access:"접근성",aTheme:"테마",aAuto:"시스템",aLight:"라이트",aDark:"다크",aSize:"글자 크기",aContrast:"고대비",aMotion:"움직임 줄이기",aMarks:"선택 항목을 색상만이 아니라 밑줄과 체크로 표시",aReset:"기본값으로 되돌리기",aMore:"설정 더 보기",aDevSize:"기기 글자 크기 따르기",aHint:"더 큰 글자나 높은 대비가 필요하신가요?",aAdjust:"조정",aNo:"괜찮아요"});
 Object.assign(A.zh,{access:"无障碍",aTheme:"主题",aAuto:"跟随系统",aLight:"浅色",aDark:"深色",aSize:"文字大小",aContrast:"高对比度",aMotion:"减少动画",aMarks:"用下划线和对勾标记所选项，而不只靠颜色",aReset:"恢复默认",aMore:"更多设置",aDevSize:"跟随设备文字大小",aHint:"需要更大的文字或更高的对比度吗？",aAdjust:"调整",aNo:"不用了"});
 
+Object.assign(A.en,{maxC:"Up to {n} characters",badLogin:"Incorrect email or password.",needConfirm:"Confirm your email first. Check your inbox for the link.",exists:"An account with this email already exists. Sign in instead.",weakPw:"Password must be at least 6 characters.",rate:"Too many attempts. Wait a minute and try again.",badEmail:"Enter a valid email address.",pwHint:"At least 6 characters"});
+Object.assign(A.es,{maxC:"Máximo {n} caracteres",badLogin:"Correo o contraseña incorrectos.",needConfirm:"Primero confirma tu correo. Revisa tu bandeja de entrada.",exists:"Ya existe una cuenta con este correo. Inicia sesión.",weakPw:"La contraseña debe tener al menos 6 caracteres.",rate:"Demasiados intentos. Espera un minuto e inténtalo de nuevo.",badEmail:"Introduce un correo válido.",pwHint:"Al menos 6 caracteres"});
+Object.assign(A.hi,{maxC:"अधिकतम {n} अक्षर",badLogin:"ईमेल या पासवर्ड गलत है।",needConfirm:"पहले अपना ईमेल पक्का करें। इनबॉक्स में लिंक देखें।",exists:"इस ईमेल से खाता पहले से है। साइन इन करें।",weakPw:"पासवर्ड कम से कम 6 अक्षर का होना चाहिए।",rate:"बहुत ज़्यादा कोशिशें। एक मिनट रुककर फिर कोशिश करें।",badEmail:"सही ईमेल पता डालें।",pwHint:"कम से कम 6 अक्षर"});
+Object.assign(A.tl,{maxC:"Hanggang {n} character",badLogin:"Mali ang email o password.",needConfirm:"Kumpirmahin muna ang iyong email. Tingnan ang inbox para sa link.",exists:"May account na gamit ang email na ito. Mag-sign in na lang.",weakPw:"Dapat ay hindi bababa sa 6 na character ang password.",rate:"Masyadong maraming subok. Maghintay ng isang minuto.",badEmail:"Maglagay ng wastong email address.",pwHint:"Hindi bababa sa 6 na character"});
+Object.assign(A.ko,{maxC:"최대 {n}자",badLogin:"이메일 또는 비밀번호가 올바르지 않습니다.",needConfirm:"먼저 이메일을 인증하세요. 받은편지함에서 링크를 확인하세요.",exists:"이 이메일로 이미 계정이 있습니다. 로그인하세요.",weakPw:"비밀번호는 6자 이상이어야 합니다.",rate:"시도가 너무 많습니다. 잠시 후 다시 시도하세요.",badEmail:"올바른 이메일 주소를 입력하세요.",pwHint:"6자 이상"});
+Object.assign(A.zh,{maxC:"最多 {n} 个字符",badLogin:"邮箱或密码不正确。",needConfirm:"请先确认邮箱。查看收件箱中的链接。",exists:"该邮箱已有账户，请直接登录。",weakPw:"密码至少需要 6 个字符。",rate:"尝试次数过多，请稍等一分钟再试。",badEmail:"请输入有效的邮箱地址。",pwHint:"至少 6 个字符"});
+
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -342,7 +349,8 @@ return i.h?`<a class="shot" href="${i.h}">${f}</a>`:`<figure class="shot">${f}</
 };
 const com=PUB.map(p=>({t:TX(p.t),s:p.s,h:null}));
 const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),s:w.img.src,h:'#wiki/'+w.id}));
-app.innerHTML=`<h1>${t.bank}</h1><div class="actions"><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div><h2 class="sec">${t.community}</h2>`+(com.length?`<div class="gal">${com.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`)+(wk.length?`<h2 class="sec">${t.fromWiki}</h2><div class="gal">${wk.map(tile).join('')}</div>`:'');
+const all=[...com,...wk];
+app.innerHTML=`<h1>${t.bank}</h1><div class="actions"><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`);
 },
 async wiki(){
 const t=T(),tok=tokn;
@@ -390,7 +398,10 @@ app.innerHTML=`<div class="page"><h1>${t.faq}</h1>`+[1,2,3].map(n=>`<details><su
 },
 contribute(){
 const t=T();
-app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" required placeholder="${esc(t.titleEx)}"></label><label class="field">${t.capF}<input type="text" placeholder="${esc(t.capEx)}"></label><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+const counter=(i,o,n)=>{const u=()=>{const l=i.value.length;o.textContent=t.maxC.replace('{n}',n)+' · '+l+'/'+n;o.classList.toggle('warn',l>=n)};i.addEventListener('input',u);u()};
+counter($('ptitle'),$('ptc'),120);
+counter($('pcap'),$('pcc'),300);
 const bad=file=>!file||!file.type.startsWith('image/')||file.size>5242880;
 const sub=$('f').querySelector('button[type=submit]');
 let busy=false;
@@ -409,7 +420,7 @@ if($('hp').value){f.reset();ok.textContent=t.thanks;return}
 if(bad(file)){ok.textContent=t.big;return}
 busy=true;sub.disabled=true;ok.textContent=t.loading;
 try{
-const[title,caption]=[...f.querySelectorAll('input[type=text]:not(#hp)')].map(i=>i.value.trim());
+const title=$('ptitle').value.trim(),caption=$('pcap').value.trim();
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
 const up=await sb.storage.from('submissions').upload(path,file);
 if(up.error){ok.textContent=/size|exceed|mime|type/i.test(up.error.message||'')?t.big:t.err;return}
@@ -431,7 +442,7 @@ $('out').addEventListener('click',()=>sb.auth.signOut());
 return;
 }
 const up=authMode==='up';
-app.innerHTML=`<div class="page"><h1>${up?t.signup:t.signin}</h1><form id="f"><label class="field">${t.email}<input type="email" autocomplete="email" required></label><label class="field">${t.pass}<input type="password" autocomplete="${up?'new-password':'current-password'}" minlength="6" required></label><label class="check"><input type="checkbox" id="rm" checked>${t.remember}</label><button class="btn solid" type="submit">${up?t.signup:t.signin}</button><div class="ok" id="ok" role="status"></div></form><button id="sw" class="btn ghost" type="button">${up?t.haveAcct:t.noAcct}</button></div>`;
+app.innerHTML=`<div class="page"><h1>${up?t.signup:t.signin}</h1><form id="f"><label class="field">${t.email}<input type="email" autocomplete="email" required></label><label class="field">${t.pass}<input type="password" autocomplete="${up?'new-password':'current-password'}" minlength="6" required${up?' aria-describedby="pwh"':''}>${up?`<small class="hint" id="pwh">${t.pwHint}</small>`:''}</label><label class="check"><input type="checkbox" id="rm" checked>${t.remember}</label><button class="btn solid" type="submit">${up?t.signup:t.signin}</button><div class="ok" id="ok" role="status"></div></form><button id="sw" class="btn ghost" type="button">${up?t.haveAcct:t.noAcct}</button></div>`;
 $('sw').addEventListener('click',()=>{authMode=up?'in':'up';pages.account()});
 $('f').addEventListener('submit',async e=>{
 e.preventDefault();
@@ -445,7 +456,11 @@ Object.keys(other).filter(k=>k.startsWith('sb-')&&k.endsWith('-auth-token')).for
 localStorage.setItem('remember',rm?'1':'0');
 }catch(x){}
 const r=up?await sb.auth.signUp({email:em,password:pw}):await sb.auth.signInWithPassword({email:em,password:pw});
-if(r.error){ok.textContent=t.err;return}
+if(r.error){
+const c=r.error.code||'',m=(r.error.message||'').toLowerCase();
+ok.textContent=c==='invalid_credentials'||m.includes('invalid login')?t.badLogin:c==='email_not_confirmed'||m.includes('not confirmed')?t.needConfirm:c==='user_already_exists'||m.includes('already registered')?t.exists:c==='weak_password'||m.includes('password')?t.weakPw:c==='over_request_rate_limit'||c==='over_email_send_rate_limit'||r.error.status===429?t.rate:c==='validation_failed'||m.includes('email')?t.badEmail:t.err;
+return;
+}
 if(up&&!r.data.session){ok.textContent=t.confirm;authMode='in'}
 });
 },

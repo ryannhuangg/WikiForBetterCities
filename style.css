@@ -244,3 +244,6 @@ html[data-mode=dark] #axHint{box-shadow:0 8px 28px rgba(0,0,0,.55)}
 html[data-mode=dark] #tabs{background:rgba(15,26,20,.92)}
 html[data-contrast=high] #tabs{background:var(--bg)}
 @media(max-width:359px){#brand{font-size:0}}
+
+.field .hint{display:block;margin-top:4px;font-weight:400;color:var(--mut);font-size:.875rem}
+.field .hint.warn{color:var(--fg);font-weight:600}
