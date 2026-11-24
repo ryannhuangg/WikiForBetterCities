@@ -98,6 +98,12 @@ Object.assign(A.zh,{locF:'位置（可选）',locNone:'未添加位置。',locPh
 Object.assign(A.tl,{locF:'Lokasyon (opsyonal)',locNone:'Walang lokasyon.',locPhoto:'Nakita ang lokasyon sa larawan:',locSet:'Naitakda ang lokasyon:',locMe:'Gamitin ang lokasyon ko',locPick:'Pumili sa mapa',locAdj:'Ayusin sa mapa',locRm:'Alisin ang lokasyon',locFail:'Hindi makuha ang lokasyon mo. Pumili na lang sa mapa.',mapPickT:'I-tap ang mapa para ilagay ang pin. I-drag para ayusin.',done:'Tapos',cancel:'Kanselahin',mapView:'Mapa',gridView:'Grid',mapT:'Mapa ng mga larawan',onMap:'Ipakita sa mapa',noMap:'Wala pang larawang may lokasyon.',mapLbl:'Mapa ng lokasyon ng mga larawan. Nasa grid ang parehong mga larawan.'});
 Object.assign(A.ko,{locF:'위치 (선택)',locNone:'위치가 없습니다.',locPhoto:'사진에서 위치를 찾았습니다:',locSet:'위치 설정됨:',locMe:'내 위치 사용',locPick:'지도에서 선택',locAdj:'지도에서 조정',locRm:'위치 삭제',locFail:'위치를 가져올 수 없습니다. 지도에서 선택해 주세요.',mapPickT:'지도를 눌러 핀을 놓고, 끌어서 조정하세요.',done:'완료',cancel:'취소',mapView:'지도 보기',gridView:'격자 보기',mapT:'사진 지도',onMap:'지도에서 보기',noMap:'아직 위치가 있는 사진이 없습니다.',mapLbl:'사진 위치 지도. 격자 보기에 같은 사진이 있습니다.'});
 Object.assign(A.hi,{locF:'स्थान (वैकल्पिक)',locNone:'कोई स्थान नहीं जोड़ा गया।',locPhoto:'तस्वीर में स्थान मिला:',locSet:'स्थान सेट:',locMe:'मेरा स्थान इस्तेमाल करें',locPick:'मैप पर चुनें',locAdj:'मैप पर ठीक करें',locRm:'स्थान हटाएँ',locFail:'आपका स्थान नहीं मिल सका। मैप पर चुनें।',mapPickT:'पिन लगाने के लिए मैप पर टैप करें। ठीक करने के लिए खींचें।',done:'हो गया',cancel:'रद्द करें',mapView:'मैप दृश्य',gridView:'ग्रिड दृश्य',mapT:'तस्वीरों का मैप',onMap:'मैप पर देखें',noMap:'अभी स्थान वाली कोई तस्वीर नहीं है।',mapLbl:'तस्वीरों के स्थानों का मैप। ग्रिड दृश्य में वही तस्वीरें हैं।'});
+Object.assign(A.en,{slow:"You're submitting too quickly. Please wait a few minutes and try again."});
+Object.assign(A.es,{slow:'Estás enviando demasiado rápido. Espera unos minutos e inténtalo de nuevo.'});
+Object.assign(A.zh,{slow:'提交太频繁了。请等几分钟再试。'});
+Object.assign(A.tl,{slow:'Masyadong mabilis ang pagsusumite mo. Maghintay ng ilang minuto at subukang muli.'});
+Object.assign(A.ko,{slow:'너무 빠르게 제출하고 있습니다. 몇 분 후 다시 시도해 주세요.'});
+Object.assign(A.hi,{slow:'आप बहुत जल्दी-जल्दी भेज रहे हैं। कुछ मिनट रुककर फिर कोशिश करें।'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -662,10 +668,11 @@ let loc=null;
 const setLoc=(lat,lng,src)=>{loc=lat==null?null:{lat:+lat,lng:+lng};$('ploc').textContent=loc?(src==='photo'?t.locPhoto:t.locSet)+' '+loc.lat.toFixed(4)+', '+loc.lng.toFixed(4):t.locNone;$('plx').hidden=!loc;$('plpick').lastChild.textContent=loc?t.locAdj:t.locPick};
 $('plx').addEventListener('click',()=>setLoc(null));
 $('plpick').addEventListener('click',()=>pickLoc(loc,(a,b)=>setLoc(a,b,'map')));
-$('plme').addEventListener('click',()=>{if(!navigator.geolocation){$('ploc').textContent=t.locFail;return}$('ploc').textContent=t.loading;navigator.geolocation.getCurrentPosition(p=>setLoc(p.coords.latitude,p.coords.longitude,'me'),()=>{$('ploc').textContent=t.locFail},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})});
+const exifLoc=fl=>fl&&fl.type.startsWith('image/')?load('lib/exifr.js?v=1').then(()=>exifr.gps(fl)).then(g=>g&&Number.isFinite(g.latitude)&&Number.isFinite(g.longitude)?g:null).catch(()=>null):Promise.resolve(null);
+$('plme').addEventListener('click',async()=>{$('ploc').textContent=t.loading;const g=await exifLoc($('f').querySelector('input[type=file]').files[0]);if(g){setLoc(g.latitude,g.longitude,'photo');return}if(!navigator.geolocation){$('ploc').textContent=t.locFail;return}navigator.geolocation.getCurrentPosition(p=>setLoc(p.coords.latitude,p.coords.longitude,'me'),()=>{$('ploc').textContent=t.locFail},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})});
 $('f').querySelector('input[type=file]').addEventListener('change',e=>{
 const fl=e.target.files[0];
-if(fl&&fl.type.startsWith('image/')&&!loc)load('lib/exifr.js?v=1').then(()=>exifr.gps(fl)).then(g=>{if(g&&Number.isFinite(g.latitude)&&Number.isFinite(g.longitude)&&!loc)setLoc(g.latitude,g.longitude,'photo')}).catch(()=>{});
+if(!loc)exifLoc(fl).then(g=>{if(g&&!loc)setLoc(g.latitude,g.longitude,'photo')});
 const file=e.target.files[0];
 if(file&&!file.type.startsWith('image/')){e.target.value='';$('ok').textContent=t.fmt}else $('ok').textContent='';
 });
@@ -686,9 +693,9 @@ addTag($('ptag').value);$('ptag').value='';
 const title=$('ptitle').value.trim(),caption=$('pcap').value.trim();
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
 const up=await sb.storage.from('submissions').upload(path,file);
-if(up.error){const m=up.error.message||'';ok.textContent=(/mime|type/i.test(m)?t.fmt:/size|exceed/i.test(m)?t.big:t.err)+' ['+m+']';return}
+if(up.error){const m=up.error.message||'';ok.textContent=/row-level|security|policy|rate/i.test(m)?t.slow:(/mime|type/i.test(m)?t.fmt:/size|exceed/i.test(m)?t.big:t.err)+' ['+m+']';return}
 const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path,...(loc?{lat:+loc.lat.toFixed(4),lng:+loc.lng.toFixed(4)}:{}),...(tags.length?{tags}:{}),...(rel.size?{related:[...rel]}:{})});
-if(r.error){await sb.storage.from('submissions').remove([path]);ok.textContent=r.error.code==='42501'?t.limit:t.err;return}
+if(r.error){await sb.storage.from('submissions').remove([path]);ok.textContent=/rate_limited/.test(r.error.message||'')?t.slow:r.error.code==='42501'?t.limit:t.err;return}
 ok.textContent=t.thanks;
 f.reset();tags=[];rel=new Set();tl();rl();setLoc(null);
 }catch(x){ok.textContent=t.err}
