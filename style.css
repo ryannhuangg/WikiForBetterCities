@@ -165,7 +165,7 @@ html:lang(ko) :is(h1,h2,h3,.date,#brand,.txt h3),html:lang(zh) :is(h1,h2,h3,.dat
 html:is(:lang(hi),:lang(ko),:lang(zh)) :is(h1,h2,h3,.date,#brand){letter-spacing:0}
 html:lang(ko) body{word-break:keep-all;line-break:strict}
 html:lang(zh) body{line-break:strict}
-@media (max-width:359px){#brand{font-size:0}#tabs a span{display:none}#tabs a[aria-current] span{display:inline}}
+@media (max-width:359px){#brand{font-size:0}}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 #app>h1,#app>section,#app>article,#app>.page,#app>.chips,#app>.gal,#app>.none{animation:rise .28s cubic-bezier(.2,.8,.2,1) both}
 img[data-o]{opacity:0;transition:opacity .3s}
@@ -353,3 +353,9 @@ a.tag{text-decoration:none;color:var(--accent)}
 .sug .opt small{color:var(--mut)}
 .sug .opt:hover,.sug .opt:focus-visible{background:var(--tile)}
 @media(max-width:480px){.arow{flex-wrap:wrap}.arow div{flex:1 1 100%}}
+
+#tabs{border-radius:32px}
+#tabs a{flex:1 1 0;min-width:0;flex-direction:column;gap:2px;padding:6px 2px;font-size:.8125rem;line-height:1.15;border-radius:26px;overflow-wrap:anywhere}
+#tabs a i{font-size:1.5rem}
+body{padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))}
+#brand{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
