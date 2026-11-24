@@ -42,6 +42,13 @@ Object.assign(A.tl,{relPh:"Mag-type para maghanap ng artikulo",relMax:"Hanggang 
 Object.assign(A.ko,{relPh:"글을 검색하려면 입력하세요",relMax:"글은 최대 3개까지 선택할 수 있습니다."});
 Object.assign(A.zh,{relPh:"输入以搜索文章",relMax:"最多可选择 3 篇文章。"});
 
+Object.assign(A.en,{loadErr:"Could not load meetings. Check your connection and try again.",retry:"Try again"});
+Object.assign(A.es,{loadErr:"No se pudieron cargar las reuniones. Revisa tu conexión e inténtalo de nuevo.",retry:"Reintentar"});
+Object.assign(A.hi,{loadErr:"बैठकें लोड नहीं हो सकीं। अपना कनेक्शन जाँचें और फिर कोशिश करें।",retry:"फिर कोशिश करें"});
+Object.assign(A.tl,{loadErr:"Hindi ma-load ang mga pulong. Suriin ang koneksyon at subukan muli.",retry:"Subukan muli"});
+Object.assign(A.ko,{loadErr:"회의를 불러오지 못했습니다. 연결을 확인하고 다시 시도하세요.",retry:"다시 시도"});
+Object.assign(A.zh,{loadErr:"无法加载会议。请检查网络连接后重试。",retry:"重试"});
+
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -244,6 +251,7 @@ sb.from('meetings').select('*').order('meeting_date',{ascending:false}),
 sb.from('articles').select('*').order('title'),
 sb.from('meeting_articles').select('*')
 ]);
+if(m.error||a.error||l.error)return{meetings:[],articles:[],links:[],err:true};
 store={meetings:m.data||[],articles:a.data||[],links:l.data||[]};
 return store;
 }
@@ -389,6 +397,7 @@ const t=T(),tok=tokn;
 app.innerHTML=`<h1>${t.recent}</h1><div class="none">${t.loading}</div>`;
 const d=await getData();
 if(tok!==tokn)return;
+if(d.err){app.innerHTML=`<h1>${t.recent}</h1><div class="none" role="alert"><p>${t.loadErr}</p><button class="btn" id="rt" type="button">${ic('arrow-clockwise')}${t.retry}</button></div>`;$('rt').addEventListener('click',()=>views.council());return}
 const arts=Object.fromEntries(d.articles.map(a=>[a.id,a]));
 await prep([...d.meetings.flatMap(m=>[m.title,m.body,m.outcome]),...d.articles.flatMap(a=>[a.title,a.body])]);
 if(tok!==tokn)return;
@@ -427,7 +436,7 @@ if(b)$('cat-'+b.dataset.j).scrollIntoView({behavior:matchMedia('(prefers-reduced
 
 async function wikiArticle(id){
 const t=T(),tok=tokn,w=WIKI.find(x=>x.id===id);
-if(!w){app.innerHTML=`<div class="none">${t.none}</div>`;return}
+if(!w){app.innerHTML=`<div class="none"><p>${t.none}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`;return}
 const img=w.img;
 const rel=WIKI.filter(x=>x.cat===w.cat&&x.id!==w.id);
 await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short])]);

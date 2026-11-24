@@ -359,3 +359,5 @@ a.tag{text-decoration:none;color:var(--accent)}
 #tabs a i{font-size:1.5rem}
 body{padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))}
 #brand{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.card .txt{min-width:0;overflow-wrap:anywhere}
