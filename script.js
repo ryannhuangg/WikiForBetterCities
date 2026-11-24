@@ -68,6 +68,18 @@ Object.assign(A.hi,{aCvd:'रंग-दृष्टि दोष के अन�
 Object.assign(A.tl,{aCvd:'Mga kulay ng paksa na angkop sa colorblind'});
 Object.assign(A.ko,{aCvd:'색각 이상에 맞춘 주제 색상'});
 Object.assign(A.zh,{aCvd:'适合色盲的主题颜色'});
+Object.assign(A.en,{undo:'Undo',axDone:'Settings reset.'});
+Object.assign(A.es,{undo:'Deshacer',axDone:'Ajustes restablecidos.'});
+Object.assign(A.hi,{undo:'पूर्ववत करें',axDone:'सेटिंग्स रीसेट हो गईं।'});
+Object.assign(A.tl,{undo:'I-undo',axDone:'Na-reset ang mga setting.'});
+Object.assign(A.ko,{undo:'실행 취소',axDone:'설정을 초기화했습니다.'});
+Object.assign(A.zh,{undo:'撤销',axDone:'设置已重置。'});
+Object.assign(A.en,{ad:{admin:'Admin',adminOnly:'Admins only.',mtgs:'Meetings',subs:'Submissions',wikiT:'Wiki',councilMtg:'Council meeting',mDate:'Meeting date',title:'Title',outcomeF:'Outcome (optional, shown on the meeting card)',summary:'Summary',relA:'Related articles',saveM:'Save meeting',cancelEd:'Cancel edit',filter:'Filter',wikiArt:'Wiki article',idUrl:'ID (used in the URL)',topic:'Topic',shortS:'Short summary',bodyF:'Body (blank line between paragraphs)',imgUrl:'Image URL',imgCr:'Image credit',imgAlt:'Image alt text (describes the photo for screen readers)',saveW:'Save wiki article',photoSubs:'Photo submissions',caption:'Caption',tagsCsv:'Tags (comma-separated, max 5)',saveS:'Save submission',showRev:'Show reviewed',noArts:'No articles yet.',noSubs:'No submissions.',noPend:'No pending submissions.',viewPhoto:'View photo',edit:'Edit',approve:'Approve',reject:'Reject',del:'Delete',saved:'Saved.',couldNot:'Could not save: ',failed:'Failed: ',mDel:'Meeting deleted.',wDel:'Wiki article deleted. It was also removed from any meetings.',sDel:'Submission deleted.',sApp:'Submission approved.',sRej:'Submission rejected.',status:'Status: ',topicL:'Topic: ',submitted:'Submitted: ',pending:'pending',approved:'approved',rejected:'rejected'}});
+Object.assign(A.es,{ad:{admin:'Administración',adminOnly:'Solo para administradores.',mtgs:'Reuniones',subs:'Envíos',wikiT:'Wiki',councilMtg:'Reunión del concejo',mDate:'Fecha de la reunión',title:'Título',outcomeF:'Resultado (opcional, se muestra en la tarjeta de la reunión)',summary:'Resumen',relA:'Artículos relacionados',saveM:'Guardar reunión',cancelEd:'Cancelar edición',filter:'Filtrar',wikiArt:'Artículo de la wiki',idUrl:'ID (se usa en la URL)',topic:'Tema',shortS:'Resumen corto',bodyF:'Texto (deja una línea en blanco entre párrafos)',imgUrl:'URL de la imagen',imgCr:'Crédito de la imagen',imgAlt:'Texto alternativo (describe la foto para lectores de pantalla)',saveW:'Guardar artículo',photoSubs:'Fotos enviadas',caption:'Pie de foto',tagsCsv:'Etiquetas (separadas por comas, máx. 5)',saveS:'Guardar envío',showRev:'Mostrar revisados',noArts:'Aún no hay artículos.',noSubs:'No hay envíos.',noPend:'No hay envíos pendientes.',viewPhoto:'Ver foto',edit:'Editar',approve:'Aprobar',reject:'Rechazar',del:'Eliminar',saved:'Guardado.',couldNot:'No se pudo guardar: ',failed:'Error: ',mDel:'Reunión eliminada.',wDel:'Artículo eliminado. También se quitó de las reuniones.',sDel:'Envío eliminado.',sApp:'Envío aprobado.',sRej:'Envío rechazado.',status:'Estado: ',topicL:'Tema: ',submitted:'Enviado: ',pending:'pendiente',approved:'aprobado',rejected:'rechazado'}});
+Object.assign(A.zh,{ad:{admin:'管理',adminOnly:'仅限管理员。',mtgs:'会议',subs:'投稿',wikiT:'百科',councilMtg:'市议会会议',mDate:'会议日期',title:'标题',outcomeF:'结果（可选，显示在会议卡片上）',summary:'摘要',relA:'相关文章',saveM:'保存会议',cancelEd:'取消编辑',filter:'筛选',wikiArt:'百科文章',idUrl:'ID（用于网址）',topic:'主题',shortS:'简短摘要',bodyF:'正文（段落之间空一行）',imgUrl:'图片网址',imgCr:'图片来源',imgAlt:'图片替代文字（为读屏软件描述照片）',saveW:'保存百科文章',photoSubs:'照片投稿',caption:'说明',tagsCsv:'标签（用逗号分隔，最多 5 个）',saveS:'保存投稿',showRev:'显示已审核',noArts:'还没有文章。',noSubs:'没有投稿。',noPend:'没有待审核的投稿。',viewPhoto:'查看照片',edit:'编辑',approve:'通过',reject:'拒绝',del:'删除',saved:'已保存。',couldNot:'无法保存：',failed:'失败：',mDel:'会议已删除。',wDel:'百科文章已删除，并已从相关会议中移除。',sDel:'投稿已删除。',sApp:'投稿已通过。',sRej:'投稿已拒绝。',status:'状态：',topicL:'主题：',submitted:'提交时间：',pending:'待审核',approved:'已通过',rejected:'已拒绝'}});
+Object.assign(A.tl,{ad:{admin:'Admin',adminOnly:'Para sa admin lamang.',mtgs:'Mga pulong',subs:'Mga isinumite',wikiT:'Wiki',councilMtg:'Pulong ng konseho',mDate:'Petsa ng pulong',title:'Pamagat',outcomeF:'Resulta (opsyonal, makikita sa card ng pulong)',summary:'Buod',relA:'Mga kaugnay na artikulo',saveM:'I-save ang pulong',cancelEd:'Kanselahin ang pag-edit',filter:'Salain',wikiArt:'Artikulo ng wiki',idUrl:'ID (ginagamit sa URL)',topic:'Paksa',shortS:'Maikling buod',bodyF:'Nilalaman (blangkong linya sa pagitan ng mga talata)',imgUrl:'URL ng larawan',imgCr:'Kredito ng larawan',imgAlt:'Alt text ng larawan (inilalarawan ang larawan para sa screen reader)',saveW:'I-save ang artikulo',photoSubs:'Mga isinumiteng larawan',caption:'Caption',tagsCsv:'Mga tag (hiwalay sa kuwit, hanggang 5)',saveS:'I-save ang isinumite',showRev:'Ipakita ang nasuri na',noArts:'Wala pang artikulo.',noSubs:'Walang isinumite.',noPend:'Walang naghihintay na isinumite.',viewPhoto:'Tingnan ang larawan',edit:'I-edit',approve:'Aprubahan',reject:'Tanggihan',del:'Burahin',saved:'Na-save.',couldNot:'Hindi ma-save: ',failed:'Nabigo: ',mDel:'Nabura ang pulong.',wDel:'Nabura ang artikulo. Inalis din ito sa mga pulong.',sDel:'Nabura ang isinumite.',sApp:'Naaprubahan ang isinumite.',sRej:'Tinanggihan ang isinumite.',status:'Status: ',topicL:'Paksa: ',submitted:'Isinumite: ',pending:'naghihintay',approved:'aprubado',rejected:'tinanggihan'}});
+Object.assign(A.ko,{ad:{admin:'관리자',adminOnly:'관리자 전용입니다.',mtgs:'회의',subs:'제출물',wikiT:'위키',councilMtg:'시의회 회의',mDate:'회의 날짜',title:'제목',outcomeF:'결과 (선택, 회의 카드에 표시)',summary:'요약',relA:'관련 글',saveM:'회의 저장',cancelEd:'편집 취소',filter:'필터',wikiArt:'위키 글',idUrl:'ID (URL에 사용)',topic:'주제',shortS:'짧은 요약',bodyF:'본문 (문단 사이에 빈 줄)',imgUrl:'이미지 URL',imgCr:'이미지 출처',imgAlt:'이미지 대체 텍스트 (화면 낭독기용 사진 설명)',saveW:'위키 글 저장',photoSubs:'사진 제출물',caption:'설명',tagsCsv:'태그 (쉼표로 구분, 최대 5개)',saveS:'제출물 저장',showRev:'검토한 항목 보기',noArts:'아직 글이 없습니다.',noSubs:'제출물이 없습니다.',noPend:'대기 중인 제출물이 없습니다.',viewPhoto:'사진 보기',edit:'편집',approve:'승인',reject:'거절',del:'삭제',saved:'저장했습니다.',couldNot:'저장할 수 없습니다: ',failed:'실패: ',mDel:'회의를 삭제했습니다.',wDel:'위키 글을 삭제했습니다. 관련 회의에서도 제거되었습니다.',sDel:'제출물을 삭제했습니다.',sApp:'제출물을 승인했습니다.',sRej:'제출물을 거절했습니다.',status:'상태: ',topicL:'주제: ',submitted:'제출일: ',pending:'대기 중',approved:'승인됨',rejected:'거절됨'}});
+Object.assign(A.hi,{ad:{admin:'एडमिन',adminOnly:'केवल एडमिन के लिए।',mtgs:'बैठकें',subs:'सबमिशन',wikiT:'विकी',councilMtg:'परिषद की बैठक',mDate:'बैठक की तारीख',title:'शीर्षक',outcomeF:'परिणाम (वैकल्पिक, बैठक कार्ड पर दिखता है)',summary:'सारांश',relA:'संबंधित लेख',saveM:'बैठक सहेजें',cancelEd:'संपादन रद्द करें',filter:'फ़िल्टर',wikiArt:'विकी लेख',idUrl:'ID (URL में उपयोग होता है)',topic:'विषय',shortS:'छोटा सारांश',bodyF:'मुख्य पाठ (अनुच्छेदों के बीच खाली पंक्ति)',imgUrl:'इमेज URL',imgCr:'इमेज का श्रेय',imgAlt:'इमेज का वैकल्पिक पाठ (स्क्रीन रीडर के लिए फ़ोटो का विवरण)',saveW:'विकी लेख सहेजें',photoSubs:'फ़ोटो सबमिशन',caption:'कैप्शन',tagsCsv:'टैग (कॉमा से अलग, अधिकतम 5)',saveS:'सबमिशन सहेजें',showRev:'समीक्षा किए गए दिखाएँ',noArts:'अभी कोई लेख नहीं।',noSubs:'कोई सबमिशन नहीं।',noPend:'कोई लंबित सबमिशन नहीं।',viewPhoto:'फ़ोटो देखें',edit:'संपादित करें',approve:'स्वीकृत करें',reject:'अस्वीकार करें',del:'हटाएँ',saved:'सहेजा गया।',couldNot:'सहेजा नहीं जा सका: ',failed:'विफल: ',mDel:'बैठक हटाई गई।',wDel:'विकी लेख हटाया गया। इसे बैठकों से भी हटा दिया गया।',sDel:'सबमिशन हटाया गया।',sApp:'सबमिशन स्वीकृत।',sRej:'सबमिशन अस्वीकृत।',status:'स्थिति: ',topicL:'विषय: ',submitted:'सबमिट किया गया: ',pending:'लंबित',approved:'स्वीकृत',rejected:'अस्वीकृत'}});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -408,6 +420,23 @@ c.classList.add('rv');io.observe(c);
 });
 }
 
+let undoT=null;
+const tst=document.createElement('div');tst.id='tst';tst.setAttribute('role','status');tst.hidden=true;document.body.appendChild(tst);
+const hideT=()=>{tst.hidden=true;tst.innerHTML=''};
+function flushUndo(){if(!undoT)return;clearTimeout(undoT.tm);const c=undoT.commit;undoT=null;hideT();if(c)c()}
+function toast(msg,undo,commit){
+flushUndo();
+const t=T();
+tst.innerHTML=`<span>${esc(msg)}</span><button type="button" class="btn">${ic('arrow-counter-clockwise')}${t.undo}</button>`;
+tst.hidden=false;
+const arm=()=>{clearTimeout(undoT.tm);undoT.tm=setTimeout(flushUndo,7000)};
+undoT={commit,tm:0};arm();
+tst.onmouseenter=tst.onfocusin=()=>clearTimeout(undoT&&undoT.tm);
+tst.onmouseleave=tst.onfocusout=e=>{if(undoT&&!tst.contains(e.relatedTarget))arm()};
+tst.querySelector('button').onclick=()=>{clearTimeout(undoT.tm);undoT=null;hideT();undo()};
+}
+addEventListener('pagehide',flushUndo);
+
 const views={
 async council(){
 const t=T(),tok=tokn;
@@ -420,7 +449,8 @@ await prep([...d.meetings.flatMap(m=>[m.title,m.body,m.outcome]),...WIKI.flatMap
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
 const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>arts[l.article_id]).filter(Boolean);
-return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),true,null,null,'lead')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(a=>card(iconOf(a.cat),TX(a.title),nameOf(a.cat),TX(a.short),false,'#wiki/'+a.id,null,'sm')).join(''):'')+`</section>`;
+const rb=rel.length?`<div class="mrel"><h4 class="rel">${t.related}</h4>`+rel.map(a=>`<a class="rl" data-c="${a.cat}" href="#wiki/${esc(a.id)}">${ic(iconOf(a.cat))}<span><b>${esc(TX(a.title))}</b><small>${esc(nameOf(a.cat))}</small></span>${ic('caret-right')}</a>`).join('')+`</div>`:'';
+return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),true,null,null,'lead').replace(/<\/div><\/article>$/,rb+'</div></article>')+`</section>`;
 }).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
 reveal(app.querySelectorAll('section .card,section .rel'));
 },
@@ -476,7 +506,7 @@ access(){
 const t=T();
 app.innerHTML=`<div class="page" id="ax"><h1>${t.access}</h1>`+axHtml(['theme','size','contrast','cvd','motion','marks'],'p-')+`<button id="axr" type="button" class="btn ghost">${t.aReset}</button></div>`;
 axBind($('ax'));
-$('axr').addEventListener('click',()=>{A11Y.reset();pages.access();if(A11Y.sync)A11Y.sync(A11Y.get())});
+$('axr').addEventListener('click',()=>{const prev=A11Y.stored();A11Y.reset();pages.access();if(A11Y.sync)A11Y.sync(A11Y.get());if(prev)toast(T().axDone,()=>{try{A11Y.load(JSON.parse(prev))}catch(e){}if(location.hash==='#access')pages.access();if(A11Y.sync)A11Y.sync(A11Y.get())})});
 },
 about(){
 const t=T();
@@ -599,69 +629,71 @@ if(up&&!r.data.session){ok.textContent=t.confirm;authMode='in'}
 });
 },
 async admin(){
-const t=T();
-if(!sb||!ready){app.innerHTML=`<div class="page"><h1>Admin</h1><div class="none">${!sb?t.notReady:t.loading}</div></div>`;return}
-if(!isAdmin){app.innerHTML=`<div class="page"><h1>Admin</h1><div class="none">Admins only.</div></div>`;return}
+const t=T(),a=t.ad;
+if(!sb||!ready){app.innerHTML=`<div class="page"><h1>${a.admin}</h1><div class="none">${!sb?t.notReady:t.loading}</div></div>`;return}
+if(!isAdmin){app.innerHTML=`<div class="page"><h1>${a.admin}</h1><div class="none">${a.adminOnly}</div></div>`;return}
 const tok=tokn;
-const topics=CATS.map((c,i)=>`<option value="${c.id}">${L.en.cats[i]}</option>`).join('');
-app.innerHTML=`<div class="page"><h1>Admin</h1>
+const topics=CATS.map((c,i)=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('');
+app.innerHTML=`<div class="page"><h1>${a.admin}</h1>
 <div class="ok" id="aerr" role="alert"></div>
-<nav class="chips" id="atabs" role="tablist"><button class="chip on" data-p="m" type="button" role="tab" aria-selected="true">Meetings</button><button class="chip" data-p="w" type="button" role="tab" aria-selected="false">Wiki</button><button class="chip" data-p="s" type="button" role="tab" aria-selected="false">Submissions</button></nav>
+<nav class="chips" id="atabs" role="tablist"><button class="chip on" data-p="m" type="button" role="tab" aria-selected="true">${a.mtgs}</button><button class="chip" data-p="w" type="button" role="tab" aria-selected="false">${a.wikiT}</button><button class="chip" data-p="s" type="button" role="tab" aria-selected="false">${a.subs}</button></nav>
 <section data-pane="m">
-<h2 class="sec">Council meeting</h2>
+<h2 class="sec">${a.councilMtg}</h2>
 <form id="mf"><input type="hidden" id="mid">
-<label class="field">Meeting date<input type="date" id="md" required></label>
-<label class="field">Title<input type="text" id="mt" required></label>
-<label class="field">Outcome (optional, shown on the meeting card)<input type="text" id="mo" maxlength="40"></label>
-<label class="field">Summary<textarea id="mb" rows="5" required></textarea></label>
-<fieldset class="checks"><legend>Related articles</legend><div id="mrel"></div></fieldset>
-<button class="btn solid" type="submit">Save meeting</button>
-<button id="mx" class="btn ghost" type="button" hidden>Cancel edit</button>
+<label class="field">${a.mDate}<input type="date" id="md" required></label>
+<label class="field">${a.title}<input type="text" id="mt" required></label>
+<label class="field">${a.outcomeF}<input type="text" id="mo" maxlength="40"></label>
+<label class="field">${a.summary}<textarea id="mb" rows="5" required></textarea></label>
+<fieldset class="checks"><legend>${a.relA}</legend><div id="mrel"></div></fieldset>
+<button class="btn solid" type="submit">${a.saveM}</button>
+<button id="mx" class="btn ghost" type="button" hidden>${a.cancelEd}</button>
 <div class="ok" id="mok" role="status"></div></form>
-<input type="search" class="flt" data-for="ml" placeholder="Filter" aria-label="Filter"><div id="ml"></div></section>
+<input type="search" class="flt" data-for="ml" placeholder="${a.filter}" aria-label="${a.filter}"><div id="ml"></div></section>
 <section data-pane="w" hidden>
-<h2 class="sec">Wiki article</h2>
+<h2 class="sec">${a.wikiArt}</h2>
 <form id="wf"><input type="hidden" id="wkey">
-<label class="field">ID (used in the URL)<input type="text" id="wid" required></label>
-<label class="field">Topic<select id="wc">${topics}</select></label>
-<label class="field">Title<input type="text" id="wt" required></label>
-<label class="field">Short summary<input type="text" id="ws" required></label>
-<label class="field">Body (blank line between paragraphs)<textarea id="wbd" rows="8" required></textarea></label>
-<label class="field">Image URL<input type="url" id="wimg"></label>
-<label class="field">Image credit<input type="text" id="wcr"></label>
-<label class="field">Image alt text (describes the photo for screen readers)<input type="text" id="wal"></label>
-<button class="btn solid" type="submit">Save wiki article</button>
-<button id="wx" class="btn ghost" type="button" hidden>Cancel edit</button>
+<label class="field">${a.idUrl}<input type="text" id="wid" required></label>
+<label class="field">${a.topic}<select id="wc">${topics}</select></label>
+<label class="field">${a.title}<input type="text" id="wt" required></label>
+<label class="field">${a.shortS}<input type="text" id="ws" required></label>
+<label class="field">${a.bodyF}<textarea id="wbd" rows="8" required></textarea></label>
+<label class="field">${a.imgUrl}<input type="url" id="wimg"></label>
+<label class="field">${a.imgCr}<input type="text" id="wcr"></label>
+<label class="field">${a.imgAlt}<input type="text" id="wal"></label>
+<button class="btn solid" type="submit">${a.saveW}</button>
+<button id="wx" class="btn ghost" type="button" hidden>${a.cancelEd}</button>
 <div class="ok" id="wok" role="status"></div></form>
-<input type="search" class="flt" data-for="wl" placeholder="Filter" aria-label="Filter"><div id="wl"></div></section>
+<input type="search" class="flt" data-for="wl" placeholder="${a.filter}" aria-label="${a.filter}"><div id="wl"></div></section>
 <section data-pane="s" hidden>
-<h2 class="sec">Photo submissions</h2>
+<h2 class="sec">${a.photoSubs}</h2>
 <form id="sf" hidden><input type="hidden" id="sid">
-<label class="field">Topic<select id="sc">${topics}</select></label>
-<label class="field">Title<input type="text" id="st" required></label>
-<label class="field">Caption<input type="text" id="sp"></label>
-<label class="field">Tags (comma-separated, max 5)<input type="text" id="stg"></label>
-<button class="btn solid" type="submit">Save submission</button>
-<button id="sx" class="btn ghost" type="button">Cancel edit</button></form>
-<label class="check"><input type="checkbox" id="srev">Show reviewed</label><input type="search" class="flt" data-for="sl" placeholder="Filter" aria-label="Filter"><div id="sl"></div></section></div>`;
+<label class="field">${a.topic}<select id="sc">${topics}</select></label>
+<label class="field">${a.title}<input type="text" id="st" required></label>
+<label class="field">${a.caption}<input type="text" id="sp"></label>
+<label class="field">${a.tagsCsv}<input type="text" id="stg"></label>
+<button class="btn solid" type="submit">${a.saveS}</button>
+<button id="sx" class="btn ghost" type="button">${a.cancelEd}</button></form>
+<label class="check"><input type="checkbox" id="srev">${a.showRev}</label><input type="search" class="flt" data-for="sl" placeholder="${a.filter}" aria-label="${a.filter}"><div id="sl"></div></section></div>`;
 let D={meetings:[],links:[]};
 let S=[];
 const resetM=()=>{$('mf').reset();$('mid').value='';$('mx').hidden=true};
 const resetW=()=>{$('wf').reset();$('wkey').value='';$('wx').hidden=true};
-const fail=r=>{$('aerr').textContent=r&&r.error?'Failed: '+r.error.message:'';return !!(r&&r.error)};
+const gone=new Set();
+const cut=(b,id,msg,commit)=>{gone.add(id);const row=b.closest('.arow');if(row)row.hidden=true;toast(msg,()=>{gone.delete(id);if(row)row.hidden=false},async()=>{await commit();gone.delete(id);await draw()})};
+const fail=r=>{$('aerr').textContent=r&&r.error?a.failed+r.error.message:'';return !!(r&&r.error)};
 const drawS=()=>{
-const v=S.filter(s=>$('srev').checked||s.status==='pending');
-$('sl').innerHTML=v.map(s=>`<div class="arow"><div><b>${esc(s.title)}</b><small>${s.status}${s.caption?' · '+esc(s.caption):''}</small></div><button class="btn icon" data-sv="${s.id}" aria-label="View photo">${ic('image')}</button><button class="btn icon" data-se="${s.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-sa="${s.id}" aria-label="Approve">${ic('check')}</button><button class="btn icon" data-sr="${s.id}" aria-label="Reject">${ic('x')}</button><button class="btn icon" data-sd="${s.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('')||`<small>${$('srev').checked?'No submissions.':'No pending submissions.'}</small>`;
+const v=S.filter(s=>!gone.has(s.id)&&($('srev').checked||s.status==='pending'));
+$('sl').innerHTML=v.map(s=>`<div class="arow"><div><b>${esc(s.title)}</b><small>${a[s.status]||s.status}${s.caption?' · '+esc(s.caption):''}</small></div><button class="btn icon" data-sv="${s.id}" aria-label="${a.viewPhoto}">${ic('image')}</button><button class="btn icon" data-se="${s.id}" aria-label="${a.edit}">${ic('pencil-simple')}</button><button class="btn icon" data-sa="${s.id}" aria-label="${a.approve}">${ic('check')}</button><button class="btn icon" data-sr="${s.id}" aria-label="${a.reject}">${ic('x')}</button><button class="btn icon" data-sd="${s.id}" aria-label="${a.del}">${ic('trash')}</button></div>`).join('')||`<small>${$('srev').checked?a.noSubs:a.noPend}</small>`;
 };
 const draw=async()=>{
 D=await getData(true);
 if(tok!==tokn)return;
 const{data:subs}=await sb.from('submissions').select('*').order('created_at',{ascending:false});
 S=subs||[];
-$('wl').innerHTML=WIKI.map(w=>`<div class="arow"><div><b>${esc(w.title)}</b><small>${esc(w.id)}</small></div><button class="btn icon" data-we="${w.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-wd="${w.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
+$('wl').innerHTML=WIKI.filter(w=>!gone.has(w.id)).map(w=>`<div class="arow"><div><b>${esc(w.title)}</b><small>${esc(w.id)}</small></div><button class="btn icon" data-we="${w.id}" aria-label="${a.edit}">${ic('pencil-simple')}</button><button class="btn icon" data-wd="${w.id}" aria-label="${a.del}">${ic('trash')}</button></div>`).join('');
 drawS();
-$('mrel').innerHTML=WIKI.map(a=>`<label class="check"><input type="checkbox" value="${esc(a.id)}"> ${esc(a.title)} <small>${nameOf(a.cat)}</small></label>`).join('')||'<small>No articles yet.</small>';
-$('ml').innerHTML=D.meetings.map(m=>`<div class="arow"><div><b>${esc(m.title)}</b><small>${m.meeting_date}${m.outcome?' · '+esc(m.outcome):''}</small></div><button class="btn icon" data-me="${m.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-md="${m.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
+$('mrel').innerHTML=WIKI.map(w=>`<label class="check"><input type="checkbox" value="${esc(w.id)}"> ${esc(w.title)} <small>${nameOf(w.cat)}</small></label>`).join('')||`<small>${a.noArts}</small>`;
+$('ml').innerHTML=D.meetings.filter(m=>!gone.has(m.id)).map(m=>`<div class="arow"><div><b>${esc(m.title)}</b><small>${m.meeting_date}${m.outcome?' · '+esc(m.outcome):''}</small></div><button class="btn icon" data-me="${m.id}" aria-label="${a.edit}">${ic('pencil-simple')}</button><button class="btn icon" data-md="${m.id}" aria-label="${a.del}">${ic('trash')}</button></div>`).join('');
 };
 $('mf').addEventListener('submit',async e=>{
 e.preventDefault();
@@ -670,12 +702,12 @@ const p={meeting_date:$('md').value,title:$('mt').value.trim(),body:$('mb').valu
 const o=$('mo').value.trim();
 if(o||(id&&(D.meetings.find(x=>x.id===id)||{}).outcome))p.outcome=o||null;
 const r=id?await sb.from('meetings').update(p).eq('id',id).select().single():await sb.from('meetings').insert(p).select().single();
-if(r.error){$('mok').textContent='Could not save: '+r.error.message;return}
+if(r.error){$('mok').textContent=a.couldNot+r.error.message;return}
 const picked=[...$('mrel').querySelectorAll('input:checked')].map(i=>({meeting_id:r.data.id,article_id:i.value}));
 await sb.from('meeting_articles').delete().eq('meeting_id',r.data.id);
 if(picked.length)await sb.from('meeting_articles').insert(picked);
 resetM();
-$('mok').textContent='Saved.';
+$('mok').textContent=a.saved;
 await draw();
 });
 $('ml').addEventListener('click',async e=>{
@@ -688,9 +720,9 @@ $('mid').value=m.id;$('md').value=m.meeting_date;$('mt').value=m.title;$('mo').v
 $('mrel').querySelectorAll('input').forEach(i=>i.checked=on.has(i.value));
 $('mx').hidden=false;$('mok').textContent='';
 window.scrollTo(0,0);
-}else if(b.dataset.md&&confirm('Delete this meeting?')){
-if(fail(await sb.from('meetings').delete().eq('id',b.dataset.md)))return;
-await draw();
+}else if(b.dataset.md){
+const id=b.dataset.md;
+cut(b,id,a.mDel,async()=>fail(await sb.from('meetings').delete().eq('id',id)));
 }
 });
 $('wf').addEventListener('submit',async e=>{
@@ -698,9 +730,9 @@ e.preventDefault();
 const key=$('wkey').value;
 const p={id:$('wid').value.trim(),cat:$('wc').value,title:$('wt').value.trim(),short:$('ws').value.trim(),body:$('wbd').value.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean),img_src:$('wimg').value.trim()||null,img_credit:$('wcr').value.trim()||null,img_alt:$('wal').value.trim()||null};
 const r=key?await sb.from('wiki_articles').update(p).eq('id',key):await sb.from('wiki_articles').insert(p);
-if(r.error){$('wok').textContent='Could not save: '+r.error.message;return}
+if(r.error){$('wok').textContent=a.couldNot+r.error.message;return}
 resetW();
-$('wok').textContent='Saved.';
+$('wok').textContent=a.saved;
 wikiReady=loadWiki();
 await wikiReady;
 await draw();
@@ -713,11 +745,9 @@ const w=WIKI.find(x=>x.id===b.dataset.we);
 $('wkey').value=w.id;$('wid').value=w.id;$('wc').value=w.cat;$('wt').value=w.title;$('ws').value=w.short;$('wbd').value=w.body.join('\n\n');$('wimg').value=w.img?.src||'';$('wcr').value=w.img?.credit||'';$('wal').value=w.img?.alt||'';
 $('wx').hidden=false;$('wok').textContent='';
 window.scrollTo(0,0);
-}else if(b.dataset.wd&&confirm('Delete this wiki article? It will be removed from any meetings it is attached to.')){
-if(fail(await sb.from('wiki_articles').delete().eq('id',b.dataset.wd)))return;
-wikiReady=loadWiki();
-await wikiReady;
-await draw();
+}else if(b.dataset.wd){
+const id=b.dataset.wd;
+cut(b,id,a.wDel,async()=>{if(fail(await sb.from('wiki_articles').delete().eq('id',id)))return;wikiReady=loadWiki();await wikiReady});
 }
 });
 $('wx').addEventListener('click',()=>{resetW();$('wok').textContent=''});
@@ -743,18 +773,18 @@ const s=S.find(x=>x.id===id);
 if(!s)return;
 if(b.dataset.sv){
 const{data}=await sb.storage.from('submissions').createSignedUrl(s.photo_path,300);
-showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',cat:s.cat,plain:true,tags:s.tags||[],rel:relOf(s.related),meta:['Status: '+s.status,'Topic: '+(s.cat&&CATS.some(c=>c.id===s.cat)?L.en.cats[CATS.findIndex(c=>c.id===s.cat)]:'All'),'Submitted: '+new Date(s.created_at).toLocaleString()]});
+showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',cat:s.cat,plain:true,tags:s.tags||[],rel:relOf(s.related),meta:[a.status+(a[s.status]||s.status),a.topicL+nameOf(s.cat&&CATS.some(c=>c.id===s.cat)?s.cat:'all'),a.submitted+new Date(s.created_at).toLocaleString(lang)]});
 }else if(b.dataset.se){
 $('sid').value=s.id;$('sc').value=s.cat||CATS[0].id;$('st').value=s.title;$('sp').value=s.caption||'';$('stg').value=(s.tags||[]).join(', ');
 $('sf').hidden=false;window.scrollTo(0,0);
 }else if(b.dataset.sa||b.dataset.sr){
-if(fail(await sb.from('submissions').update({status:b.dataset.sa?'approved':'rejected'}).eq('id',s.id)))return;
-if(b.dataset.sa){wikiReady=loadWiki();await wikiReady}
-await draw();
-}else if(b.dataset.sd&&confirm('Delete this submission and its photo?')){
-await sb.storage.from('submissions').remove([s.photo_path]);
-if(fail(await sb.from('submissions').delete().eq('id',s.id)))return;
-await draw();
+const prev=s.status,to=b.dataset.sa?'approved':'rejected';
+const set=async st=>{if(fail(await sb.from('submissions').update({status:st}).eq('id',s.id)))return;if(st==='approved'||prev==='approved'){wikiReady=loadWiki();await wikiReady}await draw()};
+flushUndo();
+await set(to);
+toast(to==='approved'?a.sApp:a.sRej,()=>set(prev));
+}else if(b.dataset.sd){
+cut(b,s.id,a.sDel,async()=>{if(fail(await sb.from('submissions').delete().eq('id',s.id)))return;await sb.storage.from('submissions').remove([s.photo_path])});
 }
 });
 document.querySelectorAll('.flt').forEach(i=>i.addEventListener('input',()=>{
@@ -816,7 +846,7 @@ function renderDrawer(){
 const t=T();
 const items=['account','contribute',...(isAdmin?['admin']:[]),'|','access','about','faq'];
 drawer.innerHTML=`<div class="dh"><b>${t.menu}</b><button id="closeBtn" class="btn icon" aria-label="${t.close}">${ic('x')}</button></div>`+
-items.map(p=>p==='|'?'<hr>':`<a class="item" href="#${p}"${page===p?' aria-current="page"':''}>${ic(PICON[p])}${p==='admin'?'Admin':t[p]}</a>`).join('');
+items.map(p=>p==='|'?'<hr>':`<a class="item" href="#${p}"${page===p?' aria-current="page"':''}>${ic(PICON[p])}${p==='admin'?t.ad.admin:t[p]}</a>`).join('');
 $('closeBtn').addEventListener('click',()=>setDrawer(false));
 menuBtn.setAttribute('aria-label',t.menu);
 drawer.setAttribute('aria-label',t.menu);
@@ -844,6 +874,7 @@ langMenu.innerHTML=LANGS.map(l=>`<li><button data-l="${l[0]}"${l[0]===lang?' ari
 }
 
 async function route(){
+flushUndo();
 const n=++tokn;
 const lbd=$('lb');if(lbd&&lbd.open)lbd.close();
 if(!app.innerHTML)app.innerHTML=`<div class="none">${T().loading}</div>`;
@@ -883,7 +914,7 @@ cur=h;
 back.hidden=true;brand.hidden=false;
 views[h]();
 }
-document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||'Admin'))+' · Our Streets Wiki';
+document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||T().ad.admin))+' · Our Streets Wiki';
 if(h.startsWith('tag/')){try{document.title=decodeURIComponent(h.slice(4))}catch(e){}}
 if(h==='wiki'||h==='photos'||h.startsWith('search-')||h.startsWith('tag/'))app.dataset.wide='1';else delete app.dataset.wide;
 nav();
