@@ -80,6 +80,12 @@ Object.assign(A.zh,{ad:{admin:'管理',adminOnly:'仅限管理员。',mtgs:'会�
 Object.assign(A.tl,{ad:{admin:'Admin',adminOnly:'Para sa admin lamang.',mtgs:'Mga pulong',subs:'Mga isinumite',wikiT:'Wiki',councilMtg:'Pulong ng konseho',mDate:'Petsa ng pulong',title:'Pamagat',outcomeF:'Resulta (opsyonal, makikita sa card ng pulong)',summary:'Buod',relA:'Mga kaugnay na artikulo',saveM:'I-save ang pulong',cancelEd:'Kanselahin ang pag-edit',filter:'Salain',wikiArt:'Artikulo ng wiki',idUrl:'ID (ginagamit sa URL)',topic:'Paksa',shortS:'Maikling buod',bodyF:'Nilalaman (blangkong linya sa pagitan ng mga talata)',imgUrl:'URL ng larawan',imgCr:'Kredito ng larawan',imgAlt:'Alt text ng larawan (inilalarawan ang larawan para sa screen reader)',saveW:'I-save ang artikulo',photoSubs:'Mga isinumiteng larawan',caption:'Caption',tagsCsv:'Mga tag (hiwalay sa kuwit, hanggang 5)',saveS:'I-save ang isinumite',showRev:'Ipakita ang nasuri na',noArts:'Wala pang artikulo.',noSubs:'Walang isinumite.',noPend:'Walang naghihintay na isinumite.',viewPhoto:'Tingnan ang larawan',edit:'I-edit',approve:'Aprubahan',reject:'Tanggihan',del:'Burahin',saved:'Na-save.',couldNot:'Hindi ma-save: ',failed:'Nabigo: ',mDel:'Nabura ang pulong.',wDel:'Nabura ang artikulo. Inalis din ito sa mga pulong.',sDel:'Nabura ang isinumite.',sApp:'Naaprubahan ang isinumite.',sRej:'Tinanggihan ang isinumite.',status:'Status: ',topicL:'Paksa: ',submitted:'Isinumite: ',pending:'naghihintay',approved:'aprubado',rejected:'tinanggihan'}});
 Object.assign(A.ko,{ad:{admin:'관리자',adminOnly:'관리자 전용입니다.',mtgs:'회의',subs:'제출물',wikiT:'위키',councilMtg:'시의회 회의',mDate:'회의 날짜',title:'제목',outcomeF:'결과 (선택, 회의 카드에 표시)',summary:'요약',relA:'관련 글',saveM:'회의 저장',cancelEd:'편집 취소',filter:'필터',wikiArt:'위키 글',idUrl:'ID (URL에 사용)',topic:'주제',shortS:'짧은 요약',bodyF:'본문 (문단 사이에 빈 줄)',imgUrl:'이미지 URL',imgCr:'이미지 출처',imgAlt:'이미지 대체 텍스트 (화면 낭독기용 사진 설명)',saveW:'위키 글 저장',photoSubs:'사진 제출물',caption:'설명',tagsCsv:'태그 (쉼표로 구분, 최대 5개)',saveS:'제출물 저장',showRev:'검토한 항목 보기',noArts:'아직 글이 없습니다.',noSubs:'제출물이 없습니다.',noPend:'대기 중인 제출물이 없습니다.',viewPhoto:'사진 보기',edit:'편집',approve:'승인',reject:'거절',del:'삭제',saved:'저장했습니다.',couldNot:'저장할 수 없습니다: ',failed:'실패: ',mDel:'회의를 삭제했습니다.',wDel:'위키 글을 삭제했습니다. 관련 회의에서도 제거되었습니다.',sDel:'제출물을 삭제했습니다.',sApp:'제출물을 승인했습니다.',sRej:'제출물을 거절했습니다.',status:'상태: ',topicL:'주제: ',submitted:'제출일: ',pending:'대기 중',approved:'승인됨',rejected:'거절됨'}});
 Object.assign(A.hi,{ad:{admin:'एडमिन',adminOnly:'केवल एडमिन के लिए।',mtgs:'बैठकें',subs:'सबमिशन',wikiT:'विकी',councilMtg:'परिषद की बैठक',mDate:'बैठक की तारीख',title:'शीर्षक',outcomeF:'परिणाम (वैकल्पिक, बैठक कार्ड पर दिखता है)',summary:'सारांश',relA:'संबंधित लेख',saveM:'बैठक सहेजें',cancelEd:'संपादन रद्द करें',filter:'फ़िल्टर',wikiArt:'विकी लेख',idUrl:'ID (URL में उपयोग होता है)',topic:'विषय',shortS:'छोटा सारांश',bodyF:'मुख्य पाठ (अनुच्छेदों के बीच खाली पंक्ति)',imgUrl:'इमेज URL',imgCr:'इमेज का श्रेय',imgAlt:'इमेज का वैकल्पिक पाठ (स्क्रीन रीडर के लिए फ़ोटो का विवरण)',saveW:'विकी लेख सहेजें',photoSubs:'फ़ोटो सबमिशन',caption:'कैप्शन',tagsCsv:'टैग (कॉमा से अलग, अधिकतम 5)',saveS:'सबमिशन सहेजें',showRev:'समीक्षा किए गए दिखाएँ',noArts:'अभी कोई लेख नहीं।',noSubs:'कोई सबमिशन नहीं।',noPend:'कोई लंबित सबमिशन नहीं।',viewPhoto:'फ़ोटो देखें',edit:'संपादित करें',approve:'स्वीकृत करें',reject:'अस्वीकार करें',del:'हटाएँ',saved:'सहेजा गया।',couldNot:'सहेजा नहीं जा सका: ',failed:'विफल: ',mDel:'बैठक हटाई गई।',wDel:'विकी लेख हटाया गया। इसे बैठकों से भी हटा दिया गया।',sDel:'सबमिशन हटाया गया।',sApp:'सबमिशन स्वीकृत।',sRej:'सबमिशन अस्वीकृत।',status:'स्थिति: ',topicL:'विषय: ',submitted:'सबमिट किया गया: ',pending:'लंबित',approved:'स्वीकृत',rejected:'अस्वीकृत'}});
+Object.assign(A.en,{meeting:'Meeting',discussed:'Discussed at council meetings'});
+Object.assign(A.es,{meeting:'Reunión',discussed:'Tratado en reuniones del concejo'});
+Object.assign(A.zh,{meeting:'会议',discussed:'在市议会会议中讨论过'});
+Object.assign(A.tl,{meeting:'Pulong',discussed:'Tinalakay sa mga pulong ng konseho'});
+Object.assign(A.ko,{meeting:'회의',discussed:'시의회 회의에서 다룬 내용'});
+Object.assign(A.hi,{meeting:'बैठक',discussed:'परिषद की बैठकों में चर्चा हुई'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -154,12 +160,12 @@ Object.assign(A.hi,{community:'समुदाय की तस्वीरे�
 Object.assign(A.tl,{community:'Mga larawan ng komunidad',fromWiki:'Mula sa wiki'});
 Object.assign(A.ko,{community:'커뮤니티 사진',fromWiki:'위키에서'});
 Object.assign(A.zh,{community:'社区图片',fromWiki:'来自百科'});
-Object.assign(A.en,{photoHint:'Image up to 5 MB. Photos are reviewed before they appear.',titleEx:'Example: Main Street bike lane',capEx:'Where was it taken? What stands out?',emptyHint:'Meeting summaries show up here once they are posted. In the meantime, learn the terms in the Wiki.',noneHint:'Try a different word or switch to All.',firstPhoto:'No photos yet. Be the first to share one.'});
-Object.assign(A.es,{photoHint:'Imagen de hasta 5 MB. Las fotos se revisan antes de publicarse.',titleEx:'Ejemplo: Ciclovía de Main Street',capEx:'¿Dónde se tomó? ¿Qué destaca?',emptyHint:'Los resúmenes de las reuniones aparecerán aquí cuando se publiquen. Mientras tanto, aprende los términos en la Wiki.',noneHint:'Prueba con otra palabra o elige Todo.',firstPhoto:'Aún no hay fotos. Sé el primero en compartir una.'});
-Object.assign(A.hi,{photoHint:'अधिकतम 5 MB की तस्वीर। प्रकाशित होने से पहले तस्वीरों की समीक्षा की जाती है।',titleEx:'उदाहरण: मेन स्ट्रीट की बाइक लेन',capEx:'कहाँ ली गई? क्या खास है?',emptyHint:'बैठकों के सारांश पोस्ट होने पर यहाँ दिखेंगे। तब तक विकी में शब्द सीखें।',noneHint:'दूसरा शब्द आज़माएँ या "सभी" चुनें।',firstPhoto:'अभी कोई तस्वीर नहीं। पहली तस्वीर आप साझा करें।'});
-Object.assign(A.tl,{photoHint:'Larawang hanggang 5 MB. Sinusuri ang mga larawan bago lumabas.',titleEx:'Halimbawa: Bike lane sa Main Street',capEx:'Saan kinunan? Ano ang kapansin-pansin?',emptyHint:'Lalabas dito ang mga buod ng pulong kapag nai-post na. Samantala, alamin ang mga termino sa Wiki.',noneHint:'Subukan ang ibang salita o piliin ang Lahat.',firstPhoto:'Wala pang larawan. Ikaw ang unang magbahagi.'});
-Object.assign(A.ko,{photoHint:'5MB 이하의 이미지. 사진은 검토 후 게시됩니다.',titleEx:'예: 메인 스트리트 자전거 도로',capEx:'어디에서 찍었나요? 눈에 띄는 점은?',emptyHint:'회의 요약은 게시되면 여기에 표시됩니다. 그동안 위키에서 용어를 알아보세요.',noneHint:'다른 단어를 입력하거나 전체를 선택해 보세요.',firstPhoto:'아직 사진이 없습니다. 첫 사진을 공유해 주세요.'});
-Object.assign(A.zh,{photoHint:'图片不超过 5 MB。照片审核后才会显示。',titleEx:'例如：主街自行车道',capEx:'在哪里拍的？有什么特别之处？',emptyHint:'会议摘要发布后会显示在这里。在此期间，可以在百科中了解相关术语。',noneHint:'换个词试试，或选择“全部”。',firstPhoto:'还没有图片。来分享第一张吧。'});
+Object.assign(A.en,{photoHint:'Large photos are resized automatically. Photos are reviewed before they appear.',titleEx:'Example: Main Street bike lane',capEx:'Where was it taken? What stands out?',emptyHint:'Meeting summaries show up here once they are posted. In the meantime, learn the terms in the Wiki.',noneHint:'Try a different word or switch to All.',firstPhoto:'No photos yet. Be the first to share one.'});
+Object.assign(A.es,{photoHint:'Las fotos grandes se reducen automáticamente. Las fotos se revisan antes de publicarse.',titleEx:'Ejemplo: Ciclovía de Main Street',capEx:'¿Dónde se tomó? ¿Qué destaca?',emptyHint:'Los resúmenes de las reuniones aparecerán aquí cuando se publiquen. Mientras tanto, aprende los términos en la Wiki.',noneHint:'Prueba con otra palabra o elige Todo.',firstPhoto:'Aún no hay fotos. Sé el primero en compartir una.'});
+Object.assign(A.hi,{photoHint:'बड़ी तस्वीरें अपने-आप छोटी कर दी जाती हैं। प्रकाशित होने से पहले तस्वीरों की समीक्षा की जाती है।',titleEx:'उदाहरण: मेन स्ट्रीट की बाइक लेन',capEx:'कहाँ ली गई? क्या खास है?',emptyHint:'बैठकों के सारांश पोस्ट होने पर यहाँ दिखेंगे। तब तक विकी में शब्द सीखें।',noneHint:'दूसरा शब्द आज़माएँ या "सभी" चुनें।',firstPhoto:'अभी कोई तस्वीर नहीं। पहली तस्वीर आप साझा करें।'});
+Object.assign(A.tl,{photoHint:'Awtomatikong pinaliliit ang malalaking larawan. Sinusuri ang mga larawan bago lumabas.',titleEx:'Halimbawa: Bike lane sa Main Street',capEx:'Saan kinunan? Ano ang kapansin-pansin?',emptyHint:'Lalabas dito ang mga buod ng pulong kapag nai-post na. Samantala, alamin ang mga termino sa Wiki.',noneHint:'Subukan ang ibang salita o piliin ang Lahat.',firstPhoto:'Wala pang larawan. Ikaw ang unang magbahagi.'});
+Object.assign(A.ko,{photoHint:'큰 사진은 자동으로 크기가 줄어듭니다. 사진은 검토 후 게시됩니다.',titleEx:'예: 메인 스트리트 자전거 도로',capEx:'어디에서 찍었나요? 눈에 띄는 점은?',emptyHint:'회의 요약은 게시되면 여기에 표시됩니다. 그동안 위키에서 용어를 알아보세요.',noneHint:'다른 단어를 입력하거나 전체를 선택해 보세요.',firstPhoto:'아직 사진이 없습니다. 첫 사진을 공유해 주세요.'});
+Object.assign(A.zh,{photoHint:'大图片会自动缩小。照片审核后才会显示。',titleEx:'例如：主街自行车道',capEx:'在哪里拍的？有什么特别之处？',emptyHint:'会议摘要发布后会显示在这里。在此期间，可以在百科中了解相关术语。',noneHint:'换个词试试，或选择“全部”。',firstPhoto:'还没有图片。来分享第一张吧。'});
 Object.assign(A.en,{share:'Share',copied:'Link copied',topicF:'Topic',big:'Photo must be an image under 5 MB.'});
 Object.assign(A.es,{share:'Compartir',copied:'Enlace copiado',topicF:'Tema',big:'La foto debe ser una imagen de menos de 5 MB.'});
 Object.assign(A.hi,{share:'साझा करें',copied:'लिंक कॉपी हो गया',topicF:'विषय',big:'फ़ोटो 5 MB से छोटी इमेज होनी चाहिए।'});
@@ -502,9 +508,13 @@ if(!w){app.innerHTML=`<div class="none"><p>${t.none}</p><a class="btn" href="#wi
 const img=w.img;
 const rel=WIKI.filter(x=>x.cat===w.cat&&x.id!==w.id);
 const ph=PUB.filter(p=>(p.rel||[]).includes(w.id)).map(mkCom).sort(byT);
-await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short]),...PUB.flatMap(p=>[p.t,p.b])]);
+const dd=await getData();
+if(tok!==tokn)return;
+const mt=dd.err?[]:dd.meetings.filter(m=>dd.links.some(l=>l.meeting_id===m.id&&l.article_id===w.id));
+await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short]),...PUB.flatMap(p=>[p.t,p.b]),...mt.map(m=>m.title)]);
 if(tok!==tokn)return;
 app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<a class="cat" data-c="${w.cat}" href="#search-${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span>${ic('caret-right')}</a><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res h3')).join(''):'')+`</article>`;
+if(mt.length)app.querySelector('article').insertAdjacentHTML('beforeend',`<h2 class="rel">${t.discussed}</h2>`+mt.map(m=>card('bank',TX(m.title),fmt(m.meeting_date),'',false,'#council/'+m.id,null,'sm')).join(''));
 if(ph.length){
 const ar=app.querySelector('article');
 ar.insertAdjacentHTML('beforeend',`<h2 class="rel">${t.photosOf}</h2><div class="gal" id="ag">${ph.map(tile).join('')}</div>`);
@@ -582,11 +592,22 @@ $('ptag').addEventListener('blur',e=>{addTag(e.target.value);e.target.value=''})
 $('ptl').addEventListener('click',e=>{const b=e.target.closest('[data-n]');if(b){tags.splice(+b.dataset.n,1);$('ptg').classList.remove('warn');tl()}});
 const bad=file=>!file||!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type)||file.size>5242880;
 const why=file=>file&&file.size>5242880?t.big:t.fmt;
+const shrink=async f=>{
+if(f.type==='image/gif')return f;
+try{
+const b=await createImageBitmap(f,{imageOrientation:'from-image'});
+const k=Math.min(1,2000/Math.max(b.width,b.height));
+const c=document.createElement('canvas');c.width=Math.round(b.width*k);c.height=Math.round(b.height*k);
+c.getContext('2d').drawImage(b,0,0,c.width,c.height);if(b.close)b.close();
+const o=await new Promise(res=>c.toBlob(res,'image/jpeg',.85));
+return o?new File([o],f.name.replace(/\.[^.]*$/,'')+'.jpg',{type:'image/jpeg'}):f;
+}catch(x){return f}
+};
 const sub=$('f').querySelector('button[type=submit]');
 let busy=false;
 $('f').querySelector('input[type=file]').addEventListener('change',e=>{
 const file=e.target.files[0];
-if(file&&bad(file)){e.target.value='';$('ok').textContent=why(file)}else $('ok').textContent='';
+if(file&&!file.type.startsWith('image/')){e.target.value='';$('ok').textContent=t.fmt}else $('ok').textContent='';
 });
 $('f').addEventListener('submit',async e=>{
 e.preventDefault();
@@ -594,11 +615,13 @@ const f=e.target,ok=$('ok');
 if(busy)return;
 if(!sb){ok.textContent=t.notReady;return}
 if(!navigator.onLine){ok.textContent=t.offline;return}
-const file=f.querySelector('input[type=file]').files[0];
+const raw=f.querySelector('input[type=file]').files[0];
 if($('hp').value){f.reset();ok.textContent=t.thanks;return}
-if(bad(file)){ok.textContent=why(file);return}
+if(!raw||!raw.type.startsWith('image/')){ok.textContent=t.fmt;return}
 busy=true;sub.disabled=true;ok.textContent=t.loading;
 try{
+const file=await shrink(raw);
+if(bad(file)){ok.textContent=why(file);return}
 addTag($('ptag').value);$('ptag').value='';
 const title=$('ptitle').value.trim(),caption=$('pcap').value.trim();
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
@@ -824,7 +847,9 @@ if(g)bindGal(g,list);
 
 async function search(cat){
 const t=T(),tok=tokn;
-await prep([...PUB.flatMap(p=>[p.t,p.b]),...PHOTOS.map(p=>p[1]),...WIKI.flatMap(w=>[w.title,w.short])]);
+const dd=await getData();
+const MT=dd.err?[]:dd.meetings;
+await prep([...PUB.flatMap(p=>[p.t,p.b]),...PHOTOS.map(p=>p[1]),...WIKI.flatMap(w=>[w.title,w.short]),...MT.flatMap(m=>[m.title,m.body])]);
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${nameOf(cat)}</h1><input id="q" type="search" aria-label="${t.ph}" placeholder="${t.ph}" autocomplete="off"><div class="chips">`+
 ['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip ${id===cat?'on':''}" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div><div id="tg" class="chips"></div><div id="res"></div>`;
@@ -833,7 +858,8 @@ const res=$('res');
 const items=[
 ...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:p.b?TX(p.b):'',h:null,s:p.s,user:true,tags:p.tags,rel:relOf(p.rel)})),
 ...PHOTOS.map(p=>({cat:p[0],t:TX(p[1]),k:t.photo,b:'',h:null})),
-...WIKI.map(w=>({cat:w.cat,t:TX(w.title),k:t.article,b:TX(w.short),h:'#wiki/'+w.id,s:w.img?.src}))
+...WIKI.map(w=>({cat:w.cat,t:TX(w.title),k:t.article,b:TX(w.short),h:'#wiki/'+w.id,s:w.img?.src})),
+...MT.map(m=>({cats:dd.links.filter(l=>l.meeting_id===m.id).map(l=>(WIKI.find(w=>w.id===l.article_id)||{}).cat),t:TX(m.title),k:t.meeting+' · '+fmt(m.meeting_date),b:TX(m.body),h:'#council/'+m.id,ic:'bank'}))
 ].sort(byT);
 const drawTags=s=>{
 const l=[...tagCounts(cat)].filter(([x])=>!s||x.includes(s)).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,8);
@@ -842,8 +868,8 @@ $('tg').innerHTML=l.length?`<span class="lbl">${t.tagsL}</span>`+l.map(([x,n])=>
 const draw=()=>{
 const s=q.value.trim().toLowerCase();
 drawTags(s);
-const out=items.filter(i=>(cat==='all'||i.cat===cat)&&(!s||(i.t+' '+i.b+' '+(i.tags||[]).join(' ')).toLowerCase().includes(s)));
-res.innerHTML=out.length?out.map(i=>card(iconOf(i.cat),i.t,i.k,i.b,false,i.h,i.s,'res',i.user?` role="button" tabindex="0" data-k="${items.indexOf(i)}"`:'')).join(''):`<div class="none"><p>${t.none}</p><p>${t.noneHint}</p></div>`;
+const out=items.filter(i=>(cat==='all'||i.cat===cat||(i.cats||[]).includes(cat))&&(!s||(i.t+' '+i.b+' '+(i.tags||[]).join(' ')).toLowerCase().includes(s)));
+res.innerHTML=out.length?out.map(i=>card(i.ic||iconOf(i.cat),i.t,i.k,i.b,false,i.h,i.s,'res',i.user?` role="button" tabindex="0" data-k="${items.indexOf(i)}"`:'')).join(''):`<div class="none"><p>${t.none}</p><p>${t.noneHint}</p></div>`;
 };
 q.addEventListener('input',draw);
 const open=e=>{const c=e.target.closest('[data-k]');if(c)showPhoto(items[+c.dataset.k])};
