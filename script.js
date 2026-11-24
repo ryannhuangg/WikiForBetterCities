@@ -49,6 +49,13 @@ Object.assign(A.tl,{loadErr:"Hindi ma-load ang mga pulong. Suriin ang koneksyon 
 Object.assign(A.ko,{loadErr:"회의를 불러오지 못했습니다. 연결을 확인하고 다시 시도하세요.",retry:"다시 시도"});
 Object.assign(A.zh,{loadErr:"无法加载会议。请检查网络连接后重试。",retry:"重试"});
 
+Object.assign(A.en,{tagged:"Photos tagged “{x}”",noTagged:"No photos with this tag yet.",tagsL:"Tags",photosOf:"Photos of this"});
+Object.assign(A.es,{tagged:"Fotos con la etiqueta “{x}”",noTagged:"Aún no hay fotos con esta etiqueta.",tagsL:"Etiquetas",photosOf:"Fotos de esto"});
+Object.assign(A.hi,{tagged:"“{x}” टैग वाली तस्वीरें",noTagged:"इस टैग वाली अभी कोई तस्वीर नहीं है।",tagsL:"टैग",photosOf:"इसकी तस्वीरें"});
+Object.assign(A.tl,{tagged:"Mga larawang may tag na “{x}”",noTagged:"Wala pang larawang may ganitong tag.",tagsL:"Mga tag",photosOf:"Mga larawan nito"});
+Object.assign(A.ko,{tagged:"“{x}” 태그가 있는 사진",noTagged:"이 태그가 있는 사진이 아직 없습니다.",tagsL:"태그",photosOf:"관련 사진"});
+Object.assign(A.zh,{tagged:"带有“{x}”标签的照片",noTagged:"还没有带此标签的照片。",tagsL:"标签",photosOf:"相关照片"});
+
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -360,6 +367,10 @@ $('axHintGo').addEventListener('click',e=>{e.stopPropagation();hideHint();setAx(
 $('axHintNo').addEventListener('click',hideHint);
 
 const relOf=ids=>(ids||[]).map(id=>WIKI.find(w=>w.id===id)).filter(Boolean).map(w=>({id:w.id,title:TX(w.title)}));
+const mkCom=p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:p.tags,cat:p.cat,rel:relOf(p.rel)});
+const tile=(i,n)=>`<button class="shot" type="button" data-i="${n}">${pic(i.s,500,'',' loading="lazy"')}<span class="cap">${esc(i.t)}</span></button>`;
+const bindGal=(el,list)=>el.addEventListener('click',e=>{const b=e.target.closest('.shot[data-i]');if(b)showPhoto(list[+b.dataset.i])});
+const tagCounts=cat=>{const m=new Map();PUB.filter(p=>!cat||cat==='all'||p.cat===cat).forEach(p=>p.tags.forEach(x=>m.set(x,(m.get(x)||0)+1)));return m};
 const byT=(a,b)=>a.t.localeCompare(b.t,lang,{sensitivity:'base',numeric:true});
 function showPhoto(o){
 let d=$('lb');
@@ -371,7 +382,7 @@ d.addEventListener('click',e=>{if(e.target===d)d.close()});
 }
 const t=T();
 d.setAttribute('aria-label',o.t);
-d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${o.tags&&o.tags.length?`<div class="tags">${o.tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>`:''}${o.rel&&o.rel.length?`<h3>${esc(t.relT)}</h3><div class="tags">${o.rel.map(x=>`<a class="tag" href="#wiki/${esc(x.id)}">${ic('book-open')}${esc(x.title)}</a>`).join('')}</div>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
+d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${(o.cat&&o.cat!=='all')||(o.tags&&o.tags.length)?`<div class="tags">${o.cat&&o.cat!=='all'?`<a class="tag" href="#search-${o.cat}">${esc(nameOf(o.cat))}</a>`:''}${(o.tags||[]).map(x=>o.plain?`<span class="tag">${esc(x)}</span>`:`<a class="tag" href="#tag/${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}</div>`:''}${o.rel&&o.rel.length?`<h3>${esc(t.relT)}</h3><div class="tags">${o.rel.map(x=>`<a class="tag" href="#wiki/${esc(x.id)}">${ic('book-open')}${esc(x.title)}</a>`).join('')}</div>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
 d.querySelector('.lbx').addEventListener('click',()=>d.close());
 d.showModal();
 }
@@ -412,13 +423,12 @@ async photos(){
 const t=T(),tok=tokn;
 await prep([...PUB.flatMap(p=>[p.t,p.b]),...WIKI.filter(w=>w.img).flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
-const com=PUB.map(p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:[...(p.cat==='all'?[]:[nameOf(p.cat)]),...p.tags],rel:relOf(p.rel)}));
-const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),b:TX(w.short),s:w.img.src,tags:[nameOf(w.cat)],h:'#wiki/'+w.id}));
+const com=PUB.map(mkCom);
+const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),b:TX(w.short),s:w.img.src,tags:[],cat:w.cat,h:'#wiki/'+w.id}));
 const all=[...com,...wk].sort(byT);
-const tile=(i,n)=>`<button class="shot" type="button" data-i="${n}">${pic(i.s,500,'',' loading="lazy"')}<span class="cap">${esc(i.t)}</span></button>`;
 app.innerHTML=`<div class="th"><h1>${t.bank}</h1><a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div>`);
 const g=$('gal');
-if(g)g.addEventListener('click',e=>{const b=e.target.closest('.shot');if(b)showPhoto(all[+b.dataset.i])});
+if(g)bindGal(g,all);
 if(g)reveal(g.querySelectorAll('.shot'));
 },
 async wiki(){
@@ -440,9 +450,15 @@ const t=T(),tok=tokn,w=WIKI.find(x=>x.id===id);
 if(!w){app.innerHTML=`<div class="none"><p>${t.none}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`;return}
 const img=w.img;
 const rel=WIKI.filter(x=>x.cat===w.cat&&x.id!==w.id);
-await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short])]);
+const ph=PUB.filter(p=>(p.rel||[]).includes(w.id)).map(mkCom).sort(byT);
+await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short]),...PUB.flatMap(p=>[p.t,p.b])]);
 if(tok!==tokn)return;
 app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<a class="cat" data-c="${w.cat}" href="#search-${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span>${ic('caret-right')}</a><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res h3')).join(''):'')+`</article>`;
+if(ph.length){
+const ar=app.querySelector('article');
+ar.insertAdjacentHTML('beforeend',`<h2 class="rel">${t.photosOf}</h2><div class="gal" id="ag">${ph.map(tile).join('')}</div>`);
+bindGal($('ag'),ph);
+}
 $('shr').addEventListener('click',async()=>{
 const u=location.href;
 if(navigator.share){try{await navigator.share({title:TX(w.title),url:u})}catch(e){}return}
@@ -467,7 +483,7 @@ app.innerHTML=`<div class="page"><h1>${t.faq}</h1>`+[1,2,3].map(n=>`<details><su
 },
 contribute(){
 const t=T();
-app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><small class="hint" id="ptg"></small></div><fieldset class="field rels"><legend>${t.relF}</legend><input type="text" id="prs" role="combobox" aria-expanded="false" aria-controls="prr" aria-autocomplete="list" autocomplete="off" placeholder="${esc(t.relPh)}"><div id="prc" class="tags"></div><div id="prr" class="sug" role="listbox"></div><small class="hint" id="prh">${t.relHint}</small></fieldset><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><div id="pts" class="sug"></div><small class="hint" id="ptg"></small></div><fieldset class="field rels"><legend>${t.relF}</legend><input type="text" id="prs" role="combobox" aria-expanded="false" aria-controls="prr" aria-autocomplete="list" autocomplete="off" placeholder="${esc(t.relPh)}"><div id="prc" class="tags"></div><div id="prr" class="sug" role="listbox"></div><small class="hint" id="prh">${t.relHint}</small></fieldset><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
 const counter=(i,o,n)=>{const u=()=>{const l=i.value.length;o.textContent=t.maxC.replace('{n}',n)+' · '+l+'/'+n;o.classList.toggle('warn',l>=n)};i.addEventListener('input',u);u()};
 counter($('ptitle'),$('ptc'),120);
 counter($('pcap'),$('pcc'),300);
@@ -498,6 +514,16 @@ if(!v||tags.includes(v))return;
 if(tags.length>=5){$('ptg').textContent=t.tagMax;$('ptg').classList.add('warn');return}
 tags.push(v);$('ptg').classList.remove('warn');tl();
 };
+const ts=()=>{
+const q=$('ptag').value.trim().toLowerCase();
+const l=[...tagCounts()].filter(([x])=>!tags.includes(x)&&(!q||x.includes(q))).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,6);
+$('pts').innerHTML=tags.length>=5?'':l.map(([x])=>`<button type="button" class="opt" data-t="${esc(x)}"><b>${esc(x)}</b></button>`).join('');
+};
+$('pts').addEventListener('pointerdown',e=>e.preventDefault());
+$('pts').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b){addTag(b.dataset.t);$('ptag').value='';ts()}});
+$('ptag').addEventListener('input',ts);
+$('ptag').addEventListener('focus',ts);
+$('ptag').addEventListener('blur',()=>setTimeout(()=>{const p=$('pts');if(p)p.innerHTML=''},150));
 tl();
 $('ptag').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();addTag($('ptag').value);$('ptag').value=''}});
 $('ptag').addEventListener('input',e=>{const v=e.target.value;if(v.includes(',')){v.split(',').forEach(addTag);e.target.value=''}});
@@ -746,7 +772,7 @@ const s=S.find(x=>x.id===id);
 if(!s)return;
 if(b.dataset.sv){
 const{data}=await sb.storage.from('submissions').createSignedUrl(s.photo_path,300);
-showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',tags:s.tags||[],rel:relOf(s.related),meta:['Status: '+s.status,'Topic: '+(s.cat&&CATS.some(c=>c.id===s.cat)?L.en.cats[CATS.findIndex(c=>c.id===s.cat)]:'All'),'Submitted: '+new Date(s.created_at).toLocaleString()]});
+showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',cat:s.cat,plain:true,tags:s.tags||[],rel:relOf(s.related),meta:['Status: '+s.status,'Topic: '+(s.cat&&CATS.some(c=>c.id===s.cat)?L.en.cats[CATS.findIndex(c=>c.id===s.cat)]:'All'),'Submitted: '+new Date(s.created_at).toLocaleString()]});
 }else if(b.dataset.se){
 $('sid').value=s.id;$('sc').value=s.cat||CATS[0].id;$('st').value=s.title;$('sp').value=s.caption||'';$('stg').value=(s.tags||[]).join(', ');
 $('sf').hidden=false;window.scrollTo(0,0);
@@ -770,21 +796,36 @@ await draw();
 }
 };
 
+async function tagView(name){
+const t=T(),tok=tokn;
+await prep(PUB.flatMap(p=>[p.t,p.b]));
+if(tok!==tokn)return;
+const list=PUB.filter(p=>p.tags.includes(name)).map(mkCom).sort(byT);
+app.innerHTML=`<h1>${esc(t.tagged.replace('{x}',name))}</h1>`+(list.length?`<div class="gal" id="gal">${list.map(tile).join('')}</div>`:`<div class="none"><p>${t.noTagged}</p><a class="btn" href="#photos">${ic('camera')}${t.photos}</a></div>`);
+const g=$('gal');
+if(g)bindGal(g,list);
+}
+
 async function search(cat){
 const t=T(),tok=tokn;
 await prep([...PUB.flatMap(p=>[p.t,p.b]),...PHOTOS.map(p=>p[1]),...WIKI.flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${nameOf(cat)}</h1><input id="q" type="search" aria-label="${t.ph}" placeholder="${t.ph}" autocomplete="off"><div class="chips">`+
-['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip ${id===cat?'on':''}" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div><div id="res"></div>`;
+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip ${id===cat?'on':''}" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div><div id="tg" class="chips"></div><div id="res"></div>`;
 const q=$('q');
 const res=$('res');
 const items=[
-...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:p.b?TX(p.b):'',h:null,s:p.s,user:true,tags:[...(p.cat==='all'?[]:[nameOf(p.cat)]),...p.tags],rel:relOf(p.rel)})),
+...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:p.b?TX(p.b):'',h:null,s:p.s,user:true,tags:p.tags,rel:relOf(p.rel)})),
 ...PHOTOS.map(p=>({cat:p[0],t:TX(p[1]),k:t.photo,b:'',h:null})),
 ...WIKI.map(w=>({cat:w.cat,t:TX(w.title),k:t.article,b:TX(w.short),h:'#wiki/'+w.id,s:w.img?.src}))
 ].sort(byT);
+const drawTags=s=>{
+const l=[...tagCounts(cat)].filter(([x])=>!s||x.includes(s)).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,8);
+$('tg').innerHTML=l.length?`<span class="lbl">${t.tagsL}</span>`+l.map(([x,n])=>`<a class="chip" href="#tag/${encodeURIComponent(x)}">${esc(x)} <small>${n}</small></a>`).join(''):'';
+};
 const draw=()=>{
 const s=q.value.trim().toLowerCase();
+drawTags(s);
 const out=items.filter(i=>(cat==='all'||i.cat===cat)&&(!s||(i.t+' '+i.b+' '+(i.tags||[]).join(' ')).toLowerCase().includes(s)));
 res.innerHTML=out.length?out.map(i=>card(iconOf(i.cat),i.t,i.k,i.b,false,i.h,i.s,'res',i.user?` role="button" tabindex="0" data-k="${items.indexOf(i)}"`:'')).join(''):`<div class="none"><p>${t.none}</p><p>${t.noneHint}</p></div>`;
 };
@@ -848,6 +889,12 @@ back.hidden=false;brand.hidden=true;
 back.href='#'+cur;
 back.textContent=T().back;
 search(c);
+}else if(h.startsWith('tag/')){
+let nm='';try{nm=decodeURIComponent(h.slice(4))}catch(e){}
+back.hidden=false;brand.hidden=true;
+back.href='#'+cur;
+back.textContent=T().back;
+tagView(nm);
 }else if(h.startsWith('wiki/')){
 cur='wiki';
 back.hidden=false;brand.hidden=true;
@@ -867,7 +914,8 @@ back.hidden=true;brand.hidden=false;
 views[h]();
 }
 document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||'Admin'))+' · Our Streets Wiki';
-if(h==='wiki'||h==='photos'||h.startsWith('search-'))app.dataset.wide='1';else delete app.dataset.wide;
+if(h.startsWith('tag/')){try{document.title=decodeURIComponent(h.slice(4))}catch(e){}}
+if(h==='wiki'||h==='photos'||h.startsWith('search-')||h.startsWith('tag/'))app.dataset.wide='1';else delete app.dataset.wide;
 nav();
 renderDrawer();
 renderLang();

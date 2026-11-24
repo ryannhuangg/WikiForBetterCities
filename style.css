@@ -362,3 +362,7 @@ body{padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))}
 
 .card .txt{min-width:0;overflow-wrap:anywhere}
 .wiki-article a.cat{min-height:44px;display:inline-flex;align-items:center}
+
+.chips .lbl{align-self:center;flex:none;margin-right:2px;color:var(--mut);font-weight:600}
+.chip small{color:var(--mut)}
+.wiki-article .gal{margin-top:var(--s3)}
