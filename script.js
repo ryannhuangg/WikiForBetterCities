@@ -28,6 +28,13 @@ Object.assign(A.tl,{tagsF:"Mga tag (hanggang 5)",tagPh:"hal. bike lane",tagHint:
 Object.assign(A.ko,{tagsF:"태그 (최대 5개)",tagPh:"예: 자전거 도로",tagHint:"Enter 또는 쉼표를 눌러 추가하세요. 최대 {n}개.",tagMax:"태그는 최대 5개까지 추가할 수 있습니다.",userSub:"사용자 제출",readArt:"글 읽기",rmTag:"태그 {x} 삭제"});
 Object.assign(A.zh,{tagsF:"标签（最多 5 个）",tagPh:"例如：自行车道",tagHint:"按回车或逗号添加。最多 {n} 个标签。",tagMax:"最多只能添加 5 个标签。",userSub:"用户投稿",readArt:"阅读文章",rmTag:"删除标签 {x}"});
 
+Object.assign(A.en,{relF:"Related articles (optional, up to 3)",relNone:"No articles in this topic yet.",relHint:"Pick the articles that explain what the photo shows.",relT:"Related articles"});
+Object.assign(A.es,{relF:"Artículos relacionados (opcional, hasta 3)",relNone:"Aún no hay artículos en este tema.",relHint:"Elige los artículos que explican lo que muestra la foto.",relT:"Artículos relacionados"});
+Object.assign(A.hi,{relF:"संबंधित लेख (वैकल्पिक, अधिकतम 3)",relNone:"इस विषय में अभी कोई लेख नहीं है।",relHint:"वे लेख चुनें जो फ़ोटो में दिख रही चीज़ समझाते हैं।",relT:"संबंधित लेख"});
+Object.assign(A.tl,{relF:"Mga kaugnay na artikulo (opsyonal, hanggang 3)",relNone:"Wala pang artikulo sa paksang ito.",relHint:"Piliin ang mga artikulong nagpapaliwanag sa nasa larawan.",relT:"Mga kaugnay na artikulo"});
+Object.assign(A.ko,{relF:"관련 글 (선택, 최대 3개)",relNone:"이 주제에는 아직 글이 없습니다.",relHint:"사진 속 내용을 설명하는 글을 선택하세요.",relT:"관련 글"});
+Object.assign(A.zh,{relF:"相关文章（可选，最多 3 篇）",relNone:"此主题暂无文章。",relHint:"请选择能解释照片内容的文章。",relT:"相关文章"});
+
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -239,12 +246,15 @@ async function loadWiki(){
 if(!sb)return;
 const{data,error}=await sb.from('wiki_articles').select('*').order('title');
 if(!error&&data)WIKI=data.map(r=>({id:r.id,cat:r.cat,title:r.title,short:r.short,body:r.body,img:r.img_src?{src:r.img_src,credit:r.img_credit||'',alt:r.img_alt||''}:null}));
-let ph=await sb.from('submissions').select('title,caption,cat,photo_path,tags').eq('status','approved').order('created_at',{ascending:false});
-if(ph.error)ph=await sb.from('submissions').select('title,caption,cat,photo_path').eq('status','approved').order('created_at',{ascending:false});
+let ph;
+for(const cols of ['title,caption,cat,photo_path,tags,related','title,caption,cat,photo_path,tags','title,caption,cat,photo_path']){
+ph=await sb.from('submissions').select(cols).eq('status','approved').order('created_at',{ascending:false});
+if(!ph.error)break;
+}
 const rows=ph.data||[];
 const su=rows.length?await sb.storage.from('submissions').createSignedUrls(rows.map(r=>r.photo_path),3600):{data:[]};
 const urls=new Map((su.data||[]).map(u=>[u.path,u.signedUrl]));
-PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({cat:r.cat||'all',t:r.title,b:r.caption||'',tags:r.tags||[],s:urls.get(r.photo_path)}));
+PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({cat:r.cat||'all',t:r.title,b:r.caption||'',tags:r.tags||[],rel:r.related||[],s:urls.get(r.photo_path)}));
 }
 
 async function loadUser(s){
@@ -333,6 +343,7 @@ axHint.setAttribute('aria-label',t.access);
 $('axHintGo').addEventListener('click',e=>{e.stopPropagation();hideHint();setAx(true)});
 $('axHintNo').addEventListener('click',hideHint);
 
+const relOf=ids=>(ids||[]).map(id=>WIKI.find(w=>w.id===id)).filter(Boolean).map(w=>({id:w.id,title:TX(w.title)}));
 const byT=(a,b)=>a.t.localeCompare(b.t,lang,{sensitivity:'base',numeric:true});
 function showPhoto(o){
 let d=$('lb');
@@ -344,9 +355,25 @@ d.addEventListener('click',e=>{if(e.target===d)d.close()});
 }
 const t=T();
 d.setAttribute('aria-label',o.t);
-d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${o.tags&&o.tags.length?`<div class="tags">${o.tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
+d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${o.tags&&o.tags.length?`<div class="tags">${o.tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>`:''}${o.rel&&o.rel.length?`<h3>${esc(t.relT)}</h3><div class="tags">${o.rel.map(x=>`<a class="tag" href="#wiki/${esc(x.id)}">${ic('book-open')}${esc(x.title)}</a>`).join('')}</div>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
 d.querySelector('.lbx').addEventListener('click',()=>d.close());
 d.showModal();
+}
+
+// Decorative skyline banner (parallax) and light scroll reveals for the main page.
+const calm=()=>matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.motion==='reduce';
+// Fade-and-rise items in as they scroll into view. Items already on screen are left alone.
+function reveal(list){
+if(calm()||!('IntersectionObserver' in window))return;
+const io=new IntersectionObserver(es=>es.filter(e=>e.isIntersecting).forEach((e,j)=>{
+const c=e.target;io.unobserve(c);
+c.style.setProperty('--d',Math.min(j,5)*60+'ms');c.classList.add('in');
+c.addEventListener('transitionend',()=>{c.classList.remove('rv','in');c.style.removeProperty('--d')},{once:true});
+}),{rootMargin:'0px 0px -8% 0px'});
+list.forEach(c=>{
+if(c.getBoundingClientRect().top<innerHeight)return;
+c.classList.add('rv');io.observe(c);
+});
 }
 
 const views={
@@ -362,18 +389,20 @@ app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
 const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>arts[l.article_id]).filter(Boolean);
 return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),true,null,null,'lead')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(a=>card(iconOf(a.cat),TX(a.title),nameOf(a.cat),TX(a.body),true,null,null,'sm')).join(''):'')+`</section>`;
 }).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
+reveal(app.querySelectorAll('section .card,section .rel'));
 },
 async photos(){
 const t=T(),tok=tokn;
 await prep([...PUB.flatMap(p=>[p.t,p.b]),...WIKI.filter(w=>w.img).flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
-const com=PUB.map(p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:[...(p.cat==='all'?[]:[nameOf(p.cat)]),...p.tags]}));
+const com=PUB.map(p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:[...(p.cat==='all'?[]:[nameOf(p.cat)]),...p.tags],rel:relOf(p.rel)}));
 const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),b:TX(w.short),s:w.img.src,tags:[nameOf(w.cat)],h:'#wiki/'+w.id}));
 const all=[...com,...wk].sort(byT);
 const tile=(i,n)=>`<button class="shot" type="button" data-i="${n}">${pic(i.s,500,i.t,' loading="lazy"')}<span class="cap">${esc(i.t)}</span></button>`;
 app.innerHTML=`<div class="th"><h1>${t.bank}</h1><a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p></div>`);
 const g=$('gal');
 if(g)g.addEventListener('click',e=>{const b=e.target.closest('.shot');if(b)showPhoto(all[+b.dataset.i])});
+if(g)reveal(g.querySelectorAll('.shot'));
 },
 async wiki(){
 const t=T(),tok=tokn;
@@ -396,7 +425,7 @@ const img=w.img;
 const rel=WIKI.filter(x=>x.cat===w.cat&&x.id!==w.id);
 await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short])]);
 if(tok!==tokn)return;
-app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<div class="cat" data-c="${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span></div><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res')).join(''):'')+`</article>`;
+app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<a class="cat" data-c="${w.cat}" href="#search-${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span>${ic('caret-right')}</a><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res')).join(''):'')+`</article>`;
 $('shr').addEventListener('click',async()=>{
 const u=location.href;
 if(navigator.share){try{await navigator.share({title:TX(w.title),url:u})}catch(e){}return}
@@ -421,11 +450,18 @@ app.innerHTML=`<div class="page"><h1>${t.faq}</h1>`+[1,2,3].map(n=>`<details><su
 },
 contribute(){
 const t=T();
-app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><small class="hint" id="ptg"></small></div><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><small class="hint" id="ptg"></small></div><fieldset class="field rels"><legend>${t.relF}</legend><div id="prl"></div><small class="hint">${t.relHint}</small></fieldset><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
 const counter=(i,o,n)=>{const u=()=>{const l=i.value.length;o.textContent=t.maxC.replace('{n}',n)+' · '+l+'/'+n;o.classList.toggle('warn',l>=n)};i.addEventListener('input',u);u()};
 counter($('ptitle'),$('ptc'),120);
 counter($('pcap'),$('pcc'),300);
-let tags=[];
+let tags=[],rel=new Set();
+const rl=()=>{
+const l=WIKI.filter(w=>w.cat===$('pc').value);
+$('prl').innerHTML=l.length?l.map(w=>`<label class="check"><input type="checkbox" value="${esc(w.id)}"${rel.has(w.id)?' checked':''}${!rel.has(w.id)&&rel.size>=3?' disabled':''}><span>${esc(TX(w.title))}</span></label>`).join(''):`<p class="hint">${t.relNone}</p>`;
+};
+$('prl').addEventListener('change',e=>{e.target.checked?rel.add(e.target.value):rel.delete(e.target.value);rl()});
+$('pc').addEventListener('change',rl);
+rl();
 const tl=()=>{
 $('ptl').innerHTML=tags.map((x,n)=>`<button type="button" class="tag rm" data-n="${n}" aria-label="${esc(t.rmTag.replace('{x}',x))}">${esc(x)}${ic('x')}</button>`).join('');
 $('ptg').textContent=t.tagHint.replace('{n}',5)+' · '+tags.length+'/5';
@@ -464,10 +500,10 @@ const title=$('ptitle').value.trim(),caption=$('pcap').value.trim();
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
 const up=await sb.storage.from('submissions').upload(path,file);
 if(up.error){ok.textContent=/size|exceed|mime|type/i.test(up.error.message||'')?t.big:t.err;return}
-const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path,...(tags.length?{tags}:{})});
+const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path,...(tags.length?{tags}:{}),...(rel.size?{related:[...rel]}:{})});
 if(r.error){await sb.storage.from('submissions').remove([path]);ok.textContent=r.error.code==='42501'?t.limit:t.err;return}
 ok.textContent=t.thanks;
-f.reset();tags=[];tl();
+f.reset();tags=[];rel=new Set();tl();rl();
 }catch(x){ok.textContent=t.err}
 finally{busy=false;sub.disabled=false}
 });
@@ -684,7 +720,7 @@ const s=S.find(x=>x.id===id);
 if(!s)return;
 if(b.dataset.sv){
 const{data}=await sb.storage.from('submissions').createSignedUrl(s.photo_path,300);
-showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',tags:s.tags||[],meta:['Status: '+s.status,'Topic: '+(s.cat&&CATS.some(c=>c.id===s.cat)?L.en.cats[CATS.findIndex(c=>c.id===s.cat)]:'All'),'Submitted: '+new Date(s.created_at).toLocaleString()]});
+showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',tags:s.tags||[],rel:relOf(s.related),meta:['Status: '+s.status,'Topic: '+(s.cat&&CATS.some(c=>c.id===s.cat)?L.en.cats[CATS.findIndex(c=>c.id===s.cat)]:'All'),'Submitted: '+new Date(s.created_at).toLocaleString()]});
 }else if(b.dataset.se){
 $('sid').value=s.id;$('sc').value=s.cat||CATS[0].id;$('st').value=s.title;$('sp').value=s.caption||'';$('stg').value=(s.tags||[]).join(', ');
 $('sf').hidden=false;window.scrollTo(0,0);
@@ -717,7 +753,7 @@ app.innerHTML=`<h1>${nameOf(cat)}</h1><input id="q" type="search" aria-label="${
 const q=$('q');
 const res=$('res');
 const items=[
-...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:p.b?TX(p.b):'',h:null,s:p.s,user:true,tags:[...(p.cat==='all'?[]:[nameOf(p.cat)]),...p.tags]})),
+...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:p.b?TX(p.b):'',h:null,s:p.s,user:true,tags:[...(p.cat==='all'?[]:[nameOf(p.cat)]),...p.tags],rel:relOf(p.rel)})),
 ...PHOTOS.map(p=>({cat:p[0],t:TX(p[1]),k:t.photo,b:'',h:null})),
 ...WIKI.map(w=>({cat:w.cat,t:TX(w.title),k:t.article,b:TX(w.short),h:'#wiki/'+w.id,s:w.img?.src}))
 ].sort(byT);

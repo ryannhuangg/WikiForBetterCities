@@ -71,7 +71,7 @@ Other fixed values: scrim `rgba(16,36,26,.3)`; photo caption gradient `transpare
 Phosphor regular, vendored (`phosphor.css`, `Phosphor.woff2`). 24px default, 34px in thumbs, 56px in image-less media cards, 26px in nav. Accent color. Category icons: road-horizon, bridge, buildings, bus, tree, map-trifold, plus images for All.
 
 ## Motion
-Minimal. Drawer slide and scrim fade at 250ms, button press scale .97. `prefers-reduced-motion` disables the drawer and scrim transitions. No page transitions, no animation on content.
+Light. Drawer slide and scrim fade at 250ms, button press scale .97. Council cards and Photos tiles below the fold fade and rise on first view (IntersectionObserver, 60ms stagger, `opacity` and `transform` only); the page h1 dash bar (Photos and other pages too) draws in; the language and accessibility menus pop open with a short stagger, and toggles and segmented buttons ease between states; linked cards lift 2px on hover where hover exists. `prefers-reduced-motion` and the in-app Reduce motion setting turn off all of it. No page transitions.
 
 ## Platform rules (iPhone)
 - `viewport-fit=cover`; top, bottom, left and right safe-area insets respected.
