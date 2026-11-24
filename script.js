@@ -498,7 +498,7 @@ const rl=()=>{
 const q=$('prs').value.trim().toLowerCase();
 $('prc').innerHTML=[...rel].map(id=>{const w=WIKI.find(x=>x.id===id);return w?`<button type="button" class="tag rm" data-id="${esc(id)}" aria-label="${esc(t.rmTag.replace('{x}',TX(w.title)))}">${esc(TX(w.title))}${ic('x')}</button>`:''}).join('');
 const full=rel.size>=3;
-let l=full?[]:WIKI.filter(w=>!rel.has(w.id)&&(q?(TX(w.title)+' '+TX(w.short)).toLowerCase().includes(q):w.cat===$('pc').value)).slice(0,6);
+let l=full||!q?[]:WIKI.filter(w=>!rel.has(w.id)&&(TX(w.title)+' '+TX(w.short)).toLowerCase().includes(q)).slice(0,6);
 $('prr').innerHTML=l.map(w=>`<button type="button" role="option" class="opt" data-id="${esc(w.id)}"><b>${esc(TX(w.title))}</b><small>${esc(nameOf(w.cat))}</small></button>`).join('')+(!full&&q&&!l.length?`<p class="hint">${t.relNone}</p>`:'');
 $('prs').setAttribute('aria-expanded',l.length?'true':'false');
 $('prs').disabled=full;
