@@ -350,19 +350,7 @@ d.showModal();
 }
 
 // Decorative skyline banner (parallax) and light scroll reveals for the main page.
-const PLX='<div class="plx" aria-hidden="true"><svg class="far" viewBox="0 0 400 172" preserveAspectRatio="xMidYMax slice"><path d="M0 172V104h28V84h26v32h22V92h30v24h24V70h28v46h26V96h30v20h24V80h28v36h28V100h26v72z"/></svg><svg class="near" viewBox="0 0 400 172" preserveAspectRatio="xMidYMax slice"><path d="M0 172V126h34V108h30v22h26V116h36v18h30V104h32v30h28V120h34v14h30V110h28v62z"/></svg></div>';
 const calm=()=>matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.motion==='reduce';
-function fx(){
-const p=app.querySelector('.plx');
-if(p){
-let raf=0;
-const upd=()=>{raf=0;if(!p.isConnected){removeEventListener('scroll',sc);return}p.style.setProperty('--py',calm()?0:Math.min(scrollY,200))};
-const sc=()=>{if(!raf)raf=requestAnimationFrame(upd)};
-addEventListener('scroll',sc,{passive:true});
-upd();
-}
-reveal(app.querySelectorAll('section .card,section .rel'));
-}
 // Fade-and-rise items in as they scroll into view. Items already on screen are left alone.
 function reveal(list){
 if(calm()||!('IntersectionObserver' in window))return;
@@ -386,11 +374,11 @@ if(tok!==tokn)return;
 const arts=Object.fromEntries(d.articles.map(a=>[a.id,a]));
 await prep([...d.meetings.flatMap(m=>[m.title,m.body,m.outcome]),...d.articles.flatMap(a=>[a.title,a.body])]);
 if(tok!==tokn)return;
-app.innerHTML=PLX+`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
+app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
 const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>arts[l.article_id]).filter(Boolean);
 return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),true,null,null,'lead')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(a=>card(iconOf(a.cat),TX(a.title),nameOf(a.cat),TX(a.body),true,null,null,'sm')).join(''):'')+`</section>`;
 }).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
-fx();
+reveal(app.querySelectorAll('section .card,section .rel'));
 },
 async photos(){
 const t=T(),tok=tokn;
