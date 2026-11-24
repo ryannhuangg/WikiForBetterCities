@@ -122,6 +122,12 @@ Object.assign(A.zh.ad,{urlL:'链接：',dupTitle:'已存在同名文章。',badT
 Object.assign(A.tl.ad,{urlL:'Link:',dupTitle:'May artikulo na may ganitong pamagat.',badTitle:'Kailangan ng pamagat ng kahit isang titik o numero.'});
 Object.assign(A.ko.ad,{urlL:'링크:',dupTitle:'같은 제목의 글이 이미 있습니다.',badTitle:'제목에 글자나 숫자가 하나 이상 있어야 합니다.'});
 Object.assign(A.hi.ad,{urlL:'लिंक:',dupTitle:'इस शीर्षक वाला लेख पहले से मौजूद है।',badTitle:'शीर्षक में कम से कम एक अक्षर या अंक होना चाहिए।'});
+Object.assign(A.en.ad,{insImg:'Insert image',imgHelp:'Images go on their own line. You can move or delete the image line like any text.',imgUp:'Upload an image',imgBank:'Or pick a photo from the photo bank:',imgAltF:'Alt text (describe the image for people who can’t see it)',imgCapF:'Caption (optional)',insert:'Insert',imgNeed:'Choose an image and add alt text.'});
+Object.assign(A.es.ad,{insImg:'Insertar imagen',imgHelp:'Las imágenes van en su propia línea. Puedes mover o borrar esa línea como cualquier texto.',imgUp:'Subir una imagen',imgBank:'O elige una foto del banco de fotos:',imgAltF:'Texto alternativo (describe la imagen para quien no puede verla)',imgCapF:'Pie de foto (opcional)',insert:'Insertar',imgNeed:'Elige una imagen y agrega texto alternativo.'});
+Object.assign(A.zh.ad,{insImg:'插入图片',imgHelp:'图片单独占一行。可以像普通文字一样移动或删除这一行。',imgUp:'上传图片',imgBank:'或从照片库中选择：',imgAltF:'替代文字（为看不到图片的人描述图片）',imgCapF:'说明（可选）',insert:'插入',imgNeed:'请选择图片并填写替代文字。'});
+Object.assign(A.tl.ad,{insImg:'Maglagay ng larawan',imgHelp:'Nasa sariling linya ang mga larawan. Maaari mong ilipat o burahin ang linyang iyon tulad ng ibang teksto.',imgUp:'Mag-upload ng larawan',imgBank:'O pumili ng larawan mula sa photo bank:',imgAltF:'Alt text (ilarawan ang larawan para sa hindi nakakakita nito)',imgCapF:'Caption (opsyonal)',insert:'Ilagay',imgNeed:'Pumili ng larawan at maglagay ng alt text.'});
+Object.assign(A.ko.ad,{insImg:'이미지 삽입',imgHelp:'이미지는 한 줄을 따로 차지합니다. 다른 글처럼 그 줄을 옮기거나 지울 수 있습니다.',imgUp:'이미지 업로드',imgBank:'또는 사진 모음에서 고르세요:',imgAltF:'대체 텍스트 (이미지를 볼 수 없는 사람을 위한 설명)',imgCapF:'설명 (선택)',insert:'삽입',imgNeed:'이미지를 고르고 대체 텍스트를 입력하세요.'});
+Object.assign(A.hi.ad,{insImg:'इमेज जोड़ें',imgHelp:'इमेज अपनी अलग पंक्ति में होती है। उस पंक्ति को किसी भी पाठ की तरह हटाया या खिसकाया जा सकता है।',imgUp:'इमेज अपलोड करें',imgBank:'या फ़ोटो बैंक से कोई तस्वीर चुनें:',imgAltF:'वैकल्पिक पाठ (जो इमेज नहीं देख सकते उनके लिए वर्णन)',imgCapF:'कैप्शन (वैकल्पिक)',insert:'जोड़ें',imgNeed:'इमेज चुनें और वैकल्पिक पाठ लिखें।'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -335,7 +341,7 @@ if(!ph.error)break;
 const rows=ph.data||[];
 const su=rows.length?await sb.storage.from('submissions').createSignedUrls(rows.map(r=>r.photo_path),3600):{data:[]};
 const urls=new Map((su.data||[]).map(u=>[u.path,u.signedUrl]));
-PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({cat:r.cat||'all',t:r.title,b:r.caption||'',tags:r.tags||[],rel:r.related||[],s:urls.get(r.photo_path),lat:r.lat??null,lng:r.lng??null}));
+PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({path:r.photo_path,cat:r.cat||'all',t:r.title,b:r.caption||'',tags:r.tags||[],rel:r.related||[],s:urls.get(r.photo_path),lat:r.lat??null,lng:r.lng??null}));
 }
 
 async function loadUser(s){
@@ -428,6 +434,25 @@ $('axHintNo').addEventListener('click',hideHint);
 const relOf=ids=>(ids||[]).map(id=>WIKI.find(w=>w.id===id)).filter(Boolean).map(w=>({id:w.id,title:TX(w.title)}));
 const mkCom=p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:p.tags,cat:p.cat,rel:relOf(p.rel),lat:p.lat,lng:p.lng});
 const slug=x=>String(x||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-+|-+$/g,'').slice(0,80);
+const shrink=async f=>{
+if(f.type==='image/gif')return f;
+try{
+const b=await createImageBitmap(f,{imageOrientation:'from-image'});
+const k=Math.min(1,2000/Math.max(b.width,b.height));
+const c=document.createElement('canvas');c.width=Math.round(b.width*k);c.height=Math.round(b.height*k);
+c.getContext('2d').drawImage(b,0,0,c.width,c.height);if(b.close)b.close();
+const o=await new Promise(res=>c.toBlob(res,'image/jpeg',.85));
+return o?new File([o],f.name.replace(/\.[^.]*$/,'')+'.jpg',{type:'image/jpeg'}):f;
+}catch(x){return f}
+};
+const IMG_RE=/^!\[([^\]]*)\]\((\S+?)(?:\s+"([^"]*)")?\)$/;
+const isImg=p=>IMG_RE.test(String(p).trim());
+const imgSrc=u=>u.startsWith('photo:')?(PUB.find(p=>p.path===u.slice(6))||{}).s||'':/^https:\/\//.test(u)?u:'';
+const paras=b=>(Array.isArray(b)?b:String(b||'').split(/\n\s*\n/)).map(x=>String(x).trim()).filter(Boolean);
+const bodyText=b=>paras(b).flatMap(p=>{const m=p.match(IMG_RE);return m?[m[1],m[3]||''].filter(Boolean):[p]});
+const plain=b=>paras(b).filter(p=>!isImg(p)).join('\n\n');
+const renderBody=b=>paras(b).map(p=>{const m=p.match(IMG_RE);if(!m)return `<p>${esc(TX(p))}</p>`;const src=imgSrc(m[2]);if(!src)return '';const alt=TX(m[1]),cap=m[3]?TX(m[3]):'';return `<figure class="inl"><button type="button" class="inlb" data-src="${esc(src)}" data-t="${esc(cap||alt)}" aria-label="${esc(alt)}">${pic(src,960,alt,' loading="lazy"')}</button>${cap?`<figcaption>${esc(cap)}</figcaption>`:''}</figure>`}).join('');
+const bindInl=el=>el.addEventListener('click',e=>{const b=e.target.closest('.inlb');if(b)showPhoto({t:b.dataset.t,s:b.dataset.src,b:''})});
 const libs={};
 const load=(src,css)=>libs[src]||(libs[src]=new Promise((ok,no)=>{if(css){const l=document.createElement('link');l.rel='stylesheet';l.href=css;document.head.appendChild(l)}const x=document.createElement('script');x.src=src;x.onload=ok;x.onerror=()=>{delete libs[src];no()};document.head.appendChild(x)}));
 const useMap=()=>load('lib/leaflet.js?v=1','lib/leaflet.css?v=1');
@@ -513,10 +538,10 @@ app.innerHTML=`<h1>${t.recent}</h1><div class="none">${t.loading}</div>`;
 const d=await getData();
 if(tok!==tokn)return;
 if(d.err){app.innerHTML=`<h1>${t.recent}</h1><div class="none" role="alert"><p>${t.loadErr}</p><button class="btn" id="rt" type="button">${ic('arrow-clockwise')}${t.retry}</button></div>`;$('rt').addEventListener('click',()=>views.council());return}
-await prep(d.meetings.flatMap(m=>[m.title,m.body,m.outcome]));
+await prep(d.meetings.flatMap(m=>[m.title,plain(m.body),m.outcome]));
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
-return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),false,'#council/'+m.id,null,'lead')+`</section>`;
+return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(plain(m.body)),false,'#council/'+m.id,null,'lead')+`</section>`;
 }).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
 reveal(app.querySelectorAll('section .card,section .rel'));
 },
@@ -569,11 +594,11 @@ if(tok!==tokn)return;
 const m=(d.meetings||[]).find(x=>String(x.id)===id);
 if(!m){app.innerHTML=`<div class="none"><p>${t.none}</p><a class="btn" href="#council">${ic('bank')}${t.council}</a></div>`;return}
 const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>WIKI.find(w=>w.id===l.article_id)).filter(Boolean);
-const body=String(m.body||'').split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
-await prep([m.title,m.outcome,...body,...rel.flatMap(w=>[w.title,w.short])]);
+await prep([m.title,m.outcome,...bodyText(m.body),...rel.flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
 document.title=TX(m.title)+' · Our Streets Wiki';
-app.innerHTML=`<article class="wiki-article mtg"><p class="kick">${ic('bank')}<span>${fmt(m.meeting_date)}</span></p><h1>${esc(TX(m.title))}</h1>`+(m.outcome?`<p class="pill">${esc(TX(m.outcome))}</p>`:'')+`<div class="actions"><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(w=>card(iconOf(w.cat),TX(w.title),nameOf(w.cat),TX(w.short),false,'#wiki/'+w.id,w.img?.src,'res h3')).join(''):'')+`</article>`;
+app.innerHTML=`<article class="wiki-article mtg"><p class="kick">${ic('bank')}<span>${fmt(m.meeting_date)}</span></p><h1>${esc(TX(m.title))}</h1>`+(m.outcome?`<p class="pill">${esc(TX(m.outcome))}</p>`:'')+`<div class="actions"><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+renderBody(m.body)+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(w=>card(iconOf(w.cat),TX(w.title),nameOf(w.cat),TX(w.short),false,'#wiki/'+w.id,w.img?.src,'res h3')).join(''):'')+`</article>`;
+bindInl(app.querySelector('article'));
 $('shr').addEventListener('click',async()=>{
 const u=location.href;
 if(navigator.share){try{await navigator.share({title:TX(m.title),url:u})}catch(e){}return}
@@ -590,15 +615,16 @@ const ph=PUB.filter(p=>(p.rel||[]).includes(w.id)).map(mkCom).sort(byT);
 const dd=await getData();
 if(tok!==tokn)return;
 const mt=dd.err?[]:dd.meetings.filter(m=>dd.links.some(l=>l.meeting_id===m.id&&l.article_id===w.id));
-await prep([w.title,w.short,...w.body,...rel.flatMap(x=>[x.title,x.short]),...PUB.flatMap(p=>[p.t,p.b]),...mt.map(m=>m.title)]);
+await prep([w.title,w.short,...bodyText(w.body),...rel.flatMap(x=>[x.title,x.short]),...PUB.flatMap(p=>[p.t,p.b]),...mt.map(m=>m.title)]);
 if(tok!==tokn)return;
-app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<a class="cat" data-c="${w.cat}" href="#search-${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span>${ic('caret-right')}</a><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+w.body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res h3')).join(''):'')+`</article>`;
+app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<a class="cat" data-c="${w.cat}" href="#search-${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span>${ic('caret-right')}</a><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+renderBody(w.body)+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res h3')).join(''):'')+`</article>`;
 if(mt.length)app.querySelector('article').insertAdjacentHTML('beforeend',`<h2 class="rel">${t.discussed}</h2>`+mt.map(m=>card('bank',TX(m.title),fmt(m.meeting_date),'',false,'#council/'+m.id,null,'sm')).join(''));
 if(ph.length){
 const ar=app.querySelector('article');
 ar.insertAdjacentHTML('beforeend',`<h2 class="rel">${t.photosOf}</h2><div class="gal" id="ag">${ph.map(tile).join('')}</div>`);
 bindGal($('ag'),ph);
 }
+bindInl(app.querySelector('article'));
 $('shr').addEventListener('click',async()=>{
 const u=location.href;
 if(navigator.share){try{await navigator.share({title:TX(w.title),url:u})}catch(e){}return}
@@ -671,17 +697,6 @@ $('ptag').addEventListener('blur',e=>{addTag(e.target.value);e.target.value=''})
 $('ptl').addEventListener('click',e=>{const b=e.target.closest('[data-n]');if(b){tags.splice(+b.dataset.n,1);$('ptg').classList.remove('warn');tl()}});
 const bad=file=>!file||!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type)||file.size>5242880;
 const why=file=>file&&file.size>5242880?t.big:t.fmt;
-const shrink=async f=>{
-if(f.type==='image/gif')return f;
-try{
-const b=await createImageBitmap(f,{imageOrientation:'from-image'});
-const k=Math.min(1,2000/Math.max(b.width,b.height));
-const c=document.createElement('canvas');c.width=Math.round(b.width*k);c.height=Math.round(b.height*k);
-c.getContext('2d').drawImage(b,0,0,c.width,c.height);if(b.close)b.close();
-const o=await new Promise(res=>c.toBlob(res,'image/jpeg',.85));
-return o?new File([o],f.name.replace(/\.[^.]*$/,'')+'.jpg',{type:'image/jpeg'}):f;
-}catch(x){return f}
-};
 const sub=$('f').querySelector('button[type=submit]');
 let busy=false;
 let loc=null;
@@ -771,7 +786,7 @@ app.innerHTML=`<div class="page"><h1>${a.admin}</h1>
 <label class="field">${a.mDate}<input type="date" id="md" required></label>
 <label class="field">${a.title}<input type="text" id="mt" required></label>
 <label class="field">${a.outcomeF}<input type="text" id="mo" maxlength="40"></label>
-<label class="field">${a.summary}<textarea id="mb" rows="5" required></textarea></label>
+<label class="field">${a.summary}<textarea id="mb" rows="5" required aria-describedby="mbh"></textarea></label><div class="imgrow"><button class="btn" type="button" data-img="mb">${ic('image')}${a.insImg}</button><small class="hint" id="mbh">${a.imgHelp}</small></div>
 <div class="field rels"><label for="mrs">${a.relA}</label><input type="text" id="mrs" role="combobox" aria-expanded="false" aria-controls="mrr" aria-autocomplete="list" autocomplete="off" placeholder="${esc(t.relPh)}"><div id="mrc" class="tags"></div><div id="mrr" class="sug" role="listbox"></div></div>
 <button class="btn solid" type="submit">${a.saveM}</button>
 <button id="mx" class="btn ghost" type="button" hidden>${a.cancelEd}</button>
@@ -785,7 +800,7 @@ app.innerHTML=`<div class="page"><h1>${a.admin}</h1>
 <label class="field">${a.topic}<select id="wc">${topics}</select></label>
 <label class="field">${a.title}<input type="text" id="wt" required maxlength="80" aria-describedby="wurl"><small class="hint" id="wurl"></small></label>
 <label class="field">${a.shortS}<input type="text" id="ws" required></label>
-<label class="field">${a.bodyF}<textarea id="wbd" rows="8" required></textarea></label>
+<label class="field">${a.bodyF}<textarea id="wbd" rows="8" required aria-describedby="wbh"></textarea></label><div class="imgrow"><button class="btn" type="button" data-img="wbd">${ic('image')}${a.insImg}</button><small class="hint" id="wbh">${a.imgHelp}</small></div>
 <label class="field">${a.imgUrl}<input type="url" id="wimg"></label>
 <label class="field">${a.imgCr}<input type="text" id="wcr"></label>
 <label class="field">${a.imgAlt}<input type="text" id="wal"></label>
@@ -825,6 +840,47 @@ $('mrr').addEventListener('pointerdown',e=>e.preventDefault());
 $('mrr').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){mSel.add(b.dataset.id);$('mrs').value='';mrl();$('mrs').focus()}});
 $('mrc').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){mSel.delete(b.dataset.id);mrl();$('mrs').focus()}});
 $('wt').addEventListener('input',wu);
+app.querySelectorAll('[data-img]').forEach(b=>b.addEventListener('click',()=>imgDialog($(b.dataset.img))));
+const imgDialog=ta=>{
+const d=document.createElement('dialog');d.id='imd';d.setAttribute('aria-labelledby','imdh');
+const bank=PUB.slice().sort(byT);
+d.innerHTML=`<div class="tgh"><h2 id="imdh">${a.insImg}</h2><button class="btn icon" type="button" data-x aria-label="${esc(t.close)}">${ic('x')}</button></div>
+<label class="field">${a.imgUp}<input type="file" id="imf" accept="image/*"></label>
+${bank.length?`<p class="hint">${a.imgBank}</p><div class="imgpick" id="imp">${bank.map((p,i)=>`<button type="button" data-i="${i}" aria-pressed="false" aria-label="${esc(p.t)}">${pic(p.s,300,'',' loading="lazy"')}</button>`).join('')}</div>`:''}
+<label class="field">${a.imgAltF}<input type="text" id="ima" maxlength="200"></label>
+<label class="field">${a.imgCapF}<input type="text" id="imc" maxlength="200"></label>
+<div class="ok" id="imo" role="status"></div>
+<div class="row2"><button class="btn" type="button" data-x>${t.cancel}</button><button class="btn solid" type="button" id="imgo">${a.insert}</button></div>`;
+document.body.appendChild(d);
+let pick=null;
+d.addEventListener('close',()=>d.remove());
+d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-x]'))d.close()});
+const imp=d.querySelector('#imp');
+if(imp)imp.addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(!b)return;pick=bank[+b.dataset.i];d.querySelector('#imf').value='';imp.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));if(!$('ima').value)$('ima').value=pick.t});
+d.querySelector('#imf').addEventListener('change',()=>{pick=null;if(imp)imp.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed','false'))});
+$('imgo').addEventListener('click',async()=>{
+const f=d.querySelector('#imf').files[0],alt=$('ima').value.trim().replace(/[\[\]]/g,''),cap=$('imc').value.trim().replace(/"/g,'”');
+if((!f&&!pick)||!alt){$('imo').textContent=a.imgNeed;return}
+let url;
+if(pick)url='photo:'+pick.path;
+else{
+if(!f.type.startsWith('image/')){$('imo').textContent=t.fmt;return}
+$('imgo').disabled=true;$('imo').textContent=t.loading;
+const img=await shrink(f);
+if(!['image/jpeg','image/png','image/webp','image/gif'].includes(img.type)||img.size>5242880){$('imo').textContent=img.size>5242880?t.big:t.fmt;$('imgo').disabled=false;return}
+const path=crypto.randomUUID()+'.'+(img.type.split('/')[1]||'jpg');
+const up=await sb.storage.from('media').upload(path,img,{contentType:img.type});
+if(up.error){$('imo').textContent=a.failed+up.error.message;$('imgo').disabled=false;return}
+url=sb.storage.from('media').getPublicUrl(path).data.publicUrl;
+}
+const mk=`![${alt}](${url}${cap?` "${cap}"`:''})`;
+const v=ta.value,at=ta.selectionStart??v.length,pre=v.slice(0,at).replace(/\s*$/,''),post=v.slice(at).replace(/^\s*/,'');
+ta.value=(pre?pre+'\n\n':'')+mk+(post?'\n\n'+post:'');
+const pos=(pre?pre.length+2:0)+mk.length;
+d.close();ta.focus();ta.setSelectionRange(pos,pos);
+});
+d.showModal();
+};
 const counts=()=>{$('cm').textContent=D.meetings.filter(m=>!gone.has(m.id)).length;$('cw').textContent=WIKI.filter(w=>!gone.has(w.id)).length;const p=S.filter(s=>!gone.has(s.id)&&s.status==='pending').length;$('cs').textContent=p;$('cs').classList.toggle('hot',p>0)};
 const gone=new Set();
 const cut=(b,id,msg,commit)=>{gone.add(id);const row=b.closest('.arow');if(row)row.hidden=true;counts();toast(msg,()=>{gone.delete(id);if(row)row.hidden=false;counts()},async()=>{await commit();gone.delete(id);await draw()})};
@@ -967,7 +1023,7 @@ async function search(cat){
 const t=T(),tok=tokn;
 const dd=await getData();
 const MT=dd.err?[]:dd.meetings;
-await prep([...PUB.flatMap(p=>[p.t,p.b]),...PHOTOS.map(p=>p[1]),...WIKI.flatMap(w=>[w.title,w.short]),...MT.flatMap(m=>[m.title,m.body])]);
+await prep([...PUB.flatMap(p=>[p.t,p.b]),...PHOTOS.map(p=>p[1]),...WIKI.flatMap(w=>[w.title,w.short]),...MT.flatMap(m=>[m.title,plain(m.body)])]);
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${nameOf(cat)}</h1><input id="q" type="search" aria-label="${t.ph}" placeholder="${t.ph}" autocomplete="off"><div class="chips">`+
 ['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip ${id===cat?'on':''}" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div><div id="tg" class="chips"></div><div id="res"></div>`;
@@ -977,7 +1033,7 @@ const items=[
 ...PUB.map(p=>({cat:p.cat,t:TX(p.t),k:t.photo,b:p.b?TX(p.b):'',h:null,s:p.s,user:true,tags:p.tags,rel:relOf(p.rel)})),
 ...PHOTOS.map(p=>({cat:p[0],t:TX(p[1]),k:t.photo,b:'',h:null})),
 ...WIKI.map(w=>({cat:w.cat,t:TX(w.title),k:t.article,b:TX(w.short),h:'#wiki/'+w.id,s:w.img?.src})),
-...MT.map(m=>({cats:dd.links.filter(l=>l.meeting_id===m.id).map(l=>(WIKI.find(w=>w.id===l.article_id)||{}).cat),t:TX(m.title),k:t.meeting+' · '+fmt(m.meeting_date),b:TX(m.body),h:'#council/'+m.id,ic:'bank'}))
+...MT.map(m=>({cats:dd.links.filter(l=>l.meeting_id===m.id).map(l=>(WIKI.find(w=>w.id===l.article_id)||{}).cat),t:TX(m.title),k:t.meeting+' · '+fmt(m.meeting_date),b:TX(plain(m.body)),h:'#council/'+m.id,ic:'bank'}))
 ].sort(byT);
 const drawTags=s=>{
 const l=[...tagCounts(cat)].filter(([x])=>!s||x.includes(s)).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,8);
