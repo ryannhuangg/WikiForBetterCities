@@ -376,3 +376,11 @@ body{padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))}
 .mtg .kick{display:flex;align-items:center;gap:8px;color:var(--accent);font-weight:600;margin:0 0 var(--s2)}
 .mtg .kick i{font-size:1.375rem}
 .mtg .pill{display:inline-block;margin:0 0 var(--s3);padding:2px 12px;border-radius:999px;background:var(--tile);font-size:var(--fs-xs);font-weight:600;color:var(--accent)}
+#tgd{width:min(520px,calc(100vw - 24px));max-height:calc(100dvh - 48px);padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--fg);overflow:auto}
+#tgd::backdrop{background:rgba(0,0,0,.55)}
+.tgh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.chips.wrap{flex-wrap:wrap;overflow:visible;padding-right:0;-webkit-mask-image:none;mask-image:none}
+#pch .chip i.ph{font-size:1.125rem}
+#tsel{gap:6px}
+#mt{gap:6px;cursor:pointer}
+.chip small{margin-left:6px}

@@ -86,6 +86,12 @@ Object.assign(A.zh,{meeting:'会议',discussed:'在市议会会议中讨论过'}
 Object.assign(A.tl,{meeting:'Pulong',discussed:'Tinalakay sa mga pulong ng konseho'});
 Object.assign(A.ko,{meeting:'회의',discussed:'시의회 회의에서 다룬 내용'});
 Object.assign(A.hi,{meeting:'बैठक',discussed:'परिषद की बैठकों में चर्चा हुई'});
+Object.assign(A.en,{moreTags:'More tags',tagSearch:'Search tags'});
+Object.assign(A.es,{moreTags:'Más etiquetas',tagSearch:'Buscar etiquetas'});
+Object.assign(A.zh,{moreTags:'更多标签',tagSearch:'搜索标签'});
+Object.assign(A.tl,{moreTags:'Iba pang tag',tagSearch:'Maghanap ng tag'});
+Object.assign(A.ko,{moreTags:'태그 더 보기',tagSearch:'태그 검색'});
+Object.assign(A.hi,{moreTags:'और टैग',tagSearch:'टैग खोजें'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -457,14 +463,16 @@ return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.
 }).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
 reveal(app.querySelectorAll('section .card,section .rel'));
 },
-async photos(){
+async photos(tag){
 const t=T(),tok=tokn;
 await prep([...PUB.flatMap(p=>[p.t,p.b]),...WIKI.filter(w=>w.img).flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
 const com=PUB.map(mkCom);
 const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),b:TX(w.short),s:w.img.src,tags:[],cat:w.cat,h:'#wiki/'+w.id}));
-const all=[...com,...wk].sort(byT);
-app.innerHTML=`<div class="th"><h1>${t.bank}</h1><a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:`<div class="none"><p>${t.firstPhoto}</p><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div>`);
+const all=(tag?com.filter(p=>(p.tags||[]).includes(tag)):[...com,...wk]).sort(byT);
+app.innerHTML=`<div class="th"><h1>${t.bank}</h1><a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips" id="pch">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+(tag?`<a class="chip on" id="tsel" href="#photos" aria-label="${esc(t.rmTag.replace('{x}',tag))}">${ic('tag')}${esc(tag)}${ic('x')}</a>`:'')+(tagCounts('all').size?`<button class="chip" id="mt" type="button" aria-haspopup="dialog">${ic('sliders-horizontal')}${t.moreTags}</button>`:'')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:tag?`<div class="none"><p>${t.noTagged}</p><a class="btn" href="#photos">${ic('camera')}${t.bank}</a></div>`:`<div class="none"><p>${t.firstPhoto}</p><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div>`);
+const sel=$('tsel');if(sel)$('pch').scrollLeft=sel.offsetLeft-$('pch').offsetLeft-16;
+const mt=$('mt');if(mt)mt.addEventListener('click',()=>tagPicker(tag));
 const g=$('gal');
 if(g)bindGal(g,all);
 if(g)reveal(g.querySelectorAll('.shot'));
@@ -835,14 +843,17 @@ await draw();
 }
 };
 
-async function tagView(name){
-const t=T(),tok=tokn;
-await prep(PUB.flatMap(p=>[p.t,p.b]));
-if(tok!==tokn)return;
-const list=PUB.filter(p=>p.tags.includes(name)).map(mkCom).sort(byT);
-app.innerHTML=`<h1>${esc(t.tagged.replace('{x}',name))}</h1>`+(list.length?`<div class="gal" id="gal">${list.map(tile).join('')}</div>`:`<div class="none"><p>${t.noTagged}</p><a class="btn" href="#photos">${ic('camera')}${t.photos}</a></div>`);
-const g=$('gal');
-if(g)bindGal(g,list);
+function tagPicker(cur){
+const t=T();
+let d=$('tgd');
+if(!d){d=document.createElement('dialog');d.id='tgd';document.body.appendChild(d);d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-x]'))d.close()})}
+d.setAttribute('aria-labelledby','tgdh');
+d.innerHTML=`<div class="tgh"><h2 id="tgdh">${t.tagsL}</h2><button class="btn icon" type="button" data-x aria-label="${esc(t.close)}">${ic('x')}</button></div><input type="search" id="tgq" placeholder="${esc(t.tagSearch)}" aria-label="${esc(t.tagSearch)}" autocomplete="off"><div class="chips wrap" id="tgl"></div>`;
+const l=[...tagCounts('all')].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
+const draw=()=>{const q=$('tgq').value.trim().toLowerCase();const v=l.filter(([x])=>!q||x.includes(q));$('tgl').innerHTML=v.length?v.map(([x,n])=>`<a class="chip${x===cur?' on':''}" href="#tag/${encodeURIComponent(x)}"${x===cur?' aria-current="true"':''}>${esc(x)} <small>${n}</small></a>`).join(''):`<p class="hint">${t.none}</p>`};
+$('tgq').addEventListener('input',draw);
+draw();
+d.showModal();
 }
 
 async function search(cat){
@@ -919,6 +930,7 @@ async function route(){
 flushUndo();
 const n=++tokn;
 const lbd=$('lb');if(lbd&&lbd.open)lbd.close();
+const tgd=$('tgd');if(tgd&&tgd.open)tgd.close();
 if(!app.innerHTML)app.innerHTML=`<div class="none">${T().loading}</div>`;
 const slow=await Promise.race([wikiReady.then(()=>0),new Promise(r=>setTimeout(()=>r(1),4000))]);
 if(slow)wikiReady.then(()=>route());
@@ -934,10 +946,9 @@ back.textContent=T().back;
 search(c);
 }else if(h.startsWith('tag/')){
 let nm='';try{nm=decodeURIComponent(h.slice(4))}catch(e){}
-back.hidden=false;brand.hidden=true;
-back.href='#'+cur;
-back.textContent=T().back;
-tagView(nm);
+cur='photos';
+back.hidden=true;brand.hidden=false;
+views.photos(nm);
 }else if(h.startsWith('council/')){
 cur='council';
 back.hidden=false;brand.hidden=true;
