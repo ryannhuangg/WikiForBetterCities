@@ -116,6 +116,12 @@ Object.assign(A.zh.ad,{descM:'发布市议会会议摘要，并关联相关的�
 Object.assign(A.tl.ad,{descM:'Mag-post ng buod ng pulong ng konseho, saka i-link ang mga kaugnay na artikulo ng wiki.',descW:'Gumawa at mag-edit ng mga simpleng artikulo sa tab na Wiki.',descS:'Suriin ang mga isinumiteng larawan. Aprubahan para ilathala, tanggihan para itago.',addM:'Magdagdag ng pulong',editM:'I-edit ang pulong',allM:'Mga nai-post na pulong',addW:'Magdagdag ng artikulo',editW:'I-edit ang artikulo',allW:'Lahat ng artikulo',editS:'I-edit ang isinumite',review:'Naghihintay ng pagsusuri',allS:'Lahat ng isinumite'});
 Object.assign(A.ko.ad,{descM:'시의회 회의 요약을 올리고 관련 위키 글을 연결하세요.',descW:'위키 탭에 표시되는 쉬운 설명 글을 만들고 편집하세요.',descS:'제출된 사진을 검토하세요. 승인하면 게시되고 거절하면 숨겨집니다.',addM:'회의 추가',editM:'회의 편집',allM:'게시된 회의',addW:'위키 글 추가',editW:'위키 글 편집',allW:'모든 위키 글',editS:'제출물 편집',review:'검토 대기 중',allS:'모든 제출물'});
 Object.assign(A.hi.ad,{descM:'परिषद की बैठक का सारांश पोस्ट करें, फिर उससे जुड़े विकी लेख जोड़ें।',descW:'विकी टैब में दिखने वाले आसान भाषा के लेख बनाएँ और संपादित करें।',descS:'भेजी गई तस्वीरों की समीक्षा करें। प्रकाशित करने के लिए स्वीकृत करें, छिपाने के लिए अस्वीकार करें।',addM:'बैठक जोड़ें',editM:'बैठक संपादित करें',allM:'पोस्ट की गई बैठकें',addW:'विकी लेख जोड़ें',editW:'विकी लेख संपादित करें',allW:'सभी विकी लेख',editS:'सबमिशन संपादित करें',review:'समीक्षा की प्रतीक्षा में',allS:'सभी सबमिशन'});
+Object.assign(A.en.ad,{urlL:'Link:',dupTitle:'An article with this title already exists.',badTitle:'The title needs at least one letter or number.'});
+Object.assign(A.es.ad,{urlL:'Enlace:',dupTitle:'Ya existe un artículo con este título.',badTitle:'El título necesita al menos una letra o un número.'});
+Object.assign(A.zh.ad,{urlL:'链接：',dupTitle:'已存在同名文章。',badTitle:'标题至少需要一个字母或数字。'});
+Object.assign(A.tl.ad,{urlL:'Link:',dupTitle:'May artikulo na may ganitong pamagat.',badTitle:'Kailangan ng pamagat ng kahit isang titik o numero.'});
+Object.assign(A.ko.ad,{urlL:'링크:',dupTitle:'같은 제목의 글이 이미 있습니다.',badTitle:'제목에 글자나 숫자가 하나 이상 있어야 합니다.'});
+Object.assign(A.hi.ad,{urlL:'लिंक:',dupTitle:'इस शीर्षक वाला लेख पहले से मौजूद है।',badTitle:'शीर्षक में कम से कम एक अक्षर या अंक होना चाहिए।'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -421,6 +427,7 @@ $('axHintNo').addEventListener('click',hideHint);
 
 const relOf=ids=>(ids||[]).map(id=>WIKI.find(w=>w.id===id)).filter(Boolean).map(w=>({id:w.id,title:TX(w.title)}));
 const mkCom=p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:p.tags,cat:p.cat,rel:relOf(p.rel),lat:p.lat,lng:p.lng});
+const slug=x=>String(x||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-+|-+$/g,'').slice(0,80);
 const libs={};
 const load=(src,css)=>libs[src]||(libs[src]=new Promise((ok,no)=>{if(css){const l=document.createElement('link');l.rel='stylesheet';l.href=css;document.head.appendChild(l)}const x=document.createElement('script');x.src=src;x.onload=ok;x.onerror=()=>{delete libs[src];no()};document.head.appendChild(x)}));
 const useMap=()=>load('lib/leaflet.js?v=1','lib/leaflet.css?v=1');
@@ -775,9 +782,8 @@ app.innerHTML=`<div class="page"><h1>${a.admin}</h1>
 <p class="pdesc">${a.descW}</p>
 <div class="apanel"><h2 class="sec" id="wfh">${a.addW}</h2>
 <form id="wf"><input type="hidden" id="wkey">
-<label class="field">${a.idUrl}<input type="text" id="wid" required></label>
 <label class="field">${a.topic}<select id="wc">${topics}</select></label>
-<label class="field">${a.title}<input type="text" id="wt" required></label>
+<label class="field">${a.title}<input type="text" id="wt" required maxlength="80" aria-describedby="wurl"><small class="hint" id="wurl"></small></label>
 <label class="field">${a.shortS}<input type="text" id="ws" required></label>
 <label class="field">${a.bodyF}<textarea id="wbd" rows="8" required></textarea></label>
 <label class="field">${a.imgUrl}<input type="url" id="wimg"></label>
@@ -811,12 +817,14 @@ $('mrr').innerHTML=l.map(w=>`<button type="button" role="option" class="opt" dat
 $('mrs').setAttribute('aria-expanded',l.length?'true':'false');
 };
 const resetM=()=>{$('mf').reset();$('mid').value='';$('mx').hidden=true;$('mfh').textContent=a.addM;mSel=new Set();mrl()};
-const resetW=()=>{$('wf').reset();$('wkey').value='';$('wx').hidden=true;$('wfh').textContent=a.addW};
+const resetW=()=>{$('wf').reset();$('wkey').value='';$('wx').hidden=true;$('wfh').textContent=a.addW;wu()};
+const wu=()=>{const v=slug($('wt').value);$('wurl').textContent=v?a.urlL+' #wiki/'+v:''};
 $('mrs').addEventListener('input',mrl);
 $('mrs').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const b=$('mrr').querySelector('[data-id]');if(b)b.click()}else if(e.key==='Escape'&&$('mrs').value){e.preventDefault();$('mrs').value='';mrl()}});
 $('mrr').addEventListener('pointerdown',e=>e.preventDefault());
 $('mrr').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){mSel.add(b.dataset.id);$('mrs').value='';mrl();$('mrs').focus()}});
 $('mrc').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){mSel.delete(b.dataset.id);mrl();$('mrs').focus()}});
+$('wt').addEventListener('input',wu);
 const counts=()=>{$('cm').textContent=D.meetings.filter(m=>!gone.has(m.id)).length;$('cw').textContent=WIKI.filter(w=>!gone.has(w.id)).length;const p=S.filter(s=>!gone.has(s.id)&&s.status==='pending').length;$('cs').textContent=p;$('cs').classList.toggle('hot',p>0)};
 const gone=new Set();
 const cut=(b,id,msg,commit)=>{gone.add(id);const row=b.closest('.arow');if(row)row.hidden=true;counts();toast(msg,()=>{gone.delete(id);if(row)row.hidden=false;counts()},async()=>{await commit();gone.delete(id);await draw()})};
@@ -870,9 +878,13 @@ cut(b,id,a.mDel,async()=>fail(await sb.from('meetings').delete().eq('id',id)));
 $('wf').addEventListener('submit',async e=>{
 e.preventDefault();
 const key=$('wkey').value;
-const p={id:$('wid').value.trim(),cat:$('wc').value,title:$('wt').value.trim(),short:$('ws').value.trim(),body:$('wbd').value.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean),img_src:$('wimg').value.trim()||null,img_credit:$('wcr').value.trim()||null,img_alt:$('wal').value.trim()||null};
+const title=$('wt').value.trim().replace(/\s+/g,' '),id=slug(title);
+if(!id){$('wok').textContent=a.badTitle;return}
+if(WIKI.some(w=>w.id!==key&&(w.id===id||w.title.toLowerCase()===title.toLowerCase()))){$('wok').textContent=a.dupTitle;$('wt').focus();return}
+const p={id,cat:$('wc').value,title,short:$('ws').value.trim(),body:$('wbd').value.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean),img_src:$('wimg').value.trim()||null,img_credit:$('wcr').value.trim()||null,img_alt:$('wal').value.trim()||null};
 const r=key?await sb.from('wiki_articles').update(p).eq('id',key):await sb.from('wiki_articles').insert(p);
-if(r.error){$('wok').textContent=a.couldNot+r.error.message;return}
+if(r.error){$('wok').textContent=r.error.code==='23505'?a.dupTitle:a.couldNot+r.error.message;return}
+if(key&&key!==id){const{data:rs}=await sb.from('submissions').select('id,related').contains('related',[key]);for(const x of rs||[])await sb.from('submissions').update({related:x.related.map(v=>v===key?id:v)}).eq('id',x.id)}
 resetW();
 $('wok').textContent=a.saved;
 wikiReady=loadWiki();
@@ -884,7 +896,7 @@ const b=e.target.closest('button');
 if(!b)return;
 if(b.dataset.we){
 const w=WIKI.find(x=>x.id===b.dataset.we);
-$('wkey').value=w.id;$('wid').value=w.id;$('wc').value=w.cat;$('wt').value=w.title;$('ws').value=w.short;$('wbd').value=w.body.join('\n\n');$('wimg').value=w.img?.src||'';$('wcr').value=w.img?.credit||'';$('wal').value=w.img?.alt||'';
+$('wkey').value=w.id;$('wc').value=w.cat;$('wt').value=w.title;$('ws').value=w.short;$('wbd').value=w.body.join('\n\n');$('wimg').value=w.img?.src||'';$('wcr').value=w.img?.credit||'';$('wal').value=w.img?.alt||'';wu();
 $('wx').hidden=false;$('wok').textContent='';$('wfh').textContent=a.editW;
 window.scrollTo(0,0);
 }else if(b.dataset.wd){
@@ -1061,7 +1073,8 @@ cur='wiki';
 back.hidden=false;brand.hidden=true;
 back.href='#wiki';
 back.textContent=T().back;
-wikiArticle(h.slice(5));
+let wid=h.slice(5);try{wid=decodeURIComponent(wid)}catch(e){}
+wikiArticle(wid);
 }else if(PAGES.includes(h)){
 page=h;
 back.hidden=false;brand.hidden=true;
