@@ -104,6 +104,12 @@ Object.assign(A.zh,{slow:'提交太频繁了。请等几分钟再试。'});
 Object.assign(A.tl,{slow:'Masyadong mabilis ang pagsusumite mo. Maghintay ng ilang minuto at subukang muli.'});
 Object.assign(A.ko,{slow:'너무 빠르게 제출하고 있습니다. 몇 분 후 다시 시도해 주세요.'});
 Object.assign(A.hi,{slow:'आप बहुत जल्दी-जल्दी भेज रहे हैं। कुछ मिनट रुककर फिर कोशिश करें।'});
+Object.assign(A.en,{zIn:'Zoom in',zOut:'Zoom out',tilesErr:"The map background couldn't load. Check your connection; the pins still work."});
+Object.assign(A.es,{zIn:'Acercar',zOut:'Alejar',tilesErr:'No se pudo cargar el fondo del mapa. Revisa tu conexión; los marcadores siguen funcionando.'});
+Object.assign(A.zh,{zIn:'放大',zOut:'缩小',tilesErr:'地图底图无法加载。请检查网络；标记仍可使用。'});
+Object.assign(A.tl,{zIn:'Mag-zoom in',zOut:'Mag-zoom out',tilesErr:'Hindi ma-load ang background ng mapa. Tingnan ang koneksyon mo; gumagana pa rin ang mga pin.'});
+Object.assign(A.ko,{zIn:'확대',zOut:'축소',tilesErr:'지도 배경을 불러올 수 없습니다. 연결을 확인하세요. 핀은 계속 작동합니다.'});
+Object.assign(A.hi,{zIn:'ज़ूम इन',zOut:'ज़ूम आउट',tilesErr:'मैप का बैकग्राउंड लोड नहीं हो सका। अपना कनेक्शन जाँचें; पिन फिर भी काम करते हैं।'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -414,7 +420,8 @@ const load=(src,css)=>libs[src]||(libs[src]=new Promise((ok,no)=>{if(css){const 
 const useMap=()=>load('lib/leaflet.js?v=1','lib/leaflet.css?v=1');
 const hasLoc=p=>p&&Number.isFinite(p.lat)&&Number.isFinite(p.lng);
 const CITY=window.CITY||null;
-const tiles=m=>window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(m);
+let curMap=null;
+const newMap=id=>{const t=T(),q=calm(),m=window.L.map(id,{zoomControl:false,zoomAnimation:!q,fadeAnimation:!q,markerZoomAnimation:!q});window.L.control.zoom({zoomInTitle:t.zIn,zoomOutTitle:t.zOut}).addTo(m);let bad=0,shown=false;window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).on('tileerror',()=>{if(++bad>=4&&!shown){shown=true;m.getContainer().insertAdjacentHTML('beforeend',`<p class="mapmsg" role="status">${esc(t.tilesErr)}</p>`)}}).on('tileload',()=>{bad=0}).addTo(m);return m};
 const home=m=>CITY&&CITY.center?m.setView(CITY.center,CITY.zoom||12):m.setView([39.5,-98.35],4);
 function pickLoc(cur,cb){
 const t=T();
@@ -427,7 +434,7 @@ d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-x]'))d.c
 d.showModal();
 useMap().then(()=>{
 if(!d.open)return;
-m=window.L.map('mpm');tiles(m);
+m=newMap('mpm');
 const put=ll=>{if(pin)pin.setLatLng(ll);else pin=window.L.marker(ll,{draggable:true,icon:window.L.divIcon({className:'pin',iconSize:[28,28],iconAnchor:[14,28]})}).addTo(m);$('mpok').disabled=false};
 if(cur){m.setView([cur.lat,cur.lng],17);put([cur.lat,cur.lng])}else home(m);
 m.on('click',e=>{if(m.getZoom()<15&&!pin)m.setView(e.latlng,Math.min(15,m.getZoom()+4));else put(e.latlng)});
@@ -524,7 +531,7 @@ app.innerHTML=`<div class="th"><h1>${t.mapT}</h1><div class="thb"><a class="btn 
 if(!pts.length)return;
 try{await useMap()}catch(e){$('pmap').textContent=t.err;return}
 if(tok!==tokn)return;
-const m=window.L.map('pmap');tiles(m);
+const m=curMap=newMap('pmap');
 const g=window.L.featureGroup(pts.map(p=>window.L.circleMarker([p.lat,p.lng],{radius:10,weight:3,color:'#fff',fillColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#1b7a4a',fillOpacity:1}).on('click',()=>showPhoto(p)).bindTooltip(esc(p.t)))).addTo(m);
 if(focus)m.setView(focus,16);else if(pts.length===1)m.setView([pts[0].lat,pts[0].lng],14);else m.fitBounds(g.getBounds(),{padding:[32,32],maxZoom:15});
 },
@@ -665,14 +672,15 @@ return o?new File([o],f.name.replace(/\.[^.]*$/,'')+'.jpg',{type:'image/jpeg'}):
 const sub=$('f').querySelector('button[type=submit]');
 let busy=false;
 let loc=null;
-const setLoc=(lat,lng,src)=>{loc=lat==null?null:{lat:+lat,lng:+lng};$('ploc').textContent=loc?(src==='photo'?t.locPhoto:t.locSet)+' '+loc.lat.toFixed(4)+', '+loc.lng.toFixed(4):t.locNone;$('plx').hidden=!loc;$('plpick').lastChild.textContent=loc?t.locAdj:t.locPick};
+const setLoc=(lat,lng,src)=>{loc=lat==null?null:{lat:+lat,lng:+lng,src};$('ploc').textContent=loc?(src==='photo'?t.locPhoto:t.locSet)+' '+loc.lat.toFixed(4)+', '+loc.lng.toFixed(4):t.locNone;$('plx').hidden=!loc;$('plpick').lastChild.textContent=loc?t.locAdj:t.locPick};
 $('plx').addEventListener('click',()=>setLoc(null));
 $('plpick').addEventListener('click',()=>pickLoc(loc,(a,b)=>setLoc(a,b,'map')));
-const exifLoc=fl=>fl&&fl.type.startsWith('image/')?load('lib/exifr.js?v=1').then(()=>exifr.gps(fl)).then(g=>g&&Number.isFinite(g.latitude)&&Number.isFinite(g.longitude)?g:null).catch(()=>null):Promise.resolve(null);
+const exifLoc=fl=>fl&&fl.type.startsWith('image/')?load('lib/exifr.js?v=1').then(()=>exifr.gps(fl)).then(g=>g&&Number.isFinite(g.latitude)&&Number.isFinite(g.longitude)&&Math.abs(g.latitude)<=90&&Math.abs(g.longitude)<=180&&(g.latitude||g.longitude)?g:null).catch(()=>null):Promise.resolve(null);
 $('plme').addEventListener('click',async()=>{$('ploc').textContent=t.loading;const g=await exifLoc($('f').querySelector('input[type=file]').files[0]);if(g){setLoc(g.latitude,g.longitude,'photo');return}if(!navigator.geolocation){$('ploc').textContent=t.locFail;return}navigator.geolocation.getCurrentPosition(p=>setLoc(p.coords.latitude,p.coords.longitude,'me'),()=>{$('ploc').textContent=t.locFail},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})});
 $('f').querySelector('input[type=file]').addEventListener('change',e=>{
 const fl=e.target.files[0];
-if(!loc)exifLoc(fl).then(g=>{if(g&&!loc)setLoc(g.latitude,g.longitude,'photo')});
+if(loc&&loc.src==='photo')setLoc(null);
+if(!loc)exifLoc(fl).then(g=>{if(g&&!loc&&e.target.files[0]===fl)setLoc(g.latitude,g.longitude,'photo')});
 const file=e.target.files[0];
 if(file&&!file.type.startsWith('image/')){e.target.value='';$('ok').textContent=t.fmt}else $('ok').textContent='';
 });
@@ -987,6 +995,7 @@ langMenu.innerHTML=LANGS.map(l=>`<li><button data-l="${l[0]}"${l[0]===lang?' ari
 
 async function route(){
 flushUndo();
+if(curMap){curMap.remove();curMap=null}
 const n=++tokn;
 const lbd=$('lb');if(lbd&&lbd.open)lbd.close();
 const tgd=$('tgd');if(tgd&&tgd.open)tgd.close();
