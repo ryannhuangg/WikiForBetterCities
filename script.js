@@ -56,6 +56,12 @@ Object.assign(A.tl,{tagged:"Mga larawang may tag na “{x}”",noTagged:"Wala pa
 Object.assign(A.ko,{tagged:"“{x}” 태그가 있는 사진",noTagged:"이 태그가 있는 사진이 아직 없습니다.",tagsL:"태그",photosOf:"관련 사진"});
 Object.assign(A.zh,{tagged:"带有“{x}”标签的照片",noTagged:"还没有带此标签的照片。",tagsL:"标签",photosOf:"相关照片"});
 
+Object.assign(A.en,{fmt:'Use a JPG, PNG, WebP or GIF image.'});
+Object.assign(A.es,{fmt:'Usa una imagen JPG, PNG, WebP o GIF.'});
+Object.assign(A.hi,{fmt:'JPG, PNG, WebP या GIF इमेज चुनें।'});
+Object.assign(A.tl,{fmt:'Gumamit ng JPG, PNG, WebP o GIF na larawan.'});
+Object.assign(A.ko,{fmt:'JPG, PNG, WebP 또는 GIF 이미지를 사용하세요.'});
+Object.assign(A.zh,{fmt:'请使用 JPG、PNG、WebP 或 GIF 图片。'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -529,12 +535,13 @@ $('ptag').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===','){e.prev
 $('ptag').addEventListener('input',e=>{const v=e.target.value;if(v.includes(',')){v.split(',').forEach(addTag);e.target.value=''}});
 $('ptag').addEventListener('blur',e=>{addTag(e.target.value);e.target.value=''});
 $('ptl').addEventListener('click',e=>{const b=e.target.closest('[data-n]');if(b){tags.splice(+b.dataset.n,1);$('ptg').classList.remove('warn');tl()}});
-const bad=file=>!file||!file.type.startsWith('image/')||file.size>5242880;
+const bad=file=>!file||!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type)||file.size>5242880;
+const why=file=>file&&file.size>5242880?t.big:t.fmt;
 const sub=$('f').querySelector('button[type=submit]');
 let busy=false;
 $('f').querySelector('input[type=file]').addEventListener('change',e=>{
 const file=e.target.files[0];
-if(file&&bad(file)){e.target.value='';$('ok').textContent=t.big}else $('ok').textContent='';
+if(file&&bad(file)){e.target.value='';$('ok').textContent=why(file)}else $('ok').textContent='';
 });
 $('f').addEventListener('submit',async e=>{
 e.preventDefault();
@@ -544,14 +551,14 @@ if(!sb){ok.textContent=t.notReady;return}
 if(!navigator.onLine){ok.textContent=t.offline;return}
 const file=f.querySelector('input[type=file]').files[0];
 if($('hp').value){f.reset();ok.textContent=t.thanks;return}
-if(bad(file)){ok.textContent=t.big;return}
+if(bad(file)){ok.textContent=why(file);return}
 busy=true;sub.disabled=true;ok.textContent=t.loading;
 try{
 addTag($('ptag').value);$('ptag').value='';
 const title=$('ptitle').value.trim(),caption=$('pcap').value.trim();
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
 const up=await sb.storage.from('submissions').upload(path,file);
-if(up.error){ok.textContent=/size|exceed|mime|type/i.test(up.error.message||'')?t.big:t.err;return}
+if(up.error){const m=up.error.message||'';ok.textContent=(/mime|type/i.test(m)?t.fmt:/size|exceed/i.test(m)?t.big:t.err)+' ['+m+']';return}
 const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path,...(tags.length?{tags}:{}),...(rel.size?{related:[...rel]}:{})});
 if(r.error){await sb.storage.from('submissions').remove([path]);ok.textContent=r.error.code==='42501'?t.limit:t.err;return}
 ok.textContent=t.thanks;
