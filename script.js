@@ -62,7 +62,13 @@ Object.assign(A.hi,{fmt:'JPG, PNG, WebP या GIF इमेज चुनें�
 Object.assign(A.tl,{fmt:'Gumamit ng JPG, PNG, WebP o GIF na larawan.'});
 Object.assign(A.ko,{fmt:'JPG, PNG, WebP 또는 GIF 이미지를 사용하세요.'});
 Object.assign(A.zh,{fmt:'请使用 JPG、PNG、WebP 或 GIF 图片。'});
-const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
+Object.assign(A.en,{aCvd:'Colorblind-friendly topic colors'});
+Object.assign(A.es,{aCvd:'Colores de temas aptos para daltonismo'});
+Object.assign(A.hi,{aCvd:'रंग-दृष्टि दोष के अनुकूल विषय रंग'});
+Object.assign(A.tl,{aCvd:'Mga kulay ng paksa na angkop sa colorblind'});
+Object.assign(A.ko,{aCvd:'색각 이상에 맞춘 주제 색상'});
+Object.assign(A.zh,{aCvd:'适合色盲的主题颜色'});
+const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
 
@@ -301,7 +307,8 @@ theme:()=>seg('theme',t.aTheme,[['auto',t.aAuto],['light',t.aLight],['dark',t.aD
 size:()=>`<h2 class="ax" id="${pre}size">${t.aSize}</h2><div class="sl"><span class="sm" aria-hidden="true">A</span><div class="rg"><input type="range" min="0.875" max="1.5" step="0.125" value="${p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size}" aria-labelledby="${pre}size" aria-valuetext="${Math.round((p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size)*100)}%"><div class="tk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="lg" aria-hidden="true">A</span></div><label class="check"><input type="checkbox" data-k="sizeAuto"${p.size==='auto'?' checked':''}>${t.aDevSize}</label>`,
 contrast:()=>chk('contrast',t.aContrast),
 motion:()=>chk('motion',t.aMotion),
-marks:()=>chk('marks',t.aMarks)
+marks:()=>chk('marks',t.aMarks),
+cvd:()=>chk('cvd',t.aCvd)
 };
 return keys.map(k=>parts[k]()).join('');
 }
@@ -324,7 +331,7 @@ if(cb)cb.checked=false;
 el.addEventListener('change',e=>{
 const k=e.target.dataset.k;
 if(!k)return;
-if(k==='sizeAuto'){const r=el.querySelector('input[type=range]');A11Y.set({size:e.target.checked?'auto':+r.value});if(e.target.checked)r.value=parseFloat(getComputedStyle(document.documentElement).fontSize)/16}
+if(k==='sizeAuto'){const r=el.querySelector('input[type=range]'),c=A11Y.get();if(e.target.checked){A11Y.set({size:'auto',man:c.size==='auto'?c.man:c.size});r.value=parseFloat(getComputedStyle(document.documentElement).fontSize)/16}else{const v=+c.man||1;A11Y.set({size:v});r.value=v}r.setAttribute('aria-valuetext',Math.round(r.value*100)+'%')}
 else A11Y.set({[k]:e.target.checked});
 });
 }
@@ -467,7 +474,7 @@ try{await navigator.clipboard.writeText(u);$('shr').firstChild.className='ph ph-
 const pages={
 access(){
 const t=T();
-app.innerHTML=`<div class="page" id="ax"><h1>${t.access}</h1>`+axHtml(['theme','size','contrast','motion','marks'],'p-')+`<button id="axr" type="button" class="btn ghost">${t.aReset}</button></div>`;
+app.innerHTML=`<div class="page" id="ax"><h1>${t.access}</h1>`+axHtml(['theme','size','contrast','cvd','motion','marks'],'p-')+`<button id="axr" type="button" class="btn ghost">${t.aReset}</button></div>`;
 axBind($('ax'));
 $('axr').addEventListener('click',()=>{A11Y.reset();pages.access();if(A11Y.sync)A11Y.sync(A11Y.get())});
 },

@@ -1,6 +1,6 @@
 (function(){
 var d=document.documentElement,k='a11y',mq=matchMedia('(prefers-color-scheme: dark)');
-function def(){return{theme:'auto',size:'auto',contrast:matchMedia('(prefers-contrast: more)').matches,motion:matchMedia('(prefers-reduced-motion: reduce)').matches,marks:false}}
+function def(){return{theme:'auto',size:'auto',contrast:matchMedia('(prefers-contrast: more)').matches,motion:matchMedia('(prefers-reduced-motion: reduce)').matches,marks:false,cvd:false}}
 function get(){var s={};try{s=JSON.parse(localStorage.getItem(k))||{}}catch(e){}var o=Object.assign(def(),s);if(o.size!=='auto'){var n=+o.size;o.size=n===0?1:n===2?1.25:Math.min(1.5,Math.max(.875,n||1))}return o}
 function apply(){
 var p=get(),dark=p.theme==='dark'||(p.theme==='auto'&&mq.matches);
@@ -15,6 +15,7 @@ d.style.fontSize=fs;
 p.contrast?d.dataset.contrast='high':delete d.dataset.contrast;
 p.motion?d.dataset.motion='reduce':delete d.dataset.motion;
 p.marks?d.dataset.marks='1':delete d.dataset.marks;
+p.cvd?d.dataset.cvd='1':delete d.dataset.cvd;
 var m=document.querySelector('meta[name=theme-color]');
 if(m)m.content=p.contrast?(dark?'#000000':'#ffffff'):(dark?'#0f1a14':'#fbfdfb');
 }
