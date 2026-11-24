@@ -444,13 +444,10 @@ app.innerHTML=`<h1>${t.recent}</h1><div class="none">${t.loading}</div>`;
 const d=await getData();
 if(tok!==tokn)return;
 if(d.err){app.innerHTML=`<h1>${t.recent}</h1><div class="none" role="alert"><p>${t.loadErr}</p><button class="btn" id="rt" type="button">${ic('arrow-clockwise')}${t.retry}</button></div>`;$('rt').addEventListener('click',()=>views.council());return}
-const arts=Object.fromEntries(WIKI.map(w=>[w.id,w]));
-await prep([...d.meetings.flatMap(m=>[m.title,m.body,m.outcome]),...WIKI.flatMap(w=>[w.title,w.short])]);
+await prep(d.meetings.flatMap(m=>[m.title,m.body,m.outcome]));
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
-const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>arts[l.article_id]).filter(Boolean);
-const rb=rel.length?`<div class="mrel"><h4 class="rel">${t.related}</h4>`+rel.map(a=>`<a class="rl" data-c="${a.cat}" href="#wiki/${esc(a.id)}">${ic(iconOf(a.cat))}<span><b>${esc(TX(a.title))}</b><small>${esc(nameOf(a.cat))}</small></span>${ic('caret-right')}</a>`).join('')+`</div>`:'';
-return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),true,null,null,'lead').replace(/<\/div><\/article>$/,rb+'</div></article>')+`</section>`;
+return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),false,'#council/'+m.id,null,'lead')+`</section>`;
 }).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
 reveal(app.querySelectorAll('section .card,section .rel'));
 },
@@ -479,6 +476,25 @@ if(b)$('cat-'+b.dataset.j).scrollIntoView({behavior:matchMedia('(prefers-reduced
 });
 }
 };
+
+async function meetingArticle(id){
+const t=T(),tok=tokn;
+const d=await getData();
+if(tok!==tokn)return;
+const m=(d.meetings||[]).find(x=>String(x.id)===id);
+if(!m){app.innerHTML=`<div class="none"><p>${t.none}</p><a class="btn" href="#council">${ic('bank')}${t.council}</a></div>`;return}
+const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>WIKI.find(w=>w.id===l.article_id)).filter(Boolean);
+const body=String(m.body||'').split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+await prep([m.title,m.outcome,...body,...rel.flatMap(w=>[w.title,w.short])]);
+if(tok!==tokn)return;
+document.title=TX(m.title)+' · Our Streets Wiki';
+app.innerHTML=`<article class="wiki-article mtg"><p class="kick">${ic('bank')}<span>${fmt(m.meeting_date)}</span></p><h1>${esc(TX(m.title))}</h1>`+(m.outcome?`<p class="pill">${esc(TX(m.outcome))}</p>`:'')+`<div class="actions"><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+body.map(p=>`<p>${esc(TX(p))}</p>`).join('')+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(w=>card(iconOf(w.cat),TX(w.title),nameOf(w.cat),TX(w.short),false,'#wiki/'+w.id,w.img?.src,'res h3')).join(''):'')+`</article>`;
+$('shr').addEventListener('click',async()=>{
+const u=location.href;
+if(navigator.share){try{await navigator.share({title:TX(m.title),url:u})}catch(e){}return}
+try{await navigator.clipboard.writeText(u);$('shr').firstChild.className='ph ph-check';$('shr').lastChild.textContent=t.copied}catch(e){}
+});
+}
 
 async function wikiArticle(id){
 const t=T(),tok=tokn,w=WIKI.find(x=>x.id===id);
@@ -896,6 +912,12 @@ back.hidden=false;brand.hidden=true;
 back.href='#'+cur;
 back.textContent=T().back;
 tagView(nm);
+}else if(h.startsWith('council/')){
+cur='council';
+back.hidden=false;brand.hidden=true;
+back.href='#council';
+back.textContent=T().back;
+meetingArticle(h.slice(8));
 }else if(h.startsWith('wiki/')){
 cur='wiki';
 back.hidden=false;brand.hidden=true;
