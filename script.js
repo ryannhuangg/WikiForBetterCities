@@ -110,6 +110,12 @@ Object.assign(A.zh,{zIn:'放大',zOut:'缩小',tilesErr:'地图底图无法加�
 Object.assign(A.tl,{zIn:'Mag-zoom in',zOut:'Mag-zoom out',tilesErr:'Hindi ma-load ang background ng mapa. Tingnan ang koneksyon mo; gumagana pa rin ang mga pin.'});
 Object.assign(A.ko,{zIn:'확대',zOut:'축소',tilesErr:'지도 배경을 불러올 수 없습니다. 연결을 확인하세요. 핀은 계속 작동합니다.'});
 Object.assign(A.hi,{zIn:'ज़ूम इन',zOut:'ज़ूम आउट',tilesErr:'मैप का बैकग्राउंड लोड नहीं हो सका। अपना कनेक्शन जाँचें; पिन फिर भी काम करते हैं।'});
+Object.assign(A.en.ad,{descM:'Post a council meeting summary, then link the wiki articles it touches.',descW:'Create and edit the plain-language articles shown in the Wiki tab.',descS:'Review photos people submitted. Approve to publish them, reject to hide them.',addM:'Add a meeting',editM:'Edit meeting',allM:'Posted meetings',addW:'Add a wiki article',editW:'Edit wiki article',allW:'All wiki articles',editS:'Edit submission',review:'Waiting for review',allS:'All submissions'});
+Object.assign(A.es.ad,{descM:'Publica el resumen de una reunión del concejo y vincula los artículos de la wiki relacionados.',descW:'Crea y edita los artículos en lenguaje sencillo de la pestaña Wiki.',descS:'Revisa las fotos enviadas. Apruébalas para publicarlas o recházalas para ocultarlas.',addM:'Agregar una reunión',editM:'Editar reunión',allM:'Reuniones publicadas',addW:'Agregar un artículo',editW:'Editar artículo',allW:'Todos los artículos',editS:'Editar envío',review:'En espera de revisión',allS:'Todos los envíos'});
+Object.assign(A.zh.ad,{descM:'发布市议会会议摘要，并关联相关的百科文章。',descW:'创建和编辑百科标签页中的通俗文章。',descS:'审核用户提交的照片。通过即发布，拒绝即隐藏。',addM:'添加会议',editM:'编辑会议',allM:'已发布的会议',addW:'添加百科文章',editW:'编辑百科文章',allW:'全部百科文章',editS:'编辑投稿',review:'待审核',allS:'全部投稿'});
+Object.assign(A.tl.ad,{descM:'Mag-post ng buod ng pulong ng konseho, saka i-link ang mga kaugnay na artikulo ng wiki.',descW:'Gumawa at mag-edit ng mga simpleng artikulo sa tab na Wiki.',descS:'Suriin ang mga isinumiteng larawan. Aprubahan para ilathala, tanggihan para itago.',addM:'Magdagdag ng pulong',editM:'I-edit ang pulong',allM:'Mga nai-post na pulong',addW:'Magdagdag ng artikulo',editW:'I-edit ang artikulo',allW:'Lahat ng artikulo',editS:'I-edit ang isinumite',review:'Naghihintay ng pagsusuri',allS:'Lahat ng isinumite'});
+Object.assign(A.ko.ad,{descM:'시의회 회의 요약을 올리고 관련 위키 글을 연결하세요.',descW:'위키 탭에 표시되는 쉬운 설명 글을 만들고 편집하세요.',descS:'제출된 사진을 검토하세요. 승인하면 게시되고 거절하면 숨겨집니다.',addM:'회의 추가',editM:'회의 편집',allM:'게시된 회의',addW:'위키 글 추가',editW:'위키 글 편집',allW:'모든 위키 글',editS:'제출물 편집',review:'검토 대기 중',allS:'모든 제출물'});
+Object.assign(A.hi.ad,{descM:'परिषद की बैठक का सारांश पोस्ट करें, फिर उससे जुड़े विकी लेख जोड़ें।',descW:'विकी टैब में दिखने वाले आसान भाषा के लेख बनाएँ और संपादित करें।',descS:'भेजी गई तस्वीरों की समीक्षा करें। प्रकाशित करने के लिए स्वीकृत करें, छिपाने के लिए अस्वीकार करें।',addM:'बैठक जोड़ें',editM:'बैठक संपादित करें',allM:'पोस्ट की गई बैठकें',addW:'विकी लेख जोड़ें',editW:'विकी लेख संपादित करें',allW:'सभी विकी लेख',editS:'सबमिशन संपादित करें',review:'समीक्षा की प्रतीक्षा में',allS:'सभी सबमिशन'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -750,21 +756,24 @@ const tok=tokn;
 const topics=CATS.map((c,i)=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('');
 app.innerHTML=`<div class="page"><h1>${a.admin}</h1>
 <div class="ok" id="aerr" role="alert"></div>
-<nav class="chips" id="atabs" role="tablist"><button class="chip on" data-p="m" type="button" role="tab" aria-selected="true">${a.mtgs}</button><button class="chip" data-p="w" type="button" role="tab" aria-selected="false">${a.wikiT}</button><button class="chip" data-p="s" type="button" role="tab" aria-selected="false">${a.subs}</button></nav>
-<section data-pane="m">
-<h2 class="sec">${a.councilMtg}</h2>
+<nav class="chips" id="atabs" role="tablist"><button class="chip on" data-p="m" id="tab-m" aria-controls="pane-m" type="button" role="tab" aria-selected="true">${ic('bank')}${a.mtgs}<span class="cnt" id="cm"></span></button><button class="chip" data-p="w" id="tab-w" aria-controls="pane-w" type="button" role="tab" aria-selected="false">${ic('book-open')}${a.wikiT}<span class="cnt" id="cw"></span></button><button class="chip" data-p="s" id="tab-s" aria-controls="pane-s" type="button" role="tab" aria-selected="false">${ic('camera')}${a.subs}<span class="cnt" id="cs"></span></button></nav>
+<section data-pane="m" id="pane-m" role="tabpanel" aria-labelledby="tab-m">
+<p class="pdesc">${a.descM}</p>
+<div class="apanel"><h2 class="sec" id="mfh">${a.addM}</h2>
 <form id="mf"><input type="hidden" id="mid">
 <label class="field">${a.mDate}<input type="date" id="md" required></label>
 <label class="field">${a.title}<input type="text" id="mt" required></label>
 <label class="field">${a.outcomeF}<input type="text" id="mo" maxlength="40"></label>
 <label class="field">${a.summary}<textarea id="mb" rows="5" required></textarea></label>
-<fieldset class="checks"><legend>${a.relA}</legend><div id="mrel"></div></fieldset>
+<div class="field rels"><label for="mrs">${a.relA}</label><input type="text" id="mrs" role="combobox" aria-expanded="false" aria-controls="mrr" aria-autocomplete="list" autocomplete="off" placeholder="${esc(t.relPh)}"><div id="mrc" class="tags"></div><div id="mrr" class="sug" role="listbox"></div></div>
 <button class="btn solid" type="submit">${a.saveM}</button>
 <button id="mx" class="btn ghost" type="button" hidden>${a.cancelEd}</button>
-<div class="ok" id="mok" role="status"></div></form>
+<div class="ok" id="mok" role="status"></div></form></div>
+<h2 class="sec lh">${a.allM}</h2>
 <input type="search" class="flt" data-for="ml" placeholder="${a.filter}" aria-label="${a.filter}"><div id="ml"></div></section>
-<section data-pane="w" hidden>
-<h2 class="sec">${a.wikiArt}</h2>
+<section data-pane="w" id="pane-w" role="tabpanel" aria-labelledby="tab-w" hidden>
+<p class="pdesc">${a.descW}</p>
+<div class="apanel"><h2 class="sec" id="wfh">${a.addW}</h2>
 <form id="wf"><input type="hidden" id="wkey">
 <label class="field">${a.idUrl}<input type="text" id="wid" required></label>
 <label class="field">${a.topic}<select id="wc">${topics}</select></label>
@@ -776,27 +785,46 @@ app.innerHTML=`<div class="page"><h1>${a.admin}</h1>
 <label class="field">${a.imgAlt}<input type="text" id="wal"></label>
 <button class="btn solid" type="submit">${a.saveW}</button>
 <button id="wx" class="btn ghost" type="button" hidden>${a.cancelEd}</button>
-<div class="ok" id="wok" role="status"></div></form>
+<div class="ok" id="wok" role="status"></div></form></div>
+<h2 class="sec lh">${a.allW}</h2>
 <input type="search" class="flt" data-for="wl" placeholder="${a.filter}" aria-label="${a.filter}"><div id="wl"></div></section>
-<section data-pane="s" hidden>
-<h2 class="sec">${a.photoSubs}</h2>
-<form id="sf" hidden><input type="hidden" id="sid">
+<section data-pane="s" id="pane-s" role="tabpanel" aria-labelledby="tab-s" hidden>
+<p class="pdesc">${a.descS}</p>
+<div class="apanel" id="sfp" hidden><h2 class="sec">${a.editS}</h2>
+<form id="sf"><input type="hidden" id="sid">
 <label class="field">${a.topic}<select id="sc">${topics}</select></label>
 <label class="field">${a.title}<input type="text" id="st" required></label>
 <label class="field">${a.caption}<input type="text" id="sp"></label>
 <label class="field">${a.tagsCsv}<input type="text" id="stg"></label>
 <button class="btn solid" type="submit">${a.saveS}</button>
-<button id="sx" class="btn ghost" type="button">${a.cancelEd}</button></form>
+<button id="sx" class="btn ghost" type="button">${a.cancelEd}</button></form></div>
+<h2 class="sec lh" id="slh">${a.review}</h2>
 <label class="check"><input type="checkbox" id="srev">${a.showRev}</label><input type="search" class="flt" data-for="sl" placeholder="${a.filter}" aria-label="${a.filter}"><div id="sl"></div></section></div>`;
 let D={meetings:[],links:[]};
 let S=[];
-const resetM=()=>{$('mf').reset();$('mid').value='';$('mx').hidden=true};
-const resetW=()=>{$('wf').reset();$('wkey').value='';$('wx').hidden=true};
+let mSel=new Set();
+const mrl=()=>{
+const q=$('mrs').value.trim().toLowerCase();
+$('mrc').innerHTML=[...mSel].map(id=>{const w=WIKI.find(x=>x.id===id);return w?`<button type="button" class="tag rm" data-id="${esc(id)}" aria-label="${esc(t.rmTag.replace('{x}',w.title))}">${esc(w.title)}${ic('x')}</button>`:''}).join('');
+const l=q?WIKI.filter(w=>!mSel.has(w.id)&&(w.title+' '+w.short+' '+w.id).toLowerCase().includes(q)).slice(0,6):[];
+$('mrr').innerHTML=l.map(w=>`<button type="button" role="option" class="opt" data-id="${esc(w.id)}"><b>${esc(w.title)}</b><small>${nameOf(w.cat)}</small></button>`).join('')+(q&&!l.length?`<p class="hint">${t.none}</p>`:'');
+$('mrs').setAttribute('aria-expanded',l.length?'true':'false');
+};
+const resetM=()=>{$('mf').reset();$('mid').value='';$('mx').hidden=true;$('mfh').textContent=a.addM;mSel=new Set();mrl()};
+const resetW=()=>{$('wf').reset();$('wkey').value='';$('wx').hidden=true;$('wfh').textContent=a.addW};
+$('mrs').addEventListener('input',mrl);
+$('mrs').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const b=$('mrr').querySelector('[data-id]');if(b)b.click()}else if(e.key==='Escape'&&$('mrs').value){e.preventDefault();$('mrs').value='';mrl()}});
+$('mrr').addEventListener('pointerdown',e=>e.preventDefault());
+$('mrr').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){mSel.add(b.dataset.id);$('mrs').value='';mrl();$('mrs').focus()}});
+$('mrc').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){mSel.delete(b.dataset.id);mrl();$('mrs').focus()}});
+const counts=()=>{$('cm').textContent=D.meetings.filter(m=>!gone.has(m.id)).length;$('cw').textContent=WIKI.filter(w=>!gone.has(w.id)).length;const p=S.filter(s=>!gone.has(s.id)&&s.status==='pending').length;$('cs').textContent=p;$('cs').classList.toggle('hot',p>0)};
 const gone=new Set();
-const cut=(b,id,msg,commit)=>{gone.add(id);const row=b.closest('.arow');if(row)row.hidden=true;toast(msg,()=>{gone.delete(id);if(row)row.hidden=false},async()=>{await commit();gone.delete(id);await draw()})};
+const cut=(b,id,msg,commit)=>{gone.add(id);const row=b.closest('.arow');if(row)row.hidden=true;counts();toast(msg,()=>{gone.delete(id);if(row)row.hidden=false;counts()},async()=>{await commit();gone.delete(id);await draw()})};
 const fail=r=>{$('aerr').textContent=r&&r.error?a.failed+r.error.message:'';return !!(r&&r.error)};
 const drawS=()=>{
 const v=S.filter(s=>!gone.has(s.id)&&($('srev').checked||s.status==='pending'));
+$('slh').textContent=($('srev').checked?a.allS:a.review)+' ('+v.length+')';
+counts();
 $('sl').innerHTML=v.map(s=>`<div class="arow"><div><b>${esc(s.title)}</b><small>${a[s.status]||s.status}${s.caption?' · '+esc(s.caption):''}</small></div><button class="btn icon" data-sv="${s.id}" aria-label="${a.viewPhoto}">${ic('image')}</button><button class="btn icon" data-se="${s.id}" aria-label="${a.edit}">${ic('pencil-simple')}</button><button class="btn icon" data-sa="${s.id}" aria-label="${a.approve}">${ic('check')}</button><button class="btn icon" data-sr="${s.id}" aria-label="${a.reject}">${ic('x')}</button><button class="btn icon" data-sd="${s.id}" aria-label="${a.del}">${ic('trash')}</button></div>`).join('')||`<small>${$('srev').checked?a.noSubs:a.noPend}</small>`;
 };
 const draw=async()=>{
@@ -806,7 +834,7 @@ const{data:subs}=await sb.from('submissions').select('*').order('created_at',{as
 S=subs||[];
 $('wl').innerHTML=WIKI.filter(w=>!gone.has(w.id)).map(w=>`<div class="arow"><div><b>${esc(w.title)}</b><small>${esc(w.id)}</small></div><button class="btn icon" data-we="${w.id}" aria-label="${a.edit}">${ic('pencil-simple')}</button><button class="btn icon" data-wd="${w.id}" aria-label="${a.del}">${ic('trash')}</button></div>`).join('');
 drawS();
-$('mrel').innerHTML=WIKI.map(w=>`<label class="check"><input type="checkbox" value="${esc(w.id)}"> ${esc(w.title)} <small>${nameOf(w.cat)}</small></label>`).join('')||`<small>${a.noArts}</small>`;
+mrl();
 $('ml').innerHTML=D.meetings.filter(m=>!gone.has(m.id)).map(m=>`<div class="arow"><div><b>${esc(m.title)}</b><small>${m.meeting_date}${m.outcome?' · '+esc(m.outcome):''}</small></div><button class="btn icon" data-me="${m.id}" aria-label="${a.edit}">${ic('pencil-simple')}</button><button class="btn icon" data-md="${m.id}" aria-label="${a.del}">${ic('trash')}</button></div>`).join('');
 };
 $('mf').addEventListener('submit',async e=>{
@@ -817,7 +845,7 @@ const o=$('mo').value.trim();
 if(o||(id&&(D.meetings.find(x=>x.id===id)||{}).outcome))p.outcome=o||null;
 const r=id?await sb.from('meetings').update(p).eq('id',id).select().single():await sb.from('meetings').insert(p).select().single();
 if(r.error){$('mok').textContent=a.couldNot+r.error.message;return}
-const picked=[...$('mrel').querySelectorAll('input:checked')].map(i=>({meeting_id:r.data.id,article_id:i.value}));
+const picked=[...mSel].map(id=>({meeting_id:r.data.id,article_id:id}));
 await sb.from('meeting_articles').delete().eq('meeting_id',r.data.id);
 if(picked.length)await sb.from('meeting_articles').insert(picked);
 resetM();
@@ -831,8 +859,8 @@ if(b.dataset.me){
 const m=D.meetings.find(x=>x.id===b.dataset.me);
 const on=new Set(D.links.filter(l=>l.meeting_id===m.id).map(l=>l.article_id));
 $('mid').value=m.id;$('md').value=m.meeting_date;$('mt').value=m.title;$('mo').value=m.outcome||'';$('mb').value=m.body;
-$('mrel').querySelectorAll('input').forEach(i=>i.checked=on.has(i.value));
-$('mx').hidden=false;$('mok').textContent='';
+mSel=new Set(on);$('mrs').value='';mrl();
+$('mx').hidden=false;$('mok').textContent='';$('mfh').textContent=a.editM;
 window.scrollTo(0,0);
 }else if(b.dataset.md){
 const id=b.dataset.md;
@@ -857,7 +885,7 @@ if(!b)return;
 if(b.dataset.we){
 const w=WIKI.find(x=>x.id===b.dataset.we);
 $('wkey').value=w.id;$('wid').value=w.id;$('wc').value=w.cat;$('wt').value=w.title;$('ws').value=w.short;$('wbd').value=w.body.join('\n\n');$('wimg').value=w.img?.src||'';$('wcr').value=w.img?.credit||'';$('wal').value=w.img?.alt||'';
-$('wx').hidden=false;$('wok').textContent='';
+$('wx').hidden=false;$('wok').textContent='';$('wfh').textContent=a.editW;
 window.scrollTo(0,0);
 }else if(b.dataset.wd){
 const id=b.dataset.wd;
@@ -874,10 +902,10 @@ document.querySelectorAll('[data-pane]').forEach(x=>x.hidden=x.dataset.pane!==b.
 $('sf').addEventListener('submit',async e=>{
 e.preventDefault();
 if(fail(await sb.from('submissions').update({cat:$('sc').value,title:$('st').value.trim(),caption:$('sp').value.trim()||null,tags:[...new Set($('stg').value.split(',').map(x=>x.trim().toLowerCase().slice(0,24)).filter(Boolean))].slice(0,5)}).eq('id',$('sid').value)))return;
-$('sf').hidden=true;
+$('sfp').hidden=true;
 await draw();
 });
-$('sx').addEventListener('click',()=>{$('sf').hidden=true});
+$('sx').addEventListener('click',()=>{$('sfp').hidden=true});
 $('srev').addEventListener('change',drawS);
 $('sl').addEventListener('click',async e=>{
 let b=e.target.closest('button');
@@ -890,7 +918,7 @@ const{data}=await sb.storage.from('submissions').createSignedUrl(s.photo_path,30
 showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',cat:s.cat,plain:true,lat:s.lat,lng:s.lng,tags:s.tags||[],rel:relOf(s.related),meta:[a.status+(a[s.status]||s.status),a.topicL+nameOf(s.cat&&CATS.some(c=>c.id===s.cat)?s.cat:'all'),a.submitted+new Date(s.created_at).toLocaleString(lang)]});
 }else if(b.dataset.se){
 $('sid').value=s.id;$('sc').value=s.cat||CATS[0].id;$('st').value=s.title;$('sp').value=s.caption||'';$('stg').value=(s.tags||[]).join(', ');
-$('sf').hidden=false;window.scrollTo(0,0);
+$('sfp').hidden=false;$('sfp').scrollIntoView({block:'start'});$('st').focus({preventScroll:true});
 }else if(b.dataset.sa||b.dataset.sr){
 const prev=s.status,to=b.dataset.sa?'approved':'rejected';
 const set=async st=>{if(fail(await sb.from('submissions').update({status:st}).eq('id',s.id)))return;if(st==='approved'||prev==='approved'){wikiReady=loadWiki();await wikiReady}await draw()};
