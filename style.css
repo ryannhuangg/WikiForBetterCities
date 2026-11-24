@@ -105,7 +105,8 @@ button.chip{cursor:pointer;font:600 1rem var(--sans)}
 #tabs a[aria-current]{background:var(--tile);color:var(--accent)}
 .card.media{flex-direction:column;gap:var(--s3);padding:0 0 var(--s4);overflow:hidden}
 .card.media .thumb{width:100%;height:auto;aspect-ratio:16/10;border-radius:0}
-.card.media .thumb img{border-radius:0}
+.card.media .thumb{position:relative;overflow:hidden}
+.card.media .thumb img{position:absolute;inset:0;border-radius:0}
 .card.media .thumb i{font-size:3.5rem}
 .card.media .txt{padding:0 var(--s4)}
 .card.lead{border-left:4px solid var(--accent)}
