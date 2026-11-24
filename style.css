@@ -384,3 +384,16 @@ body{padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))}
 #tsel{gap:6px}
 #mt{gap:6px;cursor:pointer}
 .chip small{margin-left:6px}
+.thb{display:flex;gap:8px;flex:none}
+.pmap{height:calc(100dvh - 300px);min-height:320px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--tile);z-index:0}
+.pmap.sm{height:min(56dvh,460px);min-height:260px;margin:8px 0 12px}
+#mpd{width:min(640px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--fg);overflow:auto}
+#mpd::backdrop{background:rgba(0,0,0,.55)}
+#mpd .hint{margin:0}
+.row2{display:flex;gap:8px}.row2 .btn{flex:1;margin:0;min-height:52px}
+.locb{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.locb .btn{font-weight:600}
+.pin{width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--accent);border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.leaflet-container{font:inherit}
+html[data-mode=dark] .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9)}
+#lb .btn+.btn{margin-left:8px}

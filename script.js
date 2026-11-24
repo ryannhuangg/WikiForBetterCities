@@ -92,6 +92,12 @@ Object.assign(A.zh,{moreTags:'更多标签',tagSearch:'搜索标签'});
 Object.assign(A.tl,{moreTags:'Iba pang tag',tagSearch:'Maghanap ng tag'});
 Object.assign(A.ko,{moreTags:'태그 더 보기',tagSearch:'태그 검색'});
 Object.assign(A.hi,{moreTags:'और टैग',tagSearch:'टैग खोजें'});
+Object.assign(A.en,{locF:'Location (optional)',locNone:'No location added.',locPhoto:'Location found in the photo:',locSet:'Location set:',locMe:'Use my location',locPick:'Pick on map',locAdj:'Adjust on map',locRm:'Remove location',locFail:"Couldn't get your location. Try picking it on the map.",mapPickT:'Tap the map to place the pin. Drag it to adjust.',done:'Done',cancel:'Cancel',mapView:'Map view',gridView:'Grid view',mapT:'Photo map',onMap:'Show on map',noMap:'No photos with a location yet.',mapLbl:'Map of photo locations. Grid view lists the same photos.'});
+Object.assign(A.es,{locF:'Ubicación (opcional)',locNone:'Sin ubicación.',locPhoto:'Ubicación encontrada en la foto:',locSet:'Ubicación elegida:',locMe:'Usar mi ubicación',locPick:'Elegir en el mapa',locAdj:'Ajustar en el mapa',locRm:'Quitar ubicación',locFail:'No se pudo obtener tu ubicación. Elígela en el mapa.',mapPickT:'Toca el mapa para poner el marcador. Arrástralo para ajustarlo.',done:'Listo',cancel:'Cancelar',mapView:'Ver mapa',gridView:'Ver cuadrícula',mapT:'Mapa de fotos',onMap:'Ver en el mapa',noMap:'Aún no hay fotos con ubicación.',mapLbl:'Mapa de ubicaciones de las fotos. La cuadrícula muestra las mismas fotos.'});
+Object.assign(A.zh,{locF:'位置（可选）',locNone:'未添加位置。',locPhoto:'已从照片中找到位置：',locSet:'已设置位置：',locMe:'使用我的位置',locPick:'在地图上选择',locAdj:'在地图上调整',locRm:'移除位置',locFail:'无法获取你的位置。请在地图上选择。',mapPickT:'点按地图放置标记，拖动可调整。',done:'完成',cancel:'取消',mapView:'地图视图',gridView:'网格视图',mapT:'照片地图',onMap:'在地图上查看',noMap:'还没有带位置的照片。',mapLbl:'照片位置地图。网格视图列出相同的照片。'});
+Object.assign(A.tl,{locF:'Lokasyon (opsyonal)',locNone:'Walang lokasyon.',locPhoto:'Nakita ang lokasyon sa larawan:',locSet:'Naitakda ang lokasyon:',locMe:'Gamitin ang lokasyon ko',locPick:'Pumili sa mapa',locAdj:'Ayusin sa mapa',locRm:'Alisin ang lokasyon',locFail:'Hindi makuha ang lokasyon mo. Pumili na lang sa mapa.',mapPickT:'I-tap ang mapa para ilagay ang pin. I-drag para ayusin.',done:'Tapos',cancel:'Kanselahin',mapView:'Mapa',gridView:'Grid',mapT:'Mapa ng mga larawan',onMap:'Ipakita sa mapa',noMap:'Wala pang larawang may lokasyon.',mapLbl:'Mapa ng lokasyon ng mga larawan. Nasa grid ang parehong mga larawan.'});
+Object.assign(A.ko,{locF:'위치 (선택)',locNone:'위치가 없습니다.',locPhoto:'사진에서 위치를 찾았습니다:',locSet:'위치 설정됨:',locMe:'내 위치 사용',locPick:'지도에서 선택',locAdj:'지도에서 조정',locRm:'위치 삭제',locFail:'위치를 가져올 수 없습니다. 지도에서 선택해 주세요.',mapPickT:'지도를 눌러 핀을 놓고, 끌어서 조정하세요.',done:'완료',cancel:'취소',mapView:'지도 보기',gridView:'격자 보기',mapT:'사진 지도',onMap:'지도에서 보기',noMap:'아직 위치가 있는 사진이 없습니다.',mapLbl:'사진 위치 지도. 격자 보기에 같은 사진이 있습니다.'});
+Object.assign(A.hi,{locF:'स्थान (वैकल्पिक)',locNone:'कोई स्थान नहीं जोड़ा गया।',locPhoto:'तस्वीर में स्थान मिला:',locSet:'स्थान सेट:',locMe:'मेरा स्थान इस्तेमाल करें',locPick:'मैप पर चुनें',locAdj:'मैप पर ठीक करें',locRm:'स्थान हटाएँ',locFail:'आपका स्थान नहीं मिल सका। मैप पर चुनें।',mapPickT:'पिन लगाने के लिए मैप पर टैप करें। ठीक करने के लिए खींचें।',done:'हो गया',cancel:'रद्द करें',mapView:'मैप दृश्य',gridView:'ग्रिड दृश्य',mapT:'तस्वीरों का मैप',onMap:'मैप पर देखें',noMap:'अभी स्थान वाली कोई तस्वीर नहीं है।',mapLbl:'तस्वीरों के स्थानों का मैप। ग्रिड दृश्य में वही तस्वीरें हैं।'});
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['zh','🇨🇳','中文'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['hi','🇮🇳','हिन्दी']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -298,14 +304,14 @@ if(!sb)return;
 const{data,error}=await sb.from('wiki_articles').select('*').order('title');
 if(!error&&data)WIKI=data.map(r=>({id:r.id,cat:r.cat,title:r.title,short:r.short,body:r.body,img:r.img_src?{src:r.img_src,credit:r.img_credit||'',alt:r.img_alt||''}:null}));
 let ph;
-for(const cols of ['title,caption,cat,photo_path,tags,related','title,caption,cat,photo_path,tags','title,caption,cat,photo_path']){
+for(const cols of ['title,caption,cat,photo_path,tags,related,lat,lng','title,caption,cat,photo_path,tags,related','title,caption,cat,photo_path,tags','title,caption,cat,photo_path']){
 ph=await sb.from('submissions').select(cols).eq('status','approved').order('created_at',{ascending:false});
 if(!ph.error)break;
 }
 const rows=ph.data||[];
 const su=rows.length?await sb.storage.from('submissions').createSignedUrls(rows.map(r=>r.photo_path),3600):{data:[]};
 const urls=new Map((su.data||[]).map(u=>[u.path,u.signedUrl]));
-PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({cat:r.cat||'all',t:r.title,b:r.caption||'',tags:r.tags||[],rel:r.related||[],s:urls.get(r.photo_path)}));
+PUB=rows.filter(r=>urls.get(r.photo_path)).map(r=>({cat:r.cat||'all',t:r.title,b:r.caption||'',tags:r.tags||[],rel:r.related||[],s:urls.get(r.photo_path),lat:r.lat??null,lng:r.lng??null}));
 }
 
 async function loadUser(s){
@@ -396,7 +402,32 @@ $('axHintGo').addEventListener('click',e=>{e.stopPropagation();hideHint();setAx(
 $('axHintNo').addEventListener('click',hideHint);
 
 const relOf=ids=>(ids||[]).map(id=>WIKI.find(w=>w.id===id)).filter(Boolean).map(w=>({id:w.id,title:TX(w.title)}));
-const mkCom=p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:p.tags,cat:p.cat,rel:relOf(p.rel)});
+const mkCom=p=>({t:TX(p.t),b:p.b?TX(p.b):'',s:p.s,user:true,tags:p.tags,cat:p.cat,rel:relOf(p.rel),lat:p.lat,lng:p.lng});
+const libs={};
+const load=(src,css)=>libs[src]||(libs[src]=new Promise((ok,no)=>{if(css){const l=document.createElement('link');l.rel='stylesheet';l.href=css;document.head.appendChild(l)}const x=document.createElement('script');x.src=src;x.onload=ok;x.onerror=()=>{delete libs[src];no()};document.head.appendChild(x)}));
+const useMap=()=>load('lib/leaflet.js?v=1','lib/leaflet.css?v=1');
+const hasLoc=p=>p&&Number.isFinite(p.lat)&&Number.isFinite(p.lng);
+const CITY=window.CITY||null;
+const tiles=m=>window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(m);
+const home=m=>CITY&&CITY.center?m.setView(CITY.center,CITY.zoom||12):m.setView([39.5,-98.35],4);
+function pickLoc(cur,cb){
+const t=T();
+const d=document.createElement('dialog');d.id='mpd';d.setAttribute('aria-labelledby','mpdh');
+d.innerHTML=`<div class="tgh"><h2 id="mpdh">${t.locPick}</h2><button class="btn icon" type="button" data-x aria-label="${esc(t.close)}">${ic('x')}</button></div><p class="hint">${t.mapPickT}</p><div class="pmap sm" id="mpm"></div><div class="row2"><button class="btn" type="button" data-x>${t.cancel}</button><button class="btn solid" type="button" id="mpok" disabled>${t.done}</button></div>`;
+document.body.appendChild(d);
+let m,pin=null;
+d.addEventListener('close',()=>{if(m)m.remove();d.remove()});
+d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-x]'))d.close()});
+d.showModal();
+useMap().then(()=>{
+if(!d.open)return;
+m=window.L.map('mpm');tiles(m);
+const put=ll=>{if(pin)pin.setLatLng(ll);else pin=window.L.marker(ll,{draggable:true,icon:window.L.divIcon({className:'pin',iconSize:[28,28],iconAnchor:[14,28]})}).addTo(m);$('mpok').disabled=false};
+if(cur){m.setView([cur.lat,cur.lng],17);put([cur.lat,cur.lng])}else home(m);
+m.on('click',e=>put(e.latlng));
+$('mpok').onclick=()=>{const ll=pin.getLatLng();d.close();cb(ll.lat,ll.lng)};
+}).catch(()=>{$('mpm').textContent=t.err});
+}
 const tile=(i,n)=>`<button class="shot" type="button" data-i="${n}">${pic(i.s,500,'',' loading="lazy"')}<span class="cap">${esc(i.t)}</span></button>`;
 const bindGal=(el,list)=>el.addEventListener('click',e=>{const b=e.target.closest('.shot[data-i]');if(b)showPhoto(list[+b.dataset.i])});
 const tagCounts=cat=>{const m=new Map();PUB.filter(p=>!cat||cat==='all'||p.cat===cat).forEach(p=>p.tags.forEach(x=>m.set(x,(m.get(x)||0)+1)));return m};
@@ -411,7 +442,7 @@ d.addEventListener('click',e=>{if(e.target===d)d.close()});
 }
 const t=T();
 d.setAttribute('aria-label',o.t);
-d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${(o.cat&&o.cat!=='all')||(o.tags&&o.tags.length)?`<div class="tags">${o.cat&&o.cat!=='all'?`<a class="tag" href="#search-${o.cat}">${esc(nameOf(o.cat))}</a>`:''}${(o.tags||[]).map(x=>o.plain?`<span class="tag">${esc(x)}</span>`:`<a class="tag" href="#tag/${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}</div>`:''}${o.rel&&o.rel.length?`<h3>${esc(t.relT)}</h3><div class="tags">${o.rel.map(x=>`<a class="tag" href="#wiki/${esc(x.id)}">${ic('book-open')}${esc(x.title)}</a>`).join('')}</div>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
+d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${(o.cat&&o.cat!=='all')||(o.tags&&o.tags.length)?`<div class="tags">${o.cat&&o.cat!=='all'?`<a class="tag" href="#search-${o.cat}">${esc(nameOf(o.cat))}</a>`:''}${(o.tags||[]).map(x=>o.plain?`<span class="tag">${esc(x)}</span>`:`<a class="tag" href="#tag/${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}</div>`:''}${o.rel&&o.rel.length?`<h3>${esc(t.relT)}</h3><div class="tags">${o.rel.map(x=>`<a class="tag" href="#wiki/${esc(x.id)}">${ic('book-open')}${esc(x.title)}</a>`).join('')}</div>`:''}${hasLoc(o)&&!o.plain?`<a class="btn" href="#map/${(+o.lat).toFixed(4)},${(+o.lng).toFixed(4)}">${ic('map-pin')}${t.onMap}</a>`:''}${hasLoc(o)&&o.plain?`<a class="btn" href="https://www.openstreetmap.org/?mlat=${o.lat}&mlon=${o.lng}#map=18/${o.lat}/${o.lng}" target="_blank" rel="noopener">${ic('map-pin')}${o.lat}, ${o.lng}</a>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
 d.querySelector('.lbx').addEventListener('click',()=>d.close());
 d.showModal();
 }
@@ -470,12 +501,26 @@ if(tok!==tokn)return;
 const com=PUB.map(mkCom);
 const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),b:TX(w.short),s:w.img.src,tags:[],cat:w.cat,h:'#wiki/'+w.id}));
 const all=(tag?com.filter(p=>(p.tags||[]).includes(tag)):[...com,...wk]).sort(byT);
-app.innerHTML=`<div class="th"><h1>${t.bank}</h1><a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips" id="pch">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+(tag?`<a class="chip on" id="tsel" href="#photos" aria-label="${esc(t.rmTag.replace('{x}',tag))}">${ic('tag')}${esc(tag)}${ic('x')}</a>`:'')+(tagCounts('all').size?`<button class="chip" id="mt" type="button" aria-haspopup="dialog">${ic('sliders-horizontal')}${t.moreTags}</button>`:'')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:tag?`<div class="none"><p>${t.noTagged}</p><a class="btn" href="#photos">${ic('camera')}${t.bank}</a></div>`:`<div class="none"><p>${t.firstPhoto}</p><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div>`);
+app.innerHTML=`<div class="th"><h1>${t.bank}</h1><div class="thb">${PUB.some(hasLoc)?`<a class="btn icon" href="#map" aria-label="${esc(t.mapView)}" title="${esc(t.mapView)}">${ic('map-trifold')}</a>`:''}<a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips" id="pch">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+(tag?`<a class="chip on" id="tsel" href="#photos" aria-label="${esc(t.rmTag.replace('{x}',tag))}">${ic('tag')}${esc(tag)}${ic('x')}</a>`:'')+(tagCounts('all').size?`<button class="chip" id="mt" type="button" aria-haspopup="dialog">${ic('sliders-horizontal')}${t.moreTags}</button>`:'')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:tag?`<div class="none"><p>${t.noTagged}</p><a class="btn" href="#photos">${ic('camera')}${t.bank}</a></div>`:`<div class="none"><p>${t.firstPhoto}</p><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div>`);
 const sel=$('tsel');if(sel)$('pch').scrollLeft=sel.offsetLeft-$('pch').offsetLeft-16;
 const mt=$('mt');if(mt)mt.addEventListener('click',()=>tagPicker(tag));
 const g=$('gal');
 if(g)bindGal(g,all);
 if(g)reveal(g.querySelectorAll('.shot'));
+},
+async map(focus){
+const t=T(),tok=tokn;
+await prep(PUB.flatMap(p=>[p.t,p.b]));
+if(tok!==tokn)return;
+document.title=t.mapT+' · Our Streets Wiki';
+const pts=PUB.filter(hasLoc).map(mkCom);
+app.innerHTML=`<div class="th"><h1>${t.mapT}</h1><div class="thb"><a class="btn icon" href="#photos" aria-label="${esc(t.gridView)}" title="${esc(t.gridView)}">${ic('squares-four')}</a></div></div>`+(pts.length?`<div class="pmap" id="pmap" role="region" aria-label="${esc(t.mapLbl)}"></div>`:`<div class="none"><p>${t.noMap}</p><a class="btn" href="#photos">${ic('squares-four')}${t.gridView}</a></div>`);
+if(!pts.length)return;
+try{await useMap()}catch(e){$('pmap').textContent=t.err;return}
+if(tok!==tokn)return;
+const m=window.L.map('pmap');tiles(m);
+const g=window.L.featureGroup(pts.map(p=>window.L.circleMarker([p.lat,p.lng],{radius:10,weight:3,color:'#fff',fillColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#1b7a4a',fillOpacity:1}).on('click',()=>showPhoto(p)).bindTooltip(esc(p.t)))).addTo(m);
+if(focus)m.setView(focus,17);else m.fitBounds(g.getBounds(),{padding:[32,32],maxZoom:16});
 },
 async wiki(){
 const t=T(),tok=tokn;
@@ -552,7 +597,7 @@ app.innerHTML=`<div class="page"><h1>${t.faq}</h1>`+[1,2,3].map(n=>`<details><su
 },
 contribute(){
 const t=T();
-app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><div id="pts" class="sug"></div><small class="hint" id="ptg"></small></div><fieldset class="field rels"><legend>${t.relF}</legend><input type="text" id="prs" role="combobox" aria-expanded="false" aria-controls="prr" aria-autocomplete="list" autocomplete="off" placeholder="${esc(t.relPh)}"><div id="prc" class="tags"></div><div id="prr" class="sug" role="listbox"></div><small class="hint" id="prh">${t.relHint}</small></fieldset><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><div id="pts" class="sug"></div><small class="hint" id="ptg"></small></div><fieldset class="field rels"><legend>${t.relF}</legend><input type="text" id="prs" role="combobox" aria-expanded="false" aria-controls="prr" aria-autocomplete="list" autocomplete="off" placeholder="${esc(t.relPh)}"><div id="prc" class="tags"></div><div id="prr" class="sug" role="listbox"></div><small class="hint" id="prh">${t.relHint}</small></fieldset><div class="field"><span id="plocL">${t.locF}</span><small class="hint" id="ploc" role="status">${t.locNone}</small><div class="locb" role="group" aria-labelledby="plocL"><button class="btn" type="button" id="plme">${ic('crosshair')}${t.locMe}</button><button class="btn" type="button" id="plpick">${ic('map-pin')}${t.locPick}</button><button class="btn icon" type="button" id="plx" hidden aria-label="${esc(t.locRm)}">${ic('x')}</button></div></div><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
 const counter=(i,o,n)=>{const u=()=>{const l=i.value.length;o.textContent=t.maxC.replace('{n}',n)+' · '+l+'/'+n;o.classList.toggle('warn',l>=n)};i.addEventListener('input',u);u()};
 counter($('ptitle'),$('ptc'),120);
 counter($('pcap'),$('pcc'),300);
@@ -613,7 +658,14 @@ return o?new File([o],f.name.replace(/\.[^.]*$/,'')+'.jpg',{type:'image/jpeg'}):
 };
 const sub=$('f').querySelector('button[type=submit]');
 let busy=false;
+let loc=null;
+const setLoc=(lat,lng,src)=>{loc=lat==null?null:{lat:+lat,lng:+lng};$('ploc').textContent=loc?(src==='photo'?t.locPhoto:t.locSet)+' '+loc.lat.toFixed(4)+', '+loc.lng.toFixed(4):t.locNone;$('plx').hidden=!loc;$('plpick').lastChild.textContent=loc?t.locAdj:t.locPick};
+$('plx').addEventListener('click',()=>setLoc(null));
+$('plpick').addEventListener('click',()=>pickLoc(loc,(a,b)=>setLoc(a,b,'map')));
+$('plme').addEventListener('click',()=>{if(!navigator.geolocation){$('ploc').textContent=t.locFail;return}$('ploc').textContent=t.loading;navigator.geolocation.getCurrentPosition(p=>setLoc(p.coords.latitude,p.coords.longitude,'me'),()=>{$('ploc').textContent=t.locFail},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})});
 $('f').querySelector('input[type=file]').addEventListener('change',e=>{
+const fl=e.target.files[0];
+if(fl&&fl.type.startsWith('image/')&&!loc)load('lib/exifr.js?v=1').then(()=>exifr.gps(fl)).then(g=>{if(g&&Number.isFinite(g.latitude)&&Number.isFinite(g.longitude)&&!loc)setLoc(g.latitude,g.longitude,'photo')}).catch(()=>{});
 const file=e.target.files[0];
 if(file&&!file.type.startsWith('image/')){e.target.value='';$('ok').textContent=t.fmt}else $('ok').textContent='';
 });
@@ -635,10 +687,10 @@ const title=$('ptitle').value.trim(),caption=$('pcap').value.trim();
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
 const up=await sb.storage.from('submissions').upload(path,file);
 if(up.error){const m=up.error.message||'';ok.textContent=(/mime|type/i.test(m)?t.fmt:/size|exceed/i.test(m)?t.big:t.err)+' ['+m+']';return}
-const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path,...(tags.length?{tags}:{}),...(rel.size?{related:[...rel]}:{})});
+const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path,...(loc?{lat:+loc.lat.toFixed(4),lng:+loc.lng.toFixed(4)}:{}),...(tags.length?{tags}:{}),...(rel.size?{related:[...rel]}:{})});
 if(r.error){await sb.storage.from('submissions').remove([path]);ok.textContent=r.error.code==='42501'?t.limit:t.err;return}
 ok.textContent=t.thanks;
-f.reset();tags=[];rel=new Set();tl();rl();
+f.reset();tags=[];rel=new Set();tl();rl();setLoc(null);
 }catch(x){ok.textContent=t.err}
 finally{busy=false;sub.disabled=false}
 });
@@ -820,7 +872,7 @@ const s=S.find(x=>x.id===id);
 if(!s)return;
 if(b.dataset.sv){
 const{data}=await sb.storage.from('submissions').createSignedUrl(s.photo_path,300);
-showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',cat:s.cat,plain:true,tags:s.tags||[],rel:relOf(s.related),meta:[a.status+(a[s.status]||s.status),a.topicL+nameOf(s.cat&&CATS.some(c=>c.id===s.cat)?s.cat:'all'),a.submitted+new Date(s.created_at).toLocaleString(lang)]});
+showPhoto({t:s.title,b:s.caption||'',s:data?data.signedUrl:'',cat:s.cat,plain:true,lat:s.lat,lng:s.lng,tags:s.tags||[],rel:relOf(s.related),meta:[a.status+(a[s.status]||s.status),a.topicL+nameOf(s.cat&&CATS.some(c=>c.id===s.cat)?s.cat:'all'),a.submitted+new Date(s.created_at).toLocaleString(lang)]});
 }else if(b.dataset.se){
 $('sid').value=s.id;$('sc').value=s.cat||CATS[0].id;$('st').value=s.title;$('sp').value=s.caption||'';$('stg').value=(s.tags||[]).join(', ');
 $('sf').hidden=false;window.scrollTo(0,0);
@@ -949,6 +1001,11 @@ let nm='';try{nm=decodeURIComponent(h.slice(4))}catch(e){}
 cur='photos';
 back.hidden=true;brand.hidden=false;
 views.photos(nm);
+}else if(h==='map'||h.startsWith('map/')){
+cur='photos';
+back.hidden=true;brand.hidden=false;
+const f=h.slice(4).split(',').map(Number);
+views.map(f.length===2&&f.every(Number.isFinite)?f:null);
 }else if(h.startsWith('council/')){
 cur='council';
 back.hidden=false;brand.hidden=true;
@@ -975,7 +1032,7 @@ views[h]();
 }
 document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||T().ad.admin))+' · Our Streets Wiki';
 if(h.startsWith('tag/')){try{document.title=decodeURIComponent(h.slice(4))}catch(e){}}
-if(h==='wiki'||h==='photos'||h.startsWith('search-')||h.startsWith('tag/'))app.dataset.wide='1';else delete app.dataset.wide;
+if(h==='wiki'||h==='photos'||h.startsWith('map')||h.startsWith('search-')||h.startsWith('tag/'))app.dataset.wide='1';else delete app.dataset.wide;
 nav();
 renderDrawer();
 renderLang();
