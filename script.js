@@ -164,14 +164,7 @@ meetings:[
 {id:'m3',meeting_date:'2026-10-29',outcome:'Funded',title:'Eastside bus shelters funded',body:'Twelve new bus shelters with seating and lighting were funded. Residents can suggest stop locations at the next open session.'},
 {id:'m4',meeting_date:'2026-10-22',outcome:'Open for comment',title:'Oak Avenue zoning hearing',body:'A hearing was held on allowing small apartment buildings near Oak Avenue. Public comment stays open for two more weeks.'}
 ],
-articles:[
-{id:'a1',cat:'roads',title:'Protected bike lanes on Main Street',body:'Protected bike lanes use posts, planters, or curbs to separate cyclists from traffic.'},
-{id:'a2',cat:'roads',title:'Roundabout or stop lights at Elm Street',body:'Members compared a roundabout with new stop lights at the Elm Street intersection.'},
-{id:'a3',cat:'bridges',title:'Canal Street bridge closure windows',body:'Expected closure windows and detour routes for the bridge repairs.'},
-{id:'a4',cat:'transit',title:'New bus shelters for Eastside stops',body:'Twelve shelters with seating and lighting. Residents can suggest stop locations.'},
-{id:'a5',cat:'zoning',title:'Small apartments near Oak Avenue',body:'Public comment on allowing small apartment buildings is open for two more weeks.'}
-],
-links:[{meeting_id:'m1',article_id:'a1'},{meeting_id:'m1',article_id:'a2'},{meeting_id:'m2',article_id:'a3'},{meeting_id:'m3',article_id:'a4'},{meeting_id:'m4',article_id:'a5'}]
+links:[{meeting_id:'m1',article_id:'complete-streets'},{meeting_id:'m1',article_id:'road-diet'},{meeting_id:'m2',article_id:'load-rating'},{meeting_id:'m3',article_id:'headway'},{meeting_id:'m4',article_id:'zoning'},{meeting_id:'m4',article_id:'variance'}]
 };
 
 const ICON={council:'bank',photos:'camera',wiki:'book-open'};
@@ -260,13 +253,12 @@ const fmt=d=>{const[y,m,x]=d.split('-').map(Number);return new Intl.DateTimeForm
 async function getData(force){
 if(!sb)return SAMPLE;
 if(store&&!force)return store;
-const[m,a,l]=await Promise.all([
+const[m,l]=await Promise.all([
 sb.from('meetings').select('*').order('meeting_date',{ascending:false}),
-sb.from('articles').select('*').order('title'),
 sb.from('meeting_articles').select('*')
 ]);
-if(m.error||a.error||l.error)return{meetings:[],articles:[],links:[],err:true};
-store={meetings:m.data||[],articles:a.data||[],links:l.data||[]};
+if(m.error||l.error)return{meetings:[],links:[],err:true};
+store={meetings:m.data||[],links:l.data||[]};
 return store;
 }
 
@@ -416,12 +408,12 @@ app.innerHTML=`<h1>${t.recent}</h1><div class="none">${t.loading}</div>`;
 const d=await getData();
 if(tok!==tokn)return;
 if(d.err){app.innerHTML=`<h1>${t.recent}</h1><div class="none" role="alert"><p>${t.loadErr}</p><button class="btn" id="rt" type="button">${ic('arrow-clockwise')}${t.retry}</button></div>`;$('rt').addEventListener('click',()=>views.council());return}
-const arts=Object.fromEntries(d.articles.map(a=>[a.id,a]));
-await prep([...d.meetings.flatMap(m=>[m.title,m.body,m.outcome]),...d.articles.flatMap(a=>[a.title,a.body])]);
+const arts=Object.fromEntries(WIKI.map(w=>[w.id,w]));
+await prep([...d.meetings.flatMap(m=>[m.title,m.body,m.outcome]),...WIKI.flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
 const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>arts[l.article_id]).filter(Boolean);
-return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),true,null,null,'lead')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(a=>card(iconOf(a.cat),TX(a.title),nameOf(a.cat),TX(a.body),true,null,null,'sm')).join(''):'')+`</section>`;
+return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(m.body),true,null,null,'lead')+(rel.length?`<h3 class="rel">${t.related}</h3>`+rel.map(a=>card(iconOf(a.cat),TX(a.title),nameOf(a.cat),TX(a.short),false,'#wiki/'+a.id,null,'sm')).join(''):'')+`</section>`;
 }).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
 reveal(app.querySelectorAll('section .card,section .rel'));
 },
@@ -607,7 +599,7 @@ const tok=tokn;
 const topics=CATS.map((c,i)=>`<option value="${c.id}">${L.en.cats[i]}</option>`).join('');
 app.innerHTML=`<div class="page"><h1>Admin</h1>
 <div class="ok" id="aerr" role="alert"></div>
-<nav class="chips" id="atabs" role="tablist"><button class="chip on" data-p="m" type="button" role="tab" aria-selected="true">Meetings</button><button class="chip" data-p="a" type="button" role="tab" aria-selected="false">Articles</button><button class="chip" data-p="w" type="button" role="tab" aria-selected="false">Wiki</button><button class="chip" data-p="s" type="button" role="tab" aria-selected="false">Submissions</button></nav>
+<nav class="chips" id="atabs" role="tablist"><button class="chip on" data-p="m" type="button" role="tab" aria-selected="true">Meetings</button><button class="chip" data-p="w" type="button" role="tab" aria-selected="false">Wiki</button><button class="chip" data-p="s" type="button" role="tab" aria-selected="false">Submissions</button></nav>
 <section data-pane="m">
 <h2 class="sec">Council meeting</h2>
 <form id="mf"><input type="hidden" id="mid">
@@ -620,16 +612,6 @@ app.innerHTML=`<div class="page"><h1>Admin</h1>
 <button id="mx" class="btn ghost" type="button" hidden>Cancel edit</button>
 <div class="ok" id="mok" role="status"></div></form>
 <input type="search" class="flt" data-for="ml" placeholder="Filter" aria-label="Filter"><div id="ml"></div></section>
-<section data-pane="a" hidden>
-<h2 class="sec">Articles</h2>
-<form id="af"><input type="hidden" id="aid">
-<label class="field">Topic<select id="ac">${topics}</select></label>
-<label class="field">Title<input type="text" id="at" required></label>
-<label class="field">Text<textarea id="ab" rows="6" required></textarea></label>
-<button class="btn solid" type="submit">Save article</button>
-<button id="ax" class="btn ghost" type="button" hidden>Cancel edit</button>
-<div class="ok" id="aok" role="status"></div></form>
-<input type="search" class="flt" data-for="al" placeholder="Filter" aria-label="Filter"><div id="al"></div></section>
 <section data-pane="w" hidden>
 <h2 class="sec">Wiki article</h2>
 <form id="wf"><input type="hidden" id="wkey">
@@ -655,10 +637,9 @@ app.innerHTML=`<div class="page"><h1>Admin</h1>
 <button class="btn solid" type="submit">Save submission</button>
 <button id="sx" class="btn ghost" type="button">Cancel edit</button></form>
 <label class="check"><input type="checkbox" id="srev">Show reviewed</label><input type="search" class="flt" data-for="sl" placeholder="Filter" aria-label="Filter"><div id="sl"></div></section></div>`;
-let D={meetings:[],articles:[],links:[]};
+let D={meetings:[],links:[]};
 let S=[];
 const resetM=()=>{$('mf').reset();$('mid').value='';$('mx').hidden=true};
-const resetA=()=>{$('af').reset();$('aid').value='';$('ax').hidden=true};
 const resetW=()=>{$('wf').reset();$('wkey').value='';$('wx').hidden=true};
 const fail=r=>{$('aerr').textContent=r&&r.error?'Failed: '+r.error.message:'';return !!(r&&r.error)};
 const drawS=()=>{
@@ -672,9 +653,8 @@ const{data:subs}=await sb.from('submissions').select('*').order('created_at',{as
 S=subs||[];
 $('wl').innerHTML=WIKI.map(w=>`<div class="arow"><div><b>${esc(w.title)}</b><small>${esc(w.id)}</small></div><button class="btn icon" data-we="${w.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-wd="${w.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
 drawS();
-$('mrel').innerHTML=D.articles.map(a=>`<label class="check"><input type="checkbox" value="${a.id}"> ${esc(a.title)}</label>`).join('')||'<small>No articles yet.</small>';
+$('mrel').innerHTML=WIKI.map(a=>`<label class="check"><input type="checkbox" value="${esc(a.id)}"> ${esc(a.title)} <small>${nameOf(a.cat)}</small></label>`).join('')||'<small>No articles yet.</small>';
 $('ml').innerHTML=D.meetings.map(m=>`<div class="arow"><div><b>${esc(m.title)}</b><small>${m.meeting_date}${m.outcome?' · '+esc(m.outcome):''}</small></div><button class="btn icon" data-me="${m.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-md="${m.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
-$('al').innerHTML=D.articles.map(a=>`<div class="arow"><div><b>${esc(a.title)}</b><small>${nameOf(a.cat)}</small></div><button class="btn icon" data-ae="${a.id}" aria-label="Edit">${ic('pencil-simple')}</button><button class="btn icon" data-ad="${a.id}" aria-label="Delete">${ic('trash')}</button></div>`).join('');
 };
 $('mf').addEventListener('submit',async e=>{
 e.preventDefault();
@@ -706,29 +686,6 @@ if(fail(await sb.from('meetings').delete().eq('id',b.dataset.md)))return;
 await draw();
 }
 });
-$('af').addEventListener('submit',async e=>{
-e.preventDefault();
-const id=$('aid').value;
-const p={cat:$('ac').value,title:$('at').value.trim(),body:$('ab').value.trim()};
-const r=id?await sb.from('articles').update(p).eq('id',id):await sb.from('articles').insert(p);
-if(r.error){$('aok').textContent='Could not save: '+r.error.message;return}
-resetA();
-$('aok').textContent='Saved.';
-await draw();
-});
-$('al').addEventListener('click',async e=>{
-const b=e.target.closest('button');
-if(!b)return;
-if(b.dataset.ae){
-const a=D.articles.find(x=>x.id===b.dataset.ae);
-$('aid').value=a.id;$('ac').value=a.cat;$('at').value=a.title;$('ab').value=a.body;
-$('ax').hidden=false;$('aok').textContent='';
-window.scrollTo(0,0);
-}else if(b.dataset.ad&&confirm('Delete this article? It will be removed from any meetings it is attached to.')){
-if(fail(await sb.from('articles').delete().eq('id',b.dataset.ad)))return;
-await draw();
-}
-});
 $('wf').addEventListener('submit',async e=>{
 e.preventDefault();
 const key=$('wkey').value;
@@ -749,7 +706,7 @@ const w=WIKI.find(x=>x.id===b.dataset.we);
 $('wkey').value=w.id;$('wid').value=w.id;$('wc').value=w.cat;$('wt').value=w.title;$('ws').value=w.short;$('wbd').value=w.body.join('\n\n');$('wimg').value=w.img?.src||'';$('wcr').value=w.img?.credit||'';$('wal').value=w.img?.alt||'';
 $('wx').hidden=false;$('wok').textContent='';
 window.scrollTo(0,0);
-}else if(b.dataset.wd&&confirm('Delete this wiki article?')){
+}else if(b.dataset.wd&&confirm('Delete this wiki article? It will be removed from any meetings it is attached to.')){
 if(fail(await sb.from('wiki_articles').delete().eq('id',b.dataset.wd)))return;
 wikiReady=loadWiki();
 await wikiReady;
@@ -798,7 +755,6 @@ const q=i.value.toLowerCase();
 $(i.dataset.for).querySelectorAll('.arow').forEach(r=>r.hidden=!r.textContent.toLowerCase().includes(q));
 }));
 $('mx').addEventListener('click',()=>{resetM();$('mok').textContent=''});
-$('ax').addEventListener('click',()=>{resetA();$('aok').textContent=''});
 await draw();
 }
 };
