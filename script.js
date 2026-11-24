@@ -35,6 +35,13 @@ Object.assign(A.tl,{relF:"Mga kaugnay na artikulo (opsyonal, hanggang 3)",relNon
 Object.assign(A.ko,{relF:"관련 글 (선택, 최대 3개)",relNone:"이 주제에는 아직 글이 없습니다.",relHint:"사진 속 내용을 설명하는 글을 선택하세요.",relT:"관련 글"});
 Object.assign(A.zh,{relF:"相关文章（可选，最多 3 篇）",relNone:"此主题暂无文章。",relHint:"请选择能解释照片内容的文章。",relT:"相关文章"});
 
+Object.assign(A.en,{relPh:"Type to search articles",relMax:"You can pick up to 3 articles."});
+Object.assign(A.es,{relPh:"Escribe para buscar artículos",relMax:"Puedes elegir hasta 3 artículos."});
+Object.assign(A.hi,{relPh:"लेख खोजने के लिए टाइप करें",relMax:"आप अधिकतम 3 लेख चुन सकते हैं।"});
+Object.assign(A.tl,{relPh:"Mag-type para maghanap ng artikulo",relMax:"Hanggang 3 artikulo lang ang maaari."});
+Object.assign(A.ko,{relPh:"글을 검색하려면 입력하세요",relMax:"글은 최대 3개까지 선택할 수 있습니다."});
+Object.assign(A.zh,{relPh:"输入以搜索文章",relMax:"最多可选择 3 篇文章。"});
+
 const LANGS=[['en','🇺🇸','English'],['es','🇪🇸','Español'],['hi','🇮🇳','हिन्दी'],['tl','🇵🇭','Tagalog'],['ko','🇰🇷','한국어'],['zh','🇨🇳','中文']];
 
 const CATS=[{id:'roads',i:'road-horizon'},{id:'bridges',i:'bridge'},{id:'structures',i:'buildings'},{id:'transit',i:'bus'},{id:'parks',i:'tree'},{id:'zoning',i:'map-trifold'}];
@@ -450,16 +457,25 @@ app.innerHTML=`<div class="page"><h1>${t.faq}</h1>`+[1,2,3].map(n=>`<details><su
 },
 contribute(){
 const t=T();
-app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><small class="hint" id="ptg"></small></div><fieldset class="field rels"><legend>${t.relF}</legend><div id="prl"></div><small class="hint">${t.relHint}</small></fieldset><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
+app.innerHTML=`<div class="page"><h1>${t.contribute}</h1><p>${t.contribBody}</p><form id="f"><label class="field">${t.photoF}<input type="file" accept="image/*" required><small class="hint">${t.photoHint}</small></label><label class="field">${t.topicF}<select id="pc">${CATS.map(c=>`<option value="${c.id}">${nameOf(c.id)}</option>`).join('')}</select></label><input type="text" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><label class="field">${t.titleF}<input type="text" id="ptitle" required maxlength="120" aria-describedby="ptc" placeholder="${esc(t.titleEx)}"><small class="hint" id="ptc"></small></label><label class="field">${t.capF}<input type="text" id="pcap" maxlength="300" aria-describedby="pcc" placeholder="${esc(t.capEx)}"><small class="hint" id="pcc"></small></label><div class="field"><label for="ptag">${t.tagsF}</label><input type="text" id="ptag" maxlength="24" autocomplete="off" enterkeyhint="done" aria-describedby="ptg" placeholder="${esc(t.tagPh)}"><div id="ptl" class="tags"></div><small class="hint" id="ptg"></small></div><fieldset class="field rels"><legend>${t.relF}</legend><input type="text" id="prs" role="combobox" aria-expanded="false" aria-controls="prr" aria-autocomplete="list" autocomplete="off" placeholder="${esc(t.relPh)}"><div id="prc" class="tags"></div><div id="prr" class="sug" role="listbox"></div><small class="hint" id="prh">${t.relHint}</small></fieldset><button class="btn solid" type="submit">${t.submit}</button><div class="ok" id="ok" role="status"></div></form></div>`;
 const counter=(i,o,n)=>{const u=()=>{const l=i.value.length;o.textContent=t.maxC.replace('{n}',n)+' · '+l+'/'+n;o.classList.toggle('warn',l>=n)};i.addEventListener('input',u);u()};
 counter($('ptitle'),$('ptc'),120);
 counter($('pcap'),$('pcc'),300);
 let tags=[],rel=new Set();
 const rl=()=>{
-const l=WIKI.filter(w=>w.cat===$('pc').value);
-$('prl').innerHTML=l.length?l.map(w=>`<label class="check"><input type="checkbox" value="${esc(w.id)}"${rel.has(w.id)?' checked':''}${!rel.has(w.id)&&rel.size>=3?' disabled':''}><span>${esc(TX(w.title))}</span></label>`).join(''):`<p class="hint">${t.relNone}</p>`;
+const q=$('prs').value.trim().toLowerCase();
+$('prc').innerHTML=[...rel].map(id=>{const w=WIKI.find(x=>x.id===id);return w?`<button type="button" class="tag rm" data-id="${esc(id)}" aria-label="${esc(t.rmTag.replace('{x}',TX(w.title)))}">${esc(TX(w.title))}${ic('x')}</button>`:''}).join('');
+const full=rel.size>=3;
+let l=full?[]:WIKI.filter(w=>!rel.has(w.id)&&(q?(TX(w.title)+' '+TX(w.short)).toLowerCase().includes(q):w.cat===$('pc').value)).slice(0,6);
+$('prr').innerHTML=l.map(w=>`<button type="button" role="option" class="opt" data-id="${esc(w.id)}"><b>${esc(TX(w.title))}</b><small>${esc(nameOf(w.cat))}</small></button>`).join('')+(!full&&q&&!l.length?`<p class="hint">${t.relNone}</p>`:'');
+$('prs').setAttribute('aria-expanded',l.length?'true':'false');
+$('prs').disabled=full;
+$('prh').textContent=full?t.relMax:t.relHint;
 };
-$('prl').addEventListener('change',e=>{e.target.checked?rel.add(e.target.value):rel.delete(e.target.value);rl()});
+$('prs').addEventListener('input',rl);
+$('prs').addEventListener('focus',rl);
+$('prr').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b&&rel.size<3){rel.add(b.dataset.id);$('prs').value='';rl();$('prs').focus()}});
+$('prc').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){rel.delete(b.dataset.id);rl()}});
 $('pc').addEventListener('change',rl);
 rl();
 const tl=()=>{

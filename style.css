@@ -343,3 +343,13 @@ fieldset.rels legend{padding:0;margin-bottom:6px;font-weight:600}
 #lb h3{margin:12px 0 4px;font-size:1rem}
 a.tag{text-decoration:none;color:var(--accent)}
 .check input{flex:none;align-self:center}
+
+.sug{display:flex;flex-direction:column;margin:6px 0;border-radius:12px;overflow:hidden}
+.sug:empty{display:none}
+.sug .opt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:48px;padding:8px 14px;border:1px solid var(--line);border-top-width:0;background:var(--card);color:var(--fg);font:inherit;text-align:left;cursor:pointer}
+.sug .opt:first-child{border-top-width:1px;border-radius:12px 12px 0 0}
+.sug .opt:last-child{border-radius:0 0 12px 12px}
+.sug .opt:only-child{border-radius:12px}
+.sug .opt small{color:var(--mut)}
+.sug .opt:hover,.sug .opt:focus-visible{background:var(--tile)}
+@media(max-width:480px){.arow{flex-wrap:wrap}.arow div{flex:1 1 100%}}
