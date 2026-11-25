@@ -563,7 +563,7 @@ async map(focus){
 const t=T(),tok=tokn;
 await prep(PUB.flatMap(p=>[p.t,p.b]));
 if(tok!==tokn)return;
-document.title=t.mapT+' · Our Streets Wiki';
+document.title=t.mapT+' · Our Streets Trenton';
 const pts=PUB.filter(hasLoc).map(mkCom);
 app.innerHTML=`<div class="th"><h1>${t.mapT}</h1><div class="thb"><a class="btn icon" href="#photos" aria-label="${esc(t.gridView)}" title="${esc(t.gridView)}">${ic('squares-four')}</a></div></div>`+(pts.length?`<div class="pmap" id="pmap" role="region" aria-label="${esc(t.mapLbl)}"></div>`:`<div class="none"><p>${t.noMap}</p><a class="btn" href="#photos">${ic('squares-four')}${t.gridView}</a></div>`);
 if(!pts.length)return;
@@ -571,7 +571,7 @@ try{await useMap()}catch(e){$('pmap').textContent=t.err;return}
 if(tok!==tokn)return;
 const m=curMap=newMap('pmap');
 const g=window.L.featureGroup(pts.map(p=>window.L.circleMarker([p.lat,p.lng],{radius:10,weight:3,color:'#fff',fillColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#1b7a4a',fillOpacity:1}).on('click',()=>showPhoto(p)).bindTooltip(esc(p.t)))).addTo(m);
-if(focus)m.setView(focus,16);else if(pts.length===1)m.setView([pts[0].lat,pts[0].lng],14);else m.fitBounds(g.getBounds(),{padding:[32,32],maxZoom:15});
+if(focus)m.setView(focus,16);else if(CITY&&CITY.center)home(m);else if(pts.length===1)m.setView([pts[0].lat,pts[0].lng],14);else m.fitBounds(g.getBounds(),{padding:[32,32],maxZoom:15});
 },
 async wiki(){
 const t=T(),tok=tokn;
@@ -596,7 +596,7 @@ if(!m){app.innerHTML=`<div class="none"><p>${t.none}</p><a class="btn" href="#co
 const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>WIKI.find(w=>w.id===l.article_id)).filter(Boolean);
 await prep([m.title,m.outcome,...bodyText(m.body),...rel.flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
-document.title=TX(m.title)+' · Our Streets Wiki';
+document.title=TX(m.title)+' · Our Streets Trenton';
 app.innerHTML=`<article class="wiki-article mtg"><p class="kick">${ic('bank')}<span>${fmt(m.meeting_date)}</span></p><h1>${esc(TX(m.title))}</h1>`+(m.outcome?`<p class="pill">${esc(TX(m.outcome))}</p>`:'')+`<div class="actions"><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+renderBody(m.body)+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(w=>card(iconOf(w.cat),TX(w.title),nameOf(w.cat),TX(w.short),false,'#wiki/'+w.id,w.img?.src,'res h3')).join(''):'')+`</article>`;
 bindInl(app.querySelector('article'));
 $('shr').addEventListener('click',async()=>{
@@ -1143,7 +1143,7 @@ cur=h;
 back.hidden=true;brand.hidden=false;
 views[h]();
 }
-document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||T().ad.admin))+' · Our Streets Wiki';
+document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||T().ad.admin))+' · Our Streets Trenton';
 if(h.startsWith('tag/')){try{document.title=decodeURIComponent(h.slice(4))}catch(e){}}
 if(h==='wiki'||h==='photos'||h.startsWith('map')||h.startsWith('search-')||h.startsWith('tag/'))app.dataset.wide='1';else delete app.dataset.wide;
 nav();

@@ -1,6 +1,6 @@
 # Product
 
-**Name:** Our Streets Wiki
+**Name:** Our Streets Trenton
 **Surface modes:** Read (wiki articles, FAQ, About), Operate (admin, Contribute, account), Experience (Photos)
 
 ## What it is
