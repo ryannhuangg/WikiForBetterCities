@@ -7,12 +7,12 @@ ko:{signup:'계정 만들기',noAcct:'계정이 없나요? 가입하기',haveAcc
 zh:{signup:'创建账户',noAcct:'没有账户？注册',haveAcct:'已有账户？登录',signout:'退出登录',confirm:'请查收邮件确认账户，然后登录。',err:'出错了。请检查信息后重试。',notReady:'账户功能尚未设置。',signedAs:'当前登录：',empty:'暂无会议。',loading:'加载中…',related:'相关文章',seeImg:'查看图片',remember:'记住我'}
 };
 
-Object.assign(A.en,{access:"Accessibility",aTheme:"Theme",aAuto:"System",aLight:"Light",aDark:"Dark",aSize:"Text size",aContrast:"High contrast",aMotion:"Reduce motion",aMarks:"Mark selected items with underlines and checks, not color alone",aReset:"Reset to defaults",aMore:"More settings",aDevSize:"Match device text size",aHint:"Need larger text or higher contrast?",aAdjust:"Adjust",aNo:"No thanks"});
-Object.assign(A.es,{access:"Accesibilidad",aTheme:"Tema",aAuto:"Sistema",aLight:"Claro",aDark:"Oscuro",aSize:"Tamaño del texto",aContrast:"Alto contraste",aMotion:"Reducir movimiento",aMarks:"Marcar lo seleccionado con subrayados y marcas, no solo con color",aReset:"Restablecer",aMore:"Más ajustes",aDevSize:"Usar el tamaño de texto del dispositivo",aHint:"¿Necesitas texto más grande o más contraste?",aAdjust:"Ajustar",aNo:"No, gracias"});
-Object.assign(A.hi,{access:"सुलभता",aTheme:"थीम",aAuto:"सिस्टम",aLight:"हल्का",aDark:"गहरा",aSize:"टेक्स्ट का आकार",aContrast:"उच्च कंट्रास्ट",aMotion:"एनिमेशन कम करें",aMarks:"चुने हुए आइटम को केवल रंग से नहीं, रेखांकन और निशान से दिखाएँ",aReset:"डिफ़ॉल्ट पर लौटें",aMore:"और सेटिंग्स",aDevSize:"डिवाइस के टेक्स्ट आकार का उपयोग करें",aHint:"बड़ा टेक्स्ट या ज़्यादा कंट्रास्ट चाहिए?",aAdjust:"बदलें",aNo:"नहीं, धन्यवाद"});
-Object.assign(A.tl,{access:"Accessibility",aTheme:"Tema",aAuto:"Sistema",aLight:"Maliwanag",aDark:"Madilim",aSize:"Laki ng teksto",aContrast:"Mataas na contrast",aMotion:"Bawasan ang galaw",aMarks:"Markahan ang napili ng underline at tsek, hindi kulay lang",aReset:"I-reset",aMore:"Higit pang setting",aDevSize:"Gamitin ang laki ng teksto ng device",aHint:"Kailangan ng mas malaking teksto o mas mataas na contrast?",aAdjust:"I-adjust",aNo:"Hindi, salamat"});
-Object.assign(A.ko,{access:"접근성",aTheme:"테마",aAuto:"시스템",aLight:"라이트",aDark:"다크",aSize:"글자 크기",aContrast:"고대비",aMotion:"움직임 줄이기",aMarks:"선택 항목을 색상만이 아니라 밑줄과 체크로 표시",aReset:"기본값으로 되돌리기",aMore:"설정 더 보기",aDevSize:"기기 글자 크기 따르기",aHint:"더 큰 글자나 높은 대비가 필요하신가요?",aAdjust:"조정",aNo:"괜찮아요"});
-Object.assign(A.zh,{access:"无障碍",aTheme:"主题",aAuto:"跟随系统",aLight:"浅色",aDark:"深色",aSize:"文字大小",aContrast:"高对比度",aMotion:"减少动画",aMarks:"用下划线和对勾标记所选项，而不只靠颜色",aReset:"恢复默认",aMore:"更多设置",aDevSize:"跟随设备文字大小",aHint:"需要更大的文字或更高的对比度吗？",aAdjust:"调整",aNo:"不用了"});
+Object.assign(A.en,{access:"Accessibility",aTheme:"Theme",aAuto:"System",aLight:"Light",aDark:"Dark",aSize:"Text size",aContrast:"High contrast",aMotion:"Reduce motion",aMarks:"Mark selected items with underlines and checks, not color alone",aReset:"Reset to defaults",aDevSize:"Match device text size",aHint:"Need larger text or higher contrast?",aAdjust:"Adjust",aNo:"No thanks"});
+Object.assign(A.es,{access:"Accesibilidad",aTheme:"Tema",aAuto:"Sistema",aLight:"Claro",aDark:"Oscuro",aSize:"Tamaño del texto",aContrast:"Alto contraste",aMotion:"Reducir movimiento",aMarks:"Marcar lo seleccionado con subrayados y marcas, no solo con color",aReset:"Restablecer",aDevSize:"Usar el tamaño de texto del dispositivo",aHint:"¿Necesitas texto más grande o más contraste?",aAdjust:"Ajustar",aNo:"No, gracias"});
+Object.assign(A.hi,{access:"सुलभता",aTheme:"थीम",aAuto:"सिस्टम",aLight:"हल्का",aDark:"गहरा",aSize:"टेक्स्ट का आकार",aContrast:"उच्च कंट्रास्ट",aMotion:"एनिमेशन कम करें",aMarks:"चुने हुए आइटम को केवल रंग से नहीं, रेखांकन और निशान से दिखाएँ",aReset:"डिफ़ॉल्ट पर लौटें",aDevSize:"डिवाइस के टेक्स्ट आकार का उपयोग करें",aHint:"बड़ा टेक्स्ट या ज़्यादा कंट्रास्ट चाहिए?",aAdjust:"बदलें",aNo:"नहीं, धन्यवाद"});
+Object.assign(A.tl,{access:"Accessibility",aTheme:"Tema",aAuto:"Sistema",aLight:"Maliwanag",aDark:"Madilim",aSize:"Laki ng teksto",aContrast:"Mataas na contrast",aMotion:"Bawasan ang galaw",aMarks:"Markahan ang napili ng underline at tsek, hindi kulay lang",aReset:"I-reset",aDevSize:"Gamitin ang laki ng teksto ng device",aHint:"Kailangan ng mas malaking teksto o mas mataas na contrast?",aAdjust:"I-adjust",aNo:"Hindi, salamat"});
+Object.assign(A.ko,{access:"접근성",aTheme:"테마",aAuto:"시스템",aLight:"라이트",aDark:"다크",aSize:"글자 크기",aContrast:"고대비",aMotion:"움직임 줄이기",aMarks:"선택 항목을 색상만이 아니라 밑줄과 체크로 표시",aReset:"기본값으로 되돌리기",aDevSize:"기기 글자 크기 따르기",aHint:"더 큰 글자나 높은 대비가 필요하신가요?",aAdjust:"조정",aNo:"괜찮아요"});
+Object.assign(A.zh,{access:"无障碍",aTheme:"主题",aAuto:"跟随系统",aLight:"浅色",aDark:"深色",aSize:"文字大小",aContrast:"高对比度",aMotion:"减少动画",aMarks:"用下划线和对勾标记所选项，而不只靠颜色",aReset:"恢复默认",aDevSize:"跟随设备文字大小",aHint:"需要更大的文字或更高的对比度吗？",aAdjust:"调整",aNo:"不用了"});
 
 Object.assign(A.en,{maxC:"Up to {n} characters",badLogin:"Incorrect email or password.",needConfirm:"Confirm your email first. Check your inbox for the link.",exists:"An account with this email already exists. Sign in instead.",weakPw:"Password must be at least 6 characters.",rate:"Too many attempts. Wait a minute and try again.",badEmail:"Enter a valid email address.",pwHint:"At least 6 characters"});
 Object.assign(A.es,{maxC:"Máximo {n} caracteres",badLogin:"Correo o contraseña incorrectos.",needConfirm:"Primero confirma tu correo. Revisa tu bandeja de entrada.",exists:"Ya existe una cuenta con este correo. Inicia sesión.",weakPw:"La contraseña debe tener al menos 6 caracteres.",rate:"Demasiados intentos. Espera un minuto e inténtalo de nuevo.",badEmail:"Introduce un correo válido.",pwHint:"Al menos 6 caracteres"});
@@ -49,12 +49,12 @@ Object.assign(A.tl,{loadErr:"Hindi ma-load ang mga pulong. Suriin ang koneksyon 
 Object.assign(A.ko,{loadErr:"회의를 불러오지 못했습니다. 연결을 확인하고 다시 시도하세요.",retry:"다시 시도"});
 Object.assign(A.zh,{loadErr:"无法加载会议。请检查网络连接后重试。",retry:"重试"});
 
-Object.assign(A.en,{tagged:"Photos tagged “{x}”",noTagged:"No photos with this tag yet.",tagsL:"Tags",photosOf:"Photos of this"});
-Object.assign(A.es,{tagged:"Fotos con la etiqueta “{x}”",noTagged:"Aún no hay fotos con esta etiqueta.",tagsL:"Etiquetas",photosOf:"Fotos de esto"});
-Object.assign(A.hi,{tagged:"“{x}” टैग वाली तस्वीरें",noTagged:"इस टैग वाली अभी कोई तस्वीर नहीं है।",tagsL:"टैग",photosOf:"इसकी तस्वीरें"});
-Object.assign(A.tl,{tagged:"Mga larawang may tag na “{x}”",noTagged:"Wala pang larawang may ganitong tag.",tagsL:"Mga tag",photosOf:"Mga larawan nito"});
-Object.assign(A.ko,{tagged:"“{x}” 태그가 있는 사진",noTagged:"이 태그가 있는 사진이 아직 없습니다.",tagsL:"태그",photosOf:"관련 사진"});
-Object.assign(A.zh,{tagged:"带有“{x}”标签的照片",noTagged:"还没有带此标签的照片。",tagsL:"标签",photosOf:"相关照片"});
+Object.assign(A.en,{noTagged:"No photos with this tag yet.",tagsL:"Tags",photosOf:"Photos of this"});
+Object.assign(A.es,{noTagged:"Aún no hay fotos con esta etiqueta.",tagsL:"Etiquetas",photosOf:"Fotos de esto"});
+Object.assign(A.hi,{noTagged:"इस टैग वाली अभी कोई तस्वीर नहीं है।",tagsL:"टैग",photosOf:"इसकी तस्वीरें"});
+Object.assign(A.tl,{noTagged:"Wala pang larawang may ganitong tag.",tagsL:"Mga tag",photosOf:"Mga larawan nito"});
+Object.assign(A.ko,{noTagged:"이 태그가 있는 사진이 아직 없습니다.",tagsL:"태그",photosOf:"관련 사진"});
+Object.assign(A.zh,{noTagged:"还没有带此标签的照片。",tagsL:"标签",photosOf:"相关照片"});
 
 Object.assign(A.en,{fmt:'Use a JPG, PNG, WebP or GIF image.'});
 Object.assign(A.es,{fmt:'Usa una imagen JPG, PNG, WebP o GIF.'});
@@ -274,8 +274,11 @@ const inner=`<div class="thumb">${src?pic(src,500,'',' loading="lazy"'):ic(i)}</
 const c='card'+(cls?' '+cls:'');
 const cc=CATS.find(x=>x.i===i);
 const dc=cc?` data-c="${cc.id}"`:'';
-return href?`<a class="${c}"${dc} href="${href}">${inner}</a>`:`<article class="${c}"${dc}${attr||''}>${inner}</article>`;
+return href?`<a class="${c}"${dc}${attr||''} href="${href}">${inner}</a>`:`<article class="${c}"${dc}${attr||''}>${inner}</article>`;
 };
+// outcome is free text from admins; keyword match on the English original
+const outK=o=>/\bnot\b|defund|den(y|ied)|reject|fail|vote[sd]? down/i.test(o)?'no':/\b(approv|funded|pass|adopt)/i.test(o)?'yes':'wait';
+console.assert(outK('Not approved')==='no'&&outK('Defunded')==='no'&&outK('Approved 5-2')==='yes'&&outK('Tabled pending funding')==='wait'&&outK('Bypassed')==='wait','outK');
 const TL={es:'es',hi:'hi',tl:'tl',ko:'ko',zh:'zh-CN'};
 let TC={};
 try{TC=JSON.parse(localStorage.getItem('tc')||'{}')}catch(e){}
@@ -358,13 +361,13 @@ else if(A11Y.stored())A11Y.sync(A11Y.get());
 }
 }
 
-function axHtml(keys,pre){
+function axHtml(keys){
 const t=T(),p=A11Y.get();
-const seg=(k,lab,o)=>`<h2 class="ax" id="${pre}${k}">${lab}</h2><div class="seg" role="group" aria-labelledby="${pre}${k}">`+o.map(([v,l])=>`<button type="button" data-k="${k}" data-v="${v}" aria-pressed="${String(p[k])===String(v)}">${l}</button>`).join('')+`</div>`;
+const seg=(k,lab,o)=>`<h2 class="ax" id="p-${k}">${lab}</h2><div class="seg" role="group" aria-labelledby="p-${k}">`+o.map(([v,l])=>`<button type="button" data-k="${k}" data-v="${v}" aria-pressed="${String(p[k])===String(v)}">${l}</button>`).join('')+`</div>`;
 const chk=(k,l)=>`<label class="check"><input type="checkbox" data-k="${k}"${p[k]?' checked':''}>${l}</label>`;
 const parts={
 theme:()=>seg('theme',t.aTheme,[['auto',t.aAuto],['light',t.aLight],['dark',t.aDark]]),
-size:()=>`<h2 class="ax" id="${pre}size">${t.aSize}</h2><div class="sl"><span class="sm" aria-hidden="true">A</span><div class="rg"><input type="range" min="0.875" max="1.5" step="0.125" value="${p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size}" aria-labelledby="${pre}size" aria-valuetext="${Math.round((p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size)*100)}%"><div class="tk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="lg" aria-hidden="true">A</span></div><label class="check"><input type="checkbox" data-k="sizeAuto"${p.size==='auto'?' checked':''}>${t.aDevSize}</label>`,
+size:()=>`<h2 class="ax" id="p-size">${t.aSize}</h2><div class="sl"><span class="sm" aria-hidden="true">A</span><div class="rg"><input type="range" min="0.875" max="1.5" step="0.125" value="${p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size}" aria-labelledby="p-size" aria-valuetext="${Math.round((p.size==='auto'?parseFloat(getComputedStyle(document.documentElement).fontSize)/16:p.size)*100)}%"><div class="tk" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><span class="lg" aria-hidden="true">A</span></div><label class="check"><input type="checkbox" data-k="sizeAuto"${p.size==='auto'?' checked':''}>${t.aDevSize}</label>`,
 contrast:()=>chk('contrast',t.aContrast),
 motion:()=>chk('motion',t.aMotion),
 marks:()=>chk('marks',t.aMarks),
@@ -395,21 +398,6 @@ if(k==='sizeAuto'){const r=el.querySelector('input[type=range]'),c=A11Y.get();if
 else A11Y.set({[k]:e.target.checked});
 });
 }
-const axBtn=$('axBtn'),axMenu=$('axMenu');
-function setAx(open){
-if(open){
-const t=T();
-axMenu.innerHTML=`<h2 class="ax first">${t.access}</h2>`+axHtml(['theme','size','contrast'],'q-')+`<a class="btn ghost" href="#access">${t.aMore}</a>`;
-}
-axMenu.hidden=!open;
-axBtn.setAttribute('aria-expanded',open);
-axBtn.setAttribute('aria-label',T().access);
-axMenu.setAttribute('aria-label',T().access);
-if(open){setLang(false);axMenu.querySelector('button').focus()}
-}
-axBind(axMenu);
-axBtn.addEventListener('click',e=>{e.stopPropagation();setAx(axMenu.hidden)});
-axMenu.addEventListener('click',e=>{if(e.target.closest('a'))setAx(false)});
 if(sb)A11Y.sync=p=>{if(user)sb.from('user_prefs').upsert({id:user.id,a11y:p}).then(()=>{},()=>{})};
 
 const axHint=$('axHint');
@@ -428,7 +416,7 @@ $('axHintGo').textContent=t.aAdjust;
 $('axHintNo').textContent=t.aNo;
 axHint.setAttribute('aria-label',t.access);
 }
-$('axHintGo').addEventListener('click',e=>{e.stopPropagation();hideHint();setAx(true)});
+$('axHintGo').addEventListener('click',()=>{hideHint();location.hash='#access'});
 $('axHintNo').addEventListener('click',hideHint);
 
 const relOf=ids=>(ids||[]).map(id=>WIKI.find(w=>w.id===id)).filter(Boolean).map(w=>({id:w.id,title:TX(w.title)}));
@@ -493,7 +481,7 @@ d.addEventListener('click',e=>{if(e.target===d)d.close()});
 }
 const t=T();
 d.setAttribute('aria-label',o.t);
-d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${(o.cat&&o.cat!=='all')||(o.tags&&o.tags.length)?`<div class="tags">${o.cat&&o.cat!=='all'?`<a class="tag" href="#search-${o.cat}">${esc(nameOf(o.cat))}</a>`:''}${(o.tags||[]).map(x=>o.plain?`<span class="tag">${esc(x)}</span>`:`<a class="tag" href="#tag/${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}</div>`:''}${o.rel&&o.rel.length?`<h3>${esc(t.relT)}</h3><div class="tags">${o.rel.map(x=>`<a class="tag" href="#wiki/${esc(x.id)}">${ic('book-open')}${esc(x.title)}</a>`).join('')}</div>`:''}${hasLoc(o)&&!o.plain?`<a class="btn" href="#map/${(+o.lat).toFixed(4)},${(+o.lng).toFixed(4)}">${ic('map-pin')}${t.onMap}</a>`:''}${hasLoc(o)&&o.plain?`<a class="btn" href="https://www.openstreetmap.org/?mlat=${o.lat}&mlon=${o.lng}#map=18/${o.lat}/${o.lng}" target="_blank" rel="noopener">${ic('map-pin')}${o.lat}, ${o.lng}</a>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
+d.innerHTML=`<button class="btn icon lbx" type="button" aria-label="${t.close}">${ic('x')}</button><div class="lbimg">${o.s?pic(o.s,1280,o.t):''}</div><div class="lbtx"><h2>${esc(o.t)}</h2>${o.user?`<p class="badge">${ic('user')}${esc(t.userSub)}</p>`:''}${o.b?`<p>${esc(o.b)}</p>`:''}${(o.cat&&o.cat!=='all')||(o.tags&&o.tags.length)?`<div class="tags">${o.cat&&o.cat!=='all'?`<a class="tag" href="#photos/${o.cat}">${esc(nameOf(o.cat))}</a>`:''}${(o.tags||[]).map(x=>o.plain?`<span class="tag">${esc(x)}</span>`:`<a class="tag" href="#tag/${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}</div>`:''}${o.rel&&o.rel.length?`<h3>${esc(t.relT)}</h3><div class="tags">${o.rel.map(x=>`<a class="tag" href="#wiki/${esc(x.id)}">${ic('book-open')}${esc(x.title)}</a>`).join('')}</div>`:''}${hasLoc(o)&&!o.plain?`<a class="btn" href="#map/${(+o.lat).toFixed(4)},${(+o.lng).toFixed(4)}">${ic('map-pin')}${t.onMap}</a>`:''}${hasLoc(o)&&o.plain?`<a class="btn" href="https://www.openstreetmap.org/?mlat=${o.lat}&mlon=${o.lng}#map=18/${o.lat}/${o.lng}" target="_blank" rel="noopener">${ic('map-pin')}${o.lat}, ${o.lng}</a>`:''}${o.meta?`<ul class="meta">${o.meta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${o.h?`<a class="btn" href="${o.h}">${ic('book-open')}${esc(t.readArt)}</a>`:''}</div>`;
 d.querySelector('.lbx').addEventListener('click',()=>d.close());
 d.showModal();
 }
@@ -541,19 +529,21 @@ if(d.err){app.innerHTML=`<h1>${t.recent}</h1><div class="none" role="alert"><p>$
 await prep(d.meetings.flatMap(m=>[m.title,plain(m.body),m.outcome]));
 if(tok!==tokn)return;
 app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
-return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(plain(m.body)),false,'#council/'+m.id,null,'lead')+`</section>`;
+return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(plain(m.body)),false,'#council/'+m.id,null,'lead',m.outcome?` data-out="${outK(m.outcome)}"`:'')+`</section>`;
 }).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
 reveal(app.querySelectorAll('section .card,section .rel'));
 },
-async photos(tag){
+async photos(tag,cat){
 const t=T(),tok=tokn;
+cat=tag||!cat?'all':cat;
 await prep([...PUB.flatMap(p=>[p.t,p.b]),...WIKI.filter(w=>w.img).flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
 const com=PUB.map(mkCom);
 const wk=WIKI.filter(w=>w.img).map(w=>({t:TX(w.title),b:TX(w.short),s:w.img.src,tags:[],cat:w.cat,h:'#wiki/'+w.id}));
-const all=(tag?com.filter(p=>(p.tags||[]).includes(tag)):[...com,...wk]).sort(byT);
-app.innerHTML=`<div class="th"><h1>${t.bank}</h1><div class="thb">${PUB.some(hasLoc)?`<a class="btn icon" href="#map" aria-label="${esc(t.mapView)}" title="${esc(t.mapView)}">${ic('map-trifold')}</a>`:''}<a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div></div><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips" id="pch">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip" href="#search-${id}">${nameOf(id)}</a>`).join('')+(tag?`<a class="chip on" id="tsel" href="#photos" aria-label="${esc(t.rmTag.replace('{x}',tag))}">${ic('tag')}${esc(tag)}${ic('x')}</a>`:'')+(tagCounts('all').size?`<button class="chip" id="mt" type="button" aria-haspopup="dialog">${ic('sliders-horizontal')}${t.moreTags}</button>`:'')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:tag?`<div class="none"><p>${t.noTagged}</p><a class="btn" href="#photos">${ic('camera')}${t.bank}</a></div>`:`<div class="none"><p>${t.firstPhoto}</p><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div>`);
-const sel=$('tsel');if(sel)$('pch').scrollLeft=sel.offsetLeft-$('pch').offsetLeft-16;
+const all=(tag?com.filter(p=>(p.tags||[]).includes(tag)):[...com,...wk].filter(p=>cat==='all'||p.cat===cat)).sort(byT);
+const on=id=>!tag&&id===cat;
+app.innerHTML=`<div class="th"><h1>${t.photos}</h1><div class="thb">${PUB.some(hasLoc)?`<a class="btn icon" href="#map" aria-label="${esc(t.mapView)}" title="${esc(t.mapView)}">${ic('map-trifold')}</a>`:''}<a class="btn icon" href="#contribute" aria-label="${esc(t.contribute)}" title="${esc(t.contribute)}">${ic('upload-simple')}</a></div></div><div class="chips" id="pch">`+['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip${on(id)?' on':''}" href="#photos${id==='all'?'':'/'+id}"${on(id)?' aria-current="true"':''}>${nameOf(id)}</a>`).join('')+(tag?`<a class="chip on" id="tsel" href="#photos" aria-label="${esc(t.rmTag.replace('{x}',tag))}">${ic('tag')}${esc(tag)}${ic('x')}</a>`:'')+(tagCounts('all').size?`<button class="chip" id="mt" type="button" aria-haspopup="dialog">${ic('sliders-horizontal')}${t.moreTags}</button>`:'')+`</div>`+(all.length?`<div class="gal" id="gal">${all.map(tile).join('')}</div>`:tag||cat!=='all'?`<div class="none"><p>${tag?t.noTagged:t.noCat}</p><a class="btn" href="#photos">${ic('camera')}${t.photos}</a></div>`:`<div class="none"><p>${t.firstPhoto}</p><a class="btn" href="#contribute">${ic('upload-simple')}${t.contribute}</a></div>`);
+const sel=$('tsel')||$('pch').querySelector('.on');if(sel)$('pch').scrollLeft=sel.offsetLeft-$('pch').offsetLeft-16;
 const mt=$('mt');if(mt)mt.addEventListener('click',()=>tagPicker(tag));
 const g=$('gal');
 if(g)bindGal(g,all);
@@ -577,7 +567,7 @@ async wiki(){
 const t=T(),tok=tokn;
 await prep(WIKI.flatMap(w=>[w.title,w.short]));
 if(tok!==tokn)return;
-app.innerHTML=`<h1>${t.guide}</h1><a class="searchbar" href="#search-all">${ic('magnifying-glass')}<span>${t.ph}</span></a><div class="chips">`+CATS.map(c=>`<button class="chip" type="button" data-j="${c.id}">${nameOf(c.id)}</button>`).join('')+`</div>`+CATS.map(c=>
+app.innerHTML=`<h1>${t.guide}</h1><div class="chips">`+CATS.map(c=>`<button class="chip" type="button" data-j="${c.id}">${nameOf(c.id)}</button>`).join('')+`</div>`+CATS.map(c=>
 `<section id="cat-${c.id}" data-c="${c.id}"><div class="sh"><h2>${nameOf(c.id)}</h2><a class="more" href="#search-${c.id}">${t.more}</a></div><div class="row">`+
 WIKI.filter(w=>w.cat===c.id).map(w=>card(c.i,TX(w.title),'',TX(w.short),false,'#wiki/'+w.id,w.img?.src,'media')).join('')+`</div></section>`).join('');
 app.querySelector('.chips').addEventListener('click',e=>{
@@ -597,7 +587,7 @@ const rel=d.links.filter(l=>l.meeting_id===m.id).map(l=>WIKI.find(w=>w.id===l.ar
 await prep([m.title,m.outcome,...bodyText(m.body),...rel.flatMap(w=>[w.title,w.short])]);
 if(tok!==tokn)return;
 document.title=TX(m.title)+' · Our Streets Trenton';
-app.innerHTML=`<article class="wiki-article mtg"><p class="kick">${ic('bank')}<span>${fmt(m.meeting_date)}</span></p><h1>${esc(TX(m.title))}</h1>`+(m.outcome?`<p class="pill">${esc(TX(m.outcome))}</p>`:'')+`<div class="actions"><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+renderBody(m.body)+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(w=>card(iconOf(w.cat),TX(w.title),nameOf(w.cat),TX(w.short),false,'#wiki/'+w.id,w.img?.src,'res h3')).join(''):'')+`</article>`;
+app.innerHTML=`<article class="wiki-article mtg"><p class="kick">${ic('bank')}<span>${fmt(m.meeting_date)}</span></p><h1>${esc(TX(m.title))}</h1>`+(m.outcome?`<p class="pill" data-out="${outK(m.outcome)}">${esc(TX(m.outcome))}</p>`:'')+`<div class="actions"><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+renderBody(m.body)+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(w=>card(iconOf(w.cat),TX(w.title),nameOf(w.cat),TX(w.short),false,'#wiki/'+w.id,w.img?.src,'res h3')).join(''):'')+`</article>`;
 bindInl(app.querySelector('article'));
 $('shr').addEventListener('click',async()=>{
 const u=location.href;
@@ -617,13 +607,9 @@ if(tok!==tokn)return;
 const mt=dd.err?[]:dd.meetings.filter(m=>dd.links.some(l=>l.meeting_id===m.id&&l.article_id===w.id));
 await prep([w.title,w.short,...bodyText(w.body),...rel.flatMap(x=>[x.title,x.short]),...PUB.flatMap(p=>[p.t,p.b]),...mt.map(m=>m.title)]);
 if(tok!==tokn)return;
-app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<a class="cat" data-c="${w.cat}" href="#search-${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span>${ic('caret-right')}</a><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#search-${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+renderBody(w.body)+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res h3')).join(''):'')+`</article>`;
+app.innerHTML=`<article class="wiki-article">`+(img?`<figure class="hero">${pic(img.src,960,img.alt||TX(w.title))}<figcaption>${esc(img.credit)}</figcaption></figure>`:'')+`<a class="cat" data-c="${w.cat}" href="#search-${w.cat}">${ic(iconOf(w.cat))}<span>${nameOf(w.cat)}</span>${ic('caret-right')}</a><h1>${esc(TX(w.title))}</h1><p class="lede">${esc(TX(w.short))}</p><div class="actions"><a class="btn" href="#photos/${w.cat}">${ic('images')}${t.seeImg}</a><button class="btn" id="shr" type="button">${ic('share-network')}${t.share}</button></div>`+renderBody(w.body)+(ph.length?`<h2 class="rel">${t.photosOf}</h2><div class="gal" id="ag">${ph.map(tile).join('')}</div>`:'')+(rel.length?`<h2 class="rel">${t.related}</h2>`+rel.map(x=>card(iconOf(x.cat),TX(x.title),'',TX(x.short),false,'#wiki/'+x.id,x.img?.src,'res h3')).join(''):'')+`</article>`;
 if(mt.length)app.querySelector('article').insertAdjacentHTML('beforeend',`<h2 class="rel">${t.discussed}</h2>`+mt.map(m=>card('bank',TX(m.title),fmt(m.meeting_date),'',false,'#council/'+m.id,null,'sm')).join(''));
-if(ph.length){
-const ar=app.querySelector('article');
-ar.insertAdjacentHTML('beforeend',`<h2 class="rel">${t.photosOf}</h2><div class="gal" id="ag">${ph.map(tile).join('')}</div>`);
-bindGal($('ag'),ph);
-}
+if(ph.length)bindGal($('ag'),ph);
 bindInl(app.querySelector('article'));
 $('shr').addEventListener('click',async()=>{
 const u=location.href;
@@ -635,7 +621,7 @@ try{await navigator.clipboard.writeText(u);$('shr').firstChild.className='ph ph-
 const pages={
 access(){
 const t=T();
-app.innerHTML=`<div class="page" id="ax"><h1>${t.access}</h1>`+axHtml(['theme','size','contrast','cvd','motion','marks'],'p-')+`<button id="axr" type="button" class="btn ghost">${t.aReset}</button></div>`;
+app.innerHTML=`<div class="page" id="ax"><h1>${t.access}</h1>`+axHtml(['theme','size','contrast','cvd','motion','marks'])+`<button id="axr" type="button" class="btn ghost">${t.aReset}</button></div>`;
 axBind($('ax'));
 $('axr').addEventListener('click',()=>{const prev=A11Y.stored();A11Y.reset();pages.access();if(A11Y.sync)A11Y.sync(A11Y.get());if(prev)toast(T().axDone,()=>{try{A11Y.load(JSON.parse(prev))}catch(e){}if(location.hash==='#access')pages.access();if(A11Y.sync)A11Y.sync(A11Y.get())})});
 },
@@ -1009,7 +995,7 @@ await draw();
 function tagPicker(cur){
 const t=T();
 let d=$('tgd');
-if(!d){d=document.createElement('dialog');d.id='tgd';document.body.appendChild(d);d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-x]'))d.close()})}
+if(!d){d=document.createElement('dialog');d.id='tgd';document.body.appendChild(d);d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-x],a'))d.close()})}
 d.setAttribute('aria-labelledby','tgdh');
 d.innerHTML=`<div class="tgh"><h2 id="tgdh">${t.tagsL}</h2><button class="btn icon" type="button" data-x aria-label="${esc(t.close)}">${ic('x')}</button></div><input type="search" id="tgq" placeholder="${esc(t.tagSearch)}" aria-label="${esc(t.tagSearch)}" autocomplete="off"><div class="chips wrap" id="tgl"></div>`;
 const l=[...tagCounts('all')].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
@@ -1025,7 +1011,7 @@ const dd=await getData();
 const MT=dd.err?[]:dd.meetings;
 await prep([...PUB.flatMap(p=>[p.t,p.b]),...PHOTOS.map(p=>p[1]),...WIKI.flatMap(w=>[w.title,w.short]),...MT.flatMap(m=>[m.title,plain(m.body)])]);
 if(tok!==tokn)return;
-app.innerHTML=`<h1>${nameOf(cat)}</h1><input id="q" type="search" aria-label="${t.ph}" placeholder="${t.ph}" autocomplete="off"><div class="chips">`+
+app.innerHTML=`<h1>${cat==='all'?t.search:nameOf(cat)}</h1><input id="q" type="search" aria-label="${t.ph}" placeholder="${t.ph}" autocomplete="off"><div class="chips">`+
 ['all',...CATS.map(c=>c.id)].map(id=>`<a class="chip ${id===cat?'on':''}" href="#search-${id}">${nameOf(id)}</a>`).join('')+`</div><div id="tg" class="chips"></div><div id="res"></div>`;
 const q=$('q');
 const res=$('res');
@@ -1050,6 +1036,7 @@ const open=e=>{const c=e.target.closest('[data-k]');if(c)showPhoto(items[+c.data
 res.addEventListener('click',open);
 res.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const c=e.target.closest('[data-k]');if(c){e.preventDefault();open(e)}}});
 draw();
+if(wantQ){wantQ=false;q.focus()}
 }
 
 function nav(){
@@ -1077,7 +1064,6 @@ if(open){setLang(false);$('closeBtn').focus()}else if(drawer.contains(document.a
 }
 
 function setLang(open){
-if(open&&!axMenu.hidden)setAx(false);
 langMenu.hidden=!open;
 langBtn.setAttribute('aria-expanded',open);
 }
@@ -1108,6 +1094,11 @@ back.hidden=false;brand.hidden=true;
 back.href='#'+cur;
 back.textContent=T().back;
 search(c);
+}else if(h.startsWith('photos/')){
+const c=h.slice(7);
+h='photos';cur='photos';
+back.hidden=true;brand.hidden=false;
+views.photos('',CATS.some(x=>x.id===c)?c:'all');
 }else if(h.startsWith('tag/')){
 let nm='';try{nm=decodeURIComponent(h.slice(4))}catch(e){}
 cur='photos';
@@ -1143,15 +1134,15 @@ cur=h;
 back.hidden=true;brand.hidden=false;
 views[h]();
 }
-document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||T().ad.admin))+' · Our Streets Trenton';
+document.title=(h.startsWith('wiki/')?(WIKI.find(x=>x.id===h.slice(5))||{}).title:h==='search-all'?T().search:h.startsWith('search-')?nameOf(h.slice(7)==='all'||CATS.some(x=>x.id===h.slice(7))?h.slice(7):'all'):(T()[PAGES.includes(h)||SECTIONS.includes(h)?h:'council']||T().ad.admin))+' · Our Streets Trenton';
 if(h.startsWith('tag/')){try{document.title=decodeURIComponent(h.slice(4))}catch(e){}}
 if(h==='wiki'||h==='photos'||h.startsWith('map')||h.startsWith('search-')||h.startsWith('tag/'))app.dataset.wide='1';else delete app.dataset.wide;
 nav();
 renderDrawer();
 renderLang();
-setAx(false);
 renderHint();
 $('footLink').textContent=T().access;
+$('searchBtn').setAttribute('aria-label',T().search);
 setDrawer(false);
 setLang(false);
 document.documentElement.lang=lang;
@@ -1162,6 +1153,9 @@ first=false;
 
 $('skip').textContent=T().skip;
 $('skip').addEventListener('click',()=>app.focus());
+// focus the search field only when opened from the header button, not from category chips
+let wantQ=false;
+$('searchBtn').addEventListener('click',()=>{if(location.hash==='#search-all'&&$('q'))$('q').focus();else wantQ=true});
 menuBtn.addEventListener('click',()=>setDrawer(!drawer.classList.contains('open')));
 scrim.addEventListener('click',()=>setDrawer(false));
 drawer.addEventListener('click',e=>{if(e.target.closest('a.item'))setDrawer(false)});
@@ -1175,11 +1169,10 @@ try{localStorage.setItem('lang',lang)}catch(x){}
 route();
 langBtn.focus();
 });
-document.addEventListener('click',e=>{if(!langMenu.hidden&&!e.target.closest('#langWrap'))setLang(false);if(!axMenu.hidden&&!e.target.closest('#axWrap'))setAx(false)});
+document.addEventListener('click',e=>{if(!langMenu.hidden&&!e.target.closest('#langWrap'))setLang(false);});
 document.addEventListener('keydown',e=>{
 if(e.key!=='Escape')return;
-if(!axMenu.hidden){setAx(false);axBtn.focus()}
-else if(!langMenu.hidden){setLang(false);langBtn.focus()}
+if(!langMenu.hidden){setLang(false);langBtn.focus()}
 else if(drawer.classList.contains('open'))setDrawer(false);
 });
 addEventListener('hashchange',route);

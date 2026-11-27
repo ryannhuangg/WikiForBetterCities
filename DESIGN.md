@@ -15,7 +15,7 @@ Documented from `style.css` and `script.js` as of 2026-11-18. Light, calm, civic
 | `--glass` | `rgba(255,255,255,.7)` | Header, buttons, nav pill |
 | `--glass2` | `rgba(255,255,255,.96)` | Drawer, language menu |
 
-Other fixed values: scrim `rgba(16,36,26,.3)`; photo caption gradient `transparent` to `rgba(0,0,0,.65)` with white text. Light only (`color-scheme:light`). No dark theme.
+Other fixed values: scrim `rgba(16,36,26,.3)`; photo caption gradient `transparent` to `rgba(0,0,0,.65)` with white text. Light by default. Dark mode (`html[data-mode=dark]`), high contrast (`data-contrast=high`) and a colour-blind-safe category palette (`data-cvd`) redefine the same tokens; set from the Accessibility page via `a11y.js`.
 
 ## Typography
 - Serif: `Fraunces` (Google Fonts, 600 only), falling back to Iowan Old Style, Charter, Georgia. Used for h1, h2, h3, brand, date headers.
@@ -48,11 +48,12 @@ Other fixed values: scrim `rgba(16,36,26,.3)`; photo caption gradient `transpare
 
 ## Components
 - **Button `.btn`:** pill, glass fill, 1px line, 600 weight. Variants: `.icon` (48px circle), `.solid` (full-width accent, 12px radius), `.ghost` (full-width, accent text).
-- **Chip `.chip`:** pill, glass, `.on` fills accent with white text. Used for categories, admin tabs.
+- **Chip `.chip`:** pill, glass, `.on` fills accent with white text (plus `aria-current`). Used for categories, admin tabs. A chip row filters or jumps within the page it sits on: Photos chips filter the gallery (`#photos/<cat>`), Search chips filter results, Wiki chips scroll to a section. Chips never navigate to a different kind of page.
+- **Tag `.tag`:** small pill on tile. Static tags are 32px; tappable tags (`a.tag`, `button.tag`) are 48px.
 - **Card `.card`:** thumb plus text. Variants:
   - `.media` image on top at 16:10, text below.
-  - `.lead` accent left edge, larger title (Council meeting).
-  - `.sm` compact 44px thumb (related articles on Council).
+  - `.lead` larger title, no thumb (Council meeting).
+  - `.sm` compact, no thumb ("Discussed at" meeting links on wiki articles).
 - **Thumb `.thumb`:** tile-colored box with centered Phosphor icon, or an image. Falls back to the category icon when no image.
 - **Photo tile `.shot`:** square, cover image, bottom gradient caption.
 - **Row `.row`:** horizontal snap scroller on phones, 3-column grid from 900px.
@@ -65,7 +66,7 @@ Other fixed values: scrim `rgba(16,36,26,.3)`; photo caption gradient `transpare
 ## Signature: lane lines and category tints
 - Dashed center-line motif: a short accent dash bar under each page h1, and dashed `--lane` rules after Council date headings and in the drawer.
 - Each category has a quiet tint (`--t-<cat>`) and a dot color (`--d-<cat>`): roads slate-green, bridges blue-gray, structures stone, transit sky, parks leaf, zoning sand. Tints fill icon thumbnails and the article category pill; dots mark Wiki section headings. Text and the accent stay green for contrast.
-- Council lead cards carry an optional outcome pill (from `meetings.outcome`).
+- Council lead cards and meeting pages carry an optional outcome pill (from `meetings.outcome`), keyword-matched on the English text: approved/funded = accent tint + check, denied/rejected = warm `--no-bg`/`--no-fg` + x, anything else = outlined neutral + clock.
 
 ## Icons
 Phosphor regular, vendored (`phosphor.css`, `Phosphor.woff2`). 24px default, 34px in thumbs, 56px in image-less media cards, 26px in nav. Accent color. Category icons: road-horizon, bridge, buildings, bus, tree, map-trifold, plus images for All.
@@ -90,6 +91,5 @@ Visible 3px accent focus ring with 2px offset, per-page titles, focus moves to c
 ## Known gaps
 - Spacing has no defined scale.
 - `.tile`, `.tile i` and `.tile .lab` are no longer used (the Photos page now uses chips and a gallery).
-- Photos has two sections: Community photos, then From the wiki.
-- No dark theme, no focus-ring treatment on glass beyond the default.
+- No focus-ring treatment on glass beyond the default.
 - Type has no defined scale for languages with taller scripts (Hindi, Korean, Chinese).
