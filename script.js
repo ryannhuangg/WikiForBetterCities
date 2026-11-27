@@ -528,9 +528,8 @@ if(tok!==tokn)return;
 if(d.err){app.innerHTML=`<h1>${t.recent}</h1><div class="none" role="alert"><p>${t.loadErr}</p><button class="btn" id="rt" type="button">${ic('arrow-clockwise')}${t.retry}</button></div>`;$('rt').addEventListener('click',()=>views.council());return}
 await prep(d.meetings.flatMap(m=>[m.title,plain(m.body),m.outcome]));
 if(tok!==tokn)return;
-app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?d.meetings.map(m=>{
-return `<section><h2 class="date">${fmt(m.meeting_date)}</h2>`+card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(plain(m.body)),false,'#council/'+m.id,null,'lead',m.outcome?` data-out="${outK(m.outcome)}"`:'')+`</section>`;
-}).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
+const days=d.meetings.reduce((g,m)=>g.set(m.meeting_date,[...(g.get(m.meeting_date)||[]),m]),new Map());
+app.innerHTML=`<h1>${t.recent}</h1>`+(d.meetings.length?[...days].map(([day,ms])=>`<section><h2 class="date">${fmt(day)}</h2>`+ms.map(m=>card('bank',TX(m.title),m.outcome?TX(m.outcome):'',TX(plain(m.body)),false,'#council/'+m.id,null,'lead',m.outcome?` data-out="${outK(m.outcome)}"`:'')).join('')+`</section>`).join(''):`<div class="none"><p>${t.empty}</p><p>${t.emptyHint}</p><a class="btn" href="#wiki">${ic('book-open')}${t.wiki}</a></div>`);
 reveal(app.querySelectorAll('section .card,section .rel'));
 },
 async photos(tag,cat){
@@ -567,7 +566,8 @@ async wiki(){
 const t=T(),tok=tokn;
 await prep(WIKI.flatMap(w=>[w.title,w.short]));
 if(tok!==tokn)return;
-app.innerHTML=`<h1>${t.guide}</h1><div class="chips">`+CATS.map(c=>`<button class="chip" type="button" data-j="${c.id}">${nameOf(c.id)}</button>`).join('')+`</div>`+CATS.map(c=>
+const cs=CATS.filter(c=>WIKI.some(w=>w.cat===c.id));
+app.innerHTML=`<h1>${t.guide}</h1><div class="chips">`+cs.map(c=>`<button class="chip" type="button" data-j="${c.id}">${nameOf(c.id)}</button>`).join('')+`</div>`+cs.map(c=>
 `<section id="cat-${c.id}" data-c="${c.id}"><div class="sh"><h2>${nameOf(c.id)}</h2><a class="more" href="#search-${c.id}">${t.more}</a></div><div class="row">`+
 WIKI.filter(w=>w.cat===c.id).map(w=>card(c.i,TX(w.title),'',TX(w.short),false,'#wiki/'+w.id,w.img?.src,'media')).join('')+`</div></section>`).join('');
 app.querySelector('.chips').addEventListener('click',e=>{
@@ -715,7 +715,7 @@ addTag($('ptag').value);$('ptag').value='';
 const title=$('ptitle').value.trim(),caption=$('pcap').value.trim();
 const path=crypto.randomUUID()+'-'+file.name.replace(/[^\w.-]/g,'_');
 const up=await sb.storage.from('submissions').upload(path,file);
-if(up.error){const m=up.error.message||'';ok.textContent=/row-level|security|policy|rate/i.test(m)?t.slow:(/mime|type/i.test(m)?t.fmt:/size|exceed/i.test(m)?t.big:t.err)+' ['+m+']';return}
+if(up.error){const m=up.error.message||'';ok.textContent=/row-level|security|policy|rate/i.test(m)?t.slow:(/mime|type/i.test(m)?t.fmt:/size|exceed/i.test(m)?t.big:t.err);console.warn(m);return}
 const r=await sb.from('submissions').insert({title,caption:caption||null,cat:$('pc').value,photo_path:path,...(loc?{lat:+loc.lat.toFixed(4),lng:+loc.lng.toFixed(4)}:{}),...(tags.length?{tags}:{}),...(rel.size?{related:[...rel]}:{})});
 if(r.error){await sb.storage.from('submissions').remove([path]);ok.textContent=/rate_limited/.test(r.error.message||'')?t.slow:r.error.code==='42501'?t.limit:t.err;return}
 ok.textContent=t.thanks;
@@ -1092,7 +1092,7 @@ let c=h.slice(7);
 if(c!=='all'&&!CATS.some(x=>x.id===c))c='all';
 back.hidden=false;brand.hidden=true;
 back.href='#'+cur;
-back.textContent=T().back;
+back.innerHTML=ic('arrow-left')+T().back;
 search(c);
 }else if(h.startsWith('photos/')){
 const c=h.slice(7);
@@ -1113,20 +1113,20 @@ views.map(f.length===2&&f.every(Number.isFinite)?f:null);
 cur='council';
 back.hidden=false;brand.hidden=true;
 back.href='#council';
-back.textContent=T().back;
+back.innerHTML=ic('arrow-left')+T().back;
 meetingArticle(h.slice(8));
 }else if(h.startsWith('wiki/')){
 cur='wiki';
 back.hidden=false;brand.hidden=true;
 back.href='#wiki';
-back.textContent=T().back;
+back.innerHTML=ic('arrow-left')+T().back;
 let wid=h.slice(5);try{wid=decodeURIComponent(wid)}catch(e){}
 wikiArticle(wid);
 }else if(PAGES.includes(h)){
 page=h;
 back.hidden=false;brand.hidden=true;
 back.href='#'+cur;
-back.textContent=T().back;
+back.innerHTML=ic('arrow-left')+T().back;
 pages[h]();
 }else{
 if(!SECTIONS.includes(h))h='council';
